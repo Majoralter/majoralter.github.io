@@ -11,6 +11,12 @@ importers:
       core-js:
         specifier: ^3.8.3
         version: 3.39.0
+      open-props:
+        specifier: ^1.7.8
+        version: 1.7.8
+      primeicons:
+        specifier: ^7.0.0
+        version: 7.0.0
       vue:
         specifier: ^3.2.13
         version: 3.5.13(typescript@4.5.5)
@@ -3426,6 +3432,9 @@ packages:
     resolution: {integrity: sha512-kbpaSSGJTWdAY5KPVeMOKXSrPtr8C8C7wodJbcsd51jRnmD+GZu8Y0VoU6Dm5Z4vWr0Ig/1NKuWRKf7j5aaYSg==}
     engines: {node: '>=6'}
 
+  open-props@1.7.8:
+    resolution: {integrity: sha512-krA26gD4jikp1RehQkO7zOdu3ZXdPRqAOBg5nChCYK0ykpufQflSxHw2t6W5vzG7Ot+J8Lv/NDM8ZwBdbteX5g==}
+
   open@8.4.2:
     resolution: {integrity: sha512-7x81NCL719oNbsq/3mh+hVrAWmFuEYUqrq/Iw3kUzH8ReypT9QQ0BLoJS7/G9k6N81XjW4qHWtjWwe/9eLy1EQ==}
     engines: {node: '>=12'}
@@ -3770,6 +3779,9 @@ packages:
   pretty@2.0.0:
     resolution: {integrity: sha512-G9xUchgTEiNpormdYBl+Pha50gOUovT18IvAe7EYMZ1/f9W/WWMPRn+xI68yXNMUk3QXHDwo/1wV/4NejVNe1w==}
     engines: {node: '>=0.10.0'}
+
+  primeicons@7.0.0:
+    resolution: {integrity: sha512-jK3Et9UzwzTsd6tzl2RmwrVY/b8raJ3QZLzoDACj+oTJ0oX7L9Hy+XnVwgo4QVKlKpnP/Ur13SXV/pVh4LzaDw==}
 
   process-nextick-args@2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
@@ -8748,6 +8760,8 @@ snapshots:
     dependencies:
       mimic-fn: 2.1.0
 
+  open-props@1.7.8: {}
+
   open@8.4.2:
     dependencies:
       define-lazy-prop: 2.0.0
@@ -9083,6 +9097,8 @@ snapshots:
       condense-newlines: 0.2.1
       extend-shallow: 2.0.1
       js-beautify: 1.15.1
+
+  primeicons@7.0.0: {}
 
   process-nextick-args@2.0.1: {}
 

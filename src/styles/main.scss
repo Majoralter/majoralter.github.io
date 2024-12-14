@@ -1,3 +1,53 @@
-@import 'config';
-@import 'composed';
-@import 'theme';
+@import "config";
+@import "composed";
+@import "theme";
+@import "primeicons/primeicons.css";
+
+@include themify($themes) {
+  body {
+    background-color: themed(bg-default);
+    transition: background-color 0.2s var(--ease-3);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: themed(text-default);
+  }
+
+  button {
+    color: themed(text-default);
+    background-color: themed(bg-contrast);
+
+    &.theme-toggle {
+      color: themed(text-inverted);
+      background-color: themed(bg-inverted);
+    }
+  }
+
+  a {
+    color: themed(link);
+
+    // &.router-link-active {
+    // //   padding: var(size-1);
+    // //   border-radius: var(--radius-1);
+    //   color: themed(link-active);
+    // }
+
+    &:hover {
+      color: themed(link-active);
+    }
+  }
+
+  hr {
+    color: themed(border);
+  }
+
+  p,
+  span {
+    color: themed(text-p);
+  }
+}
