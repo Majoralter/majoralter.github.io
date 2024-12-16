@@ -31,11 +31,10 @@
   a {
     color: themed(link);
 
-    // &.router-link-active {
-    // //   padding: var(size-1);
-    // //   border-radius: var(--radius-1);
-    //   color: themed(link-active);
-    // }
+    &.router-link-active {
+      font-weight: 500;
+      color: themed(link-active);
+    }
 
     &:hover {
       color: themed(link-active);
@@ -49,5 +48,9 @@
   p,
   span {
     color: themed(text-p);
+  }
+
+  header {
+    border-bottom: solid var(--border-size-1) themed(border);
   }
 }
