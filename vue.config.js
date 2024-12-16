@@ -19,8 +19,5 @@ module.exports = defineConfig({
       });
       return definitions;
     });
-  },
-  publicPath: process.env.NODE_ENV === 'production'
-    ? '/majoralter.github.io/'
-    : '/',
+  }
 });
