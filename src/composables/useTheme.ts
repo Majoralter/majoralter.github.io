@@ -9,6 +9,7 @@ export const useTheme = () => {
     const toggleTheme = () => {
         currentTheme.value = currentTheme.value === 'light' ? 'dark' : 'light'
         applyTheme(currentTheme.value)
+        console.log(currentTheme.value)
     }
 
     const applyTheme = (theme: Theme) => {

@@ -14,6 +14,9 @@ importers:
       open-props:
         specifier: ^1.7.8
         version: 1.7.8
+      pinia:
+        specifier: ^2.3.0
+        version: 2.3.0(typescript@4.5.5)(vue@3.5.13(typescript@4.5.5))
       primeicons:
         specifier: ^7.0.0
         version: 7.0.0
@@ -3567,6 +3570,15 @@ packages:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
     engines: {node: '>=8.6'}
 
+  pinia@2.3.0:
+    resolution: {integrity: sha512-ohZj3jla0LL0OH5PlLTDMzqKiVw2XARmC1XYLdLWIPBMdhDW/123ZWr4zVAhtJm+aoSkFa13pYXskAvAscIkhQ==}
+    peerDependencies:
+      typescript: '>=4.4.4'
+      vue: ^2.7.0 || ^3.5.11
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
   pirates@4.0.6:
     resolution: {integrity: sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==}
     engines: {node: '>= 6'}
@@ -4518,6 +4530,17 @@ packages:
 
   vue-component-type-helpers@2.1.10:
     resolution: {integrity: sha512-lfgdSLQKrUmADiSV6PbBvYgQ33KF3Ztv6gP85MfGaGaSGMTXORVaHT1EHfsqCgzRNBstPKYDmvAV9Do5CmJ07A==}
+
+  vue-demi@0.14.10:
+    resolution: {integrity: sha512-nMZBOwuzabUO0nLgIcc6rycZEebF6eeUfaiQx9+WSk8e29IbLvPU9feI6tqW4kTo3hvoYAJkMh8n8D0fuISphg==}
+    engines: {node: '>=12'}
+    hasBin: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^3.0.0-0 || ^2.6.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
 
   vue-hot-reload-api@2.3.4:
     resolution: {integrity: sha512-BXq3jwIagosjgNVae6tkHzzIk6a8MHFtzAdwhnV5VlvPTFxDCvIttgSiHWjdGoTJvXtmRu5HacExfdarRcFhog==}
@@ -8925,6 +8948,16 @@ snapshots:
 
   picomatch@2.3.1: {}
 
+  pinia@2.3.0(typescript@4.5.5)(vue@3.5.13(typescript@4.5.5)):
+    dependencies:
+      '@vue/devtools-api': 6.6.4
+      vue: 3.5.13(typescript@4.5.5)
+      vue-demi: 0.14.10(vue@3.5.13(typescript@4.5.5))
+    optionalDependencies:
+      typescript: 4.5.5
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+
   pirates@4.0.6: {}
 
   pkg-dir@4.2.0:
@@ -9868,6 +9901,10 @@ snapshots:
   vary@1.1.2: {}
 
   vue-component-type-helpers@2.1.10: {}
+
+  vue-demi@0.14.10(vue@3.5.13(typescript@4.5.5)):
+    dependencies:
+      vue: 3.5.13(typescript@4.5.5)
 
   vue-hot-reload-api@2.3.4: {}
 
