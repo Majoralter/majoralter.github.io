@@ -1,9 +1,6 @@
 <template>
     <header>
         <nav>
-            <!-- <span class="name">
-                Jenrola Jackson
-            </span> -->
             <div class="nav__links">
                 <ul>
                     <li><router-link to="/"><i class="pi pi-home"></i> Index</router-link></li>
@@ -14,7 +11,7 @@
                 </ul>
             </div>
 
-            <button @click="toggleTheme" class="theme-toggle">
+            <button @click="themeStore.toggleTheme" class="theme-toggle">
                 <i class="pi" :class="{ 'pi-sun': isDarkMode, 'pi-moon': !isDarkMode }"></i>
             </button>
         </nav>
@@ -23,10 +20,15 @@
 </template>
 
 <script lang="ts" setup>
-import { useTheme } from '@/composables/useTheme';
+import { useThemeStore } from '@/store/themeStore';
+import { onMounted } from 'vue'
 
-const { isDarkMode, toggleTheme } = useTheme()
-</script>
+const themeStore = useThemeStore()
+
+onMounted(() => {
+    themeStore.initializeTheme()
+})
+</script> 
 
 <style lang="scss">
 header {

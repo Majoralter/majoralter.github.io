@@ -1,22 +1,15 @@
 <template>
     <main class="home__layout">
         <div class="home__layout--hero-section">
-            <img  :src="require(`@/assets/home/hero-image-${currentTheme}.jpg`)" alt="hero image">
-
-            <h1>
-                {{ isDark  ? "Hello Darkness" : "Hello Brightness" }}
-            </h1>
-            <button @click="toggleTheme">Toggle Theme</button>
+            <img :src="require(`@/assets/home/hero-image-${themeStore.currentTheme}.jpg`)" alt="hero image">
         </div>
     </main>
 </template>
 
 <script lang="ts" setup>
-import { useTheme } from '@/composables/useTheme';
-import { ref } from 'vue'
+import { useThemeStore } from '@/store/themeStore'
 
-const { isDarkMode, toggleTheme, currentTheme } = useTheme()
-const isDark  = ref(isDarkMode)
+const themeStore = useThemeStore()
 </script>
 
 <style lang="scss">
@@ -25,10 +18,6 @@ const isDark  = ref(isDarkMode)
         img {
             height: 300px;
             width: auto;
-
-            // &.light {
-            //     content: url('@/assets/home/hero-image-light.jpg');
-            // }
         }
     }
 }
