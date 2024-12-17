@@ -31,11 +31,12 @@ const { isDarkMode, toggleTheme } = useTheme()
 <style lang="scss">
 header {
     width: calc(100dvw - ($page-padding--left / 2) - ($page-padding--right / 2));
-    max-width: 1440px;
     margin-inline: auto;
 
     nav {
         width: 100%;
+        max-width: 1024px;
+        margin-inline: auto;
         @include flex-layout(space-between, center, row, nowrap, 0);
         padding-block: var(--size-3);
 
