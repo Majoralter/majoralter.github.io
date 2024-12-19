@@ -1,17 +1,20 @@
 <template>
     <header>
         <nav>
+            <!-- <span class="name">
+                Jenrola Jackson
+            </span> -->
             <div class="nav__links">
                 <ul>
                     <li><router-link to="/"><i class="pi pi-home"></i> Index</router-link></li>
                     <li><router-link to="/work"><i class="pi pi-briefcase"></i> Work</router-link></li>
                     <li><router-link to="/blog"><i class="pi pi-pencil"></i> Blog</router-link></li>
                     <li><router-link to="/components"><i class="pi pi-box"></i> Components</router-link></li>
-                    <li><router-link to="/lists"><i class="pi pi-map"></i> Lists</router-link></li>
+                    <li><router-link to="/lists"><i class="pi pi-list"></i> Lists</router-link></li>
                 </ul>
             </div>
 
-            <button @click="themeStore.toggleTheme" class="theme-toggle">
+            <button @click="toggleTheme" class="theme-toggle">
                 <i class="pi" :class="{ 'pi-sun': isDarkMode, 'pi-moon': !isDarkMode }"></i>
             </button>
         </nav>
@@ -20,15 +23,10 @@
 </template>
 
 <script lang="ts" setup>
-import { useThemeStore } from '@/store/themeStore';
-import { onMounted } from 'vue'
+import { useTheme } from '@/composables/useTheme';
 
-const themeStore = useThemeStore()
-
-onMounted(() => {
-    themeStore.initializeTheme()
-})
-</script> 
+const { isDarkMode, toggleTheme } = useTheme()
+</script>
 
 <style lang="scss">
 header {
@@ -38,7 +36,6 @@ header {
     nav {
         width: 100%;
         max-width: 1024px;
-        margin-inline: auto;
         @include flex-layout(space-between, center, row, nowrap, 0);
         padding-block: var(--size-3);
 
@@ -67,6 +64,9 @@ header {
                 li {
                     a {
                         font-size: 14.4px;
+                        display: flex;
+                        align-items: center;
+                        gap: 3px;
 
                         i {
                             display: none;
