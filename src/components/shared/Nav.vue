@@ -7,7 +7,6 @@
             <div class="nav__links">
                 <ul>
                     <li><router-link to="/"><i class="pi pi-home"></i> Index</router-link></li>
-                    <li><router-link to="/work"><i class="pi pi-briefcase"></i> Work</router-link></li>
                     <li><router-link to="/blog"><i class="pi pi-pencil"></i> Blog</router-link></li>
                     <li><router-link to="/components"><i class="pi pi-box"></i> Components</router-link></li>
                     <li><router-link to="/lists"><i class="pi pi-list"></i> Lists</router-link></li>

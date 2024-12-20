@@ -46,11 +46,22 @@
   }
 
   p,
-  span {
+  span:not(.hljs span),
+  time {
     color: themed(text-p);
   }
 
   header {
     border-bottom: solid var(--border-size-1) themed(border);
+  }
+
+  .list-item {
+    a {
+      border-bottom: solid var(--border-size-1) themed(border);
+      &:hover {
+        color: themed(link);
+        background-color: themed(bg-contrast);
+      }
+    }
   }
 }

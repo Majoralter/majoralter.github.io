@@ -19,26 +19,48 @@
                         I love trying my hand at stuff that challenge me. When I'm <br>
                         not working, you'll find me cheering Liverpool, oogling at <br>
                         beautifully designed components, or reading slower than a turtle. <br>
-                        I also love playing chess, Apex legends & Fortnite. I  intend to write <br>
+                        I also love playing chess, Apex legends & Fortnite. I intend to write <br>
                         about stuff I'm learning or that I find interesting enough on this site.
                     </p>
                 </div>
             </section>
         </div>
+        <div class="home__layout--blog-section">
+            <h2>
+                Latest Posts 
+            </h2>
+            <p v-if="posts.length < 1">No posts yet...</p>
+            <div class="post-list" v-else>
+                <MinimalPostListItem v-for="post in posts"
+                    :post="{ slug: post.slug, date: new Date(post.date), title: post.title }" />
+                    <router-link class="ext" to="/blog">
+                        View all posts
+                    </router-link>
+            </div>
+
+        </div>
     </main>
 </template>
 
 <script lang="ts" setup>
-import { useThemeStore } from '@/store/themeStore'
+import { getPosts, Post } from '@/composables/useGetPosts'
+import { ref, onMounted } from 'vue'
+import MinimalPostListItem from '@/components/shared/MinimalPostListItem.vue'
 
-const themeStore = useThemeStore()
+const posts = ref<Post[]>([])
+
+onMounted(() => {
+    posts.value = getPosts()
+    console.log(posts.value)
+})
+
 </script>
 
 <style lang="scss">
 .home__layout {
     width: calc(100dvw - ($page-padding--left / 2) - ($page-padding--right / 2));
     max-width: 1024px;
-    @include flex-layout(center, center, column, nowrap, 0);
+    @include flex-layout(center, center, column, nowrap, 3em);
     margin-block: var(--size-4);
 
     &--hero-section {
@@ -77,6 +99,24 @@ const themeStore = useThemeStore()
                         }
                     }
                 }
+            }
+        }
+    }
+
+    &--blog-section {
+        width: 100%;
+        @include flex-layout(flex-start, flex-start, column, nowrap, 1em);
+
+        .post-list {
+            width: 100%;
+            max-width: 650px;
+
+            .ext {
+                display: block;
+                text-decoration: underline;
+                margin-top: 20px;
+                width: fit-content;
+                font-size: 13px;
             }
         }
     }

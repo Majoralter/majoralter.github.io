@@ -24,7 +24,8 @@ span {
 }
 
 p,
-a {
+a,
+time {
   font-family: "Geist Mono", monospace;
   font-optical-sizing: auto;
   font-style: normal;
@@ -34,4 +35,56 @@ main,
 header,
 nav {
   margin-inline: auto;
+}
+
+blockquote {
+  border-left: solid 10px #aaa;
+  padding: 1em;
+  background-color: pink;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 1.6rem;
+
+  th,
+  td {
+    padding: 0.6em 1.2em;
+    border: 1px solid #d0d7de;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    background-color: #f6f8fa;
+    font-weight: 600;
+    color: #24292f;
+  }
+
+  tr:nth-child(even) td {
+    background-color: #f6f8fa;
+  }
+
+  tr:hover td {
+    background-color: #f0f3f6;
+  }
+
+  /* Styling for links inside tables */
+  a {
+    color: #0969da;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  /* Responsive tables */
+  @media (max-width: 768px) {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
 }
