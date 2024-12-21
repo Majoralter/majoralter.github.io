@@ -45,6 +45,12 @@
     color: themed(border);
   }
 
+  ul {
+    li {
+      color: themed(text-p);
+    }
+  }
+
   p,
   span:not(.hljs span),
   time {
@@ -63,5 +69,19 @@
         background-color: themed(bg-contrast);
       }
     }
+  }
+
+  pre {
+    .code-language {
+      display: inline-block;
+      color: themed(text-p);
+      background-color: themed(bg-contrast);
+    }
+  }
+
+  blockquote {
+    border-left: solid 5px #aaa;
+    padding: 1em;
+    background-color: themed(blockquote-bg);
   }
 }

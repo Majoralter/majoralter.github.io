@@ -25,7 +25,8 @@ span {
 
 p,
 a,
-time {
+time,
+ul {
   font-family: "Geist Mono", monospace;
   font-optical-sizing: auto;
   font-style: normal;
@@ -38,9 +39,7 @@ nav {
 }
 
 blockquote {
-  border-left: solid 10px #aaa;
-  padding: 1em;
-  background-color: pink;
+  border-radius: var(--radius-2);
 }
 
 table {

@@ -1,8 +1,16 @@
 <template>
     <main class="post-wrapper">
         <article class="post">
-            <h1>{{ post.title }}</h1>
-            <div @mounted="addAnchorsToHeadings" class="post-content" v-html="processedContent"></div>
+            <div class="post-details">
+                <h1 class="post-title">{{ post.title }}</h1>
+                <span class="post-date">
+                    Published:
+                    <b>
+                    {{ new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) }}
+                    </b>
+                </span>
+            </div>
+            <div class="post-content" v-html="processedContent"></div>
         </article>
         <div class="table-of-contents-container">
             <button @click="toggleTOC">
@@ -45,6 +53,21 @@ const addAnchorsToHeadings = () => {
     })
 }
 
+const addLanguageNameToCodeBlocks = () => {
+    document.querySelectorAll('pre code').forEach((codeBlock) => {
+        const className = codeBlock.className || ''; // Get the class of the code block
+        const languageMatch = className.match(/language-(\w+)/); // Extract the language
+        if (languageMatch) {
+            const language = languageMatch[1]; // The language name
+            const languageLabel = document.createElement('span'); // Create a new div
+            languageLabel.className = 'code-language'; // Add a class for styling
+            languageLabel.textContent = language; // Set the text to the language name
+            codeBlock?.parentNode?.insertBefore(languageLabel, codeBlock); // Append after <code>
+        }
+    });
+
+}
+
 const toggleTOC = () => {
     showTOC.value = !showTOC.value
 }
@@ -58,6 +81,7 @@ onMounted(async () => {
 
             nextTick(() => {
                 addAnchorsToHeadings()
+                addLanguageNameToCodeBlocks()
             })
         }
     }
@@ -69,19 +93,54 @@ onMounted(async () => {
 .post-wrapper {
     @include flex-layout(flex-start, flex-start, row, wrap, 1em);
     width: calc(100dvw - ($page-padding--left / 2) - ($page-padding--right / 2));
-    max-width: 1200px;
-    margin-top: 30px;
+    max-width: 1024px;
+    margin-block: 30px;
 
     .post {
         flex: 3;
-        max-width: 100%
+        max-width: 100%;
+        @include flex-layout(flex-start, flex-start, column, nowrap, 2em);
+
+        .post-details {
+            @include flex-layout(flex-start, flex-start, column, nowrap, .25em);
+
+            .post-title {
+                font-size: var(--font-size-5)
+            }
+
+            .post-date {
+                font-size: 14px;
+            }
+        }
+
+        .post-content {
+            @include flex-layout(flex-start, flex-start, column, nowrap, 1em);
+            width: 100%;
+
+            ul {
+                li {
+                    margin-top: .5em;
+                    list-style-type: disc;
+                }
+            }
+
+            pre {
+                width: 100%;
+
+                .code-language {
+                    padding: var(--size-1) var(--size-2);
+                    border-radius: var(--radius-2) var(--radius-2) 0 0;
+                }
+            }
+        }
     }
 
     .table-of-contents-container {
-        @include flex-layout(flex-start, flex-start, column, nowrap, 1em);
+        @include flex-layout(flex-start, flex-start, column, nowrap, .5em);
         flex: 1;
-        border: solid var(--border-size-1) #aaa;
         max-width: 100%;
+        position: sticky;
+        top: 20px;
 
         button {
             width: 100%;
@@ -91,9 +150,8 @@ onMounted(async () => {
             background: transparent;
             cursor: pointer;
             font-size: 16px;
-            display: flex;
-            align-items: center;
-            gap: 3px;
+            @include flex-layout(space-between, center, row, nowrap, 0);
+            border-radius: var(--radius-2);
         }
     }
 }
@@ -101,6 +159,10 @@ onMounted(async () => {
 @media (max-width: 925px) {
     .post-wrapper {
         flex-wrap: wrap-reverse;
+
+        .table-of-contents-container {
+            position: static;
+        }
     }
 }
 </style>
