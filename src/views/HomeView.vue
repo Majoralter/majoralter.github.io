@@ -5,21 +5,20 @@
                 <img :src="require(`@/assets/home/hero-image.jpg`)" alt="hero image">
                 <div class="content">
                     <h1>Jenrola Jackson</h1>
-                    <p>Unopinionated Tinkerer</p>
+                    <!-- <p>Unopinionated Tinkerer</p> -->
 
                     <div class="contact-links">
                         <a target="_blank" href="https://x.com/MajorAlter"><i class="pi pi-twitter"></i></a>
-                        <a target="_blank" href=""><i class="pi pi-discord"></i></a>
                         <a target="_blank" href="https://github.com/Majoralter?tab=repositories"><i
                                 class="pi pi-github"></i></a>
                     </div>
 
                     <p class="bio">
-                        I'm a frontend developer with a generalist mindset (I think). <br>
-                        I love trying my hand at stuff that challenge me. When I'm <br>
-                        not working, you'll find me cheering Liverpool, oogling at <br>
-                        beautifully designed components, or reading slower than a turtle. <br>
-                        I also love playing chess, Apex legends & Fortnite. I intend to write <br>
+                        I'm a frontend developer with a generalist mindset (I think).
+                        I love trying my hand at stuff that challenge me. When I'm
+                        not working, you'll find me cheering Liverpool, oogling at
+                        beautifully designed components, or reading slower than a turtle.
+                        I also love playing chess, Apex legends & Fortnite. I intend to write
                         about stuff I'm learning or that I find interesting enough on this site.
                     </p>
                 </div>
@@ -27,15 +26,15 @@
         </div>
         <div class="home__layout--blog-section">
             <h2>
-                Latest Posts 
+                Latest Posts
             </h2>
             <p v-if="posts.length < 1">No posts yet...</p>
             <div class="post-list" v-else>
                 <MinimalPostListItem v-for="post in posts"
                     :post="{ slug: post.slug, date: new Date(post.date), title: post.title }" />
-                    <router-link class="ext" to="/blog">
-                        View all posts
-                    </router-link>
+                <router-link class="ext" to="/blog">
+                    View all posts
+                </router-link>
             </div>
 
         </div>
@@ -51,23 +50,20 @@ const posts = ref<Post[]>([])
 
 onMounted(() => {
     posts.value = getPosts()
-    console.log(posts.value)
 })
 
 </script>
 
 <style lang="scss">
 .home__layout {
-    width: calc(100dvw - ($page-padding--left / 2) - ($page-padding--right / 2));
-    max-width: 1024px;
     @include flex-layout(center, center, column, nowrap, 3em);
-    margin-block: var(--size-4);
 
     &--hero-section {
         width: 100%;
 
         .hero-intro {
-            @include flex-layout(flex-start, flex-start, row, wrap, 1.5em);
+            @include flex-layout(flex-start, flex-start, column, wrap, 1.5em);
+            width: 100%;
 
             img {
                 height: 200px;
@@ -83,11 +79,7 @@ onMounted(() => {
                 }
 
                 p {
-                    font-size: var(--font-size-0);
-
-                    &.bio {
-                        font-size: var(--font-size-1);
-                    }
+                    font-size: var(--font-size-1);
                 }
 
                 .contact-links {

@@ -1,7 +1,11 @@
 <template>
     <main class="post-wrapper">
-        <article class="post">
+        
+        <article class="post">  
             <div class="post-details">
+                <router-link to="/blog">
+                    <i class="pi pi-arrow-left"></i> Posts
+                </router-link>
                 <h1 class="post-title">{{ post.title }}</h1>
                 <span class="post-date">
                     Published:
@@ -12,7 +16,7 @@
             </div>
             <div class="post-content" v-html="processedContent"></div>
         </article>
-        <div class="table-of-contents-container">
+        <div class="table-of-contents-container" v-if="post.headings.length > 1">
             <button @click="toggleTOC">
                 Table of contents <i class="pi" :class="{ 'pi-chevron-up': showTOC, 'pi-chevron-down': !showTOC }"></i>
             </button>
@@ -26,7 +30,7 @@
 import { usePostsStore } from '@/store/postsStore';
 import { useRoute } from 'vue-router'
 import { computed, onMounted, ref, nextTick } from 'vue'
-import { processMdx } from '@/utils/extend';
+import { processMdx } from '@/plugins/extend';
 import TableOfContents from '@/components/blog/TableOfContents.vue';
 
 const processedContent = ref(''),
@@ -43,7 +47,6 @@ const post = computed(() =>
 
 const addAnchorsToHeadings = () => {
     const headings = document.querySelectorAll(".post-content h1, .post-content h2, .post-content h3");
-    // console.log(headings)
     headings.forEach((heading) => {
         const text = heading.textContent || ""
         heading.id = text
@@ -77,7 +80,6 @@ onMounted(async () => {
     else {
         if (post && 'content' in post.value && typeof post.value.content === 'string') {
             processedContent.value = await processMdx(post.value.content)
-            console.log(post.value)
 
             nextTick(() => {
                 addAnchorsToHeadings()
@@ -116,6 +118,15 @@ onMounted(async () => {
         .post-content {
             @include flex-layout(flex-start, flex-start, column, nowrap, 1em);
             width: 100%;
+
+            p {
+                line-height: var(--font-lineheight-3);
+                font-size: 15px;
+            }
+
+            blockquote {
+                width: 100%;
+            }
 
             ul {
                 li {
