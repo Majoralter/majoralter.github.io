@@ -22,10 +22,6 @@
 
 <style lang="scss">
 footer {
-    // position: absolute;
-    // left: 50%;
-    // bottom: 0;
-    // transform: translate(-50%, 0);
     @include flex-layout(center, center, column, nowrap, .5em);
     width: calc(100dvw - ($page-padding--left / 2) - ($page-padding--right / 2));
     margin-inline: auto;
