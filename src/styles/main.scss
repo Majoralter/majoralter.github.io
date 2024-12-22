@@ -15,8 +15,12 @@ main {
     transition: background-color 0.2s var(--ease-3);
   }
 
-  header {
+  nav {
     border-bottom: solid var(--border-size-1) themed(border);
+  }
+
+  footer {
+    border-top: solid var(--border-size-1) themed(border);
   }
 
   h1,
