@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkmajoralter_github_io"]=self["webpackChunkmajoralter_github_io"]||[]).push([[976],{4976:function(n,r,t){t.r(r),t.d(r,{default:function(){return l}});var e=t(6185);const u={class:"notfound-main"};function a(n,r){return(0,e.uX)(),(0,e.CE)("main",u,r[0]||(r[0]=[(0,e.Lk)("h1",null,"404 📎",-1),(0,e.Lk)("p",null,"Page broken or doesn't exist.",-1)]))}var o=t(2037);const i={},s=(0,o.A)(i,[["render",a]]);var l=s}}]);
+//# sourceMappingURL=976.fee896a5.js.map
