@@ -6,10 +6,10 @@ export const getHeadingsFromContent = (
 
   let match;
   while ((match = regex.exec(content)) !== null) {
-    const [_, hashes, text] = match; // Destructure match groups
+    const [_, hashes, text] = match;
     headings.push({
-      depth: hashes.length, // Number of `#` determines depth
-      text: text.trim(), // Trim any extra whitespace
+      depth: hashes.length,
+      text: text.trim(),
     });
   }
 

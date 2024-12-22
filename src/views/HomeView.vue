@@ -5,7 +5,6 @@
                 <img :src="require(`@/assets/home/hero-image.jpg`)" alt="hero image">
                 <div class="content">
                     <h1>Jenrola Jackson</h1>
-                    <!-- <p>Unopinionated Tinkerer</p> -->
 
                     <div class="contact-links">
                         <a target="_blank" href="https://x.com/MajorAlter"><i class="pi pi-twitter"></i></a>

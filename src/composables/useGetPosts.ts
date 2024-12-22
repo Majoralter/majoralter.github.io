@@ -1,6 +1,4 @@
 import matter from "gray-matter";
-import { compile } from "@mdx-js/mdx";
-import remarkGfm from "remark-gfm";
 import { getHeadingsFromContent } from "@/utils/getHeadings";
 
 export type Post = {
@@ -20,7 +18,6 @@ export function getPosts(): Post[] {
     /\.mdx$/
   );
 
-//   const testContext = require.context("!@/content/posts", false, /\.mdx$/);
   const posts: Post[] = [];
 
   context.keys().forEach(async (key) => {
