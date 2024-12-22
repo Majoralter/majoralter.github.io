@@ -31,7 +31,6 @@ const generateAnchor = (text: string): string => {
     width: 100%;
     padding: var(--size-2);
     border: solid var(--border-size-1) #aaa;
-    border-radius: var(--size-2);
 
     ul {
         @include flex-layout(flex-start, flex-start, column, nowrap, 0);

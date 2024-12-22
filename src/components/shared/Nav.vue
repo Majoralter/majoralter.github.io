@@ -6,7 +6,6 @@
                     <li><router-link to="/"><i class="pi pi-home"></i> Index</router-link></li>
                     <li><router-link to="/blog" :class="{ 'router-link-active': $route.path.startsWith('/blog') }"><i
                                 class="pi pi-pencil"></i> Blog</router-link></li>
-                    <li><router-link to="/components"><i class="pi pi-box"></i> Components</router-link></li>
                     <li><router-link to="/lists"><i class="pi pi-list"></i> Lists</router-link></li>
                 </ul>
             </div>
@@ -49,7 +48,7 @@ header {
         .theme-toggle {
             border: none;
             padding: 6px;
-            border-radius: var(--radius-1);
+            border-radius: var(--radius-round);
             box-shadow: var(--shadow-1);
             cursor: pointer;
             @include flex-layout(center, center, row, nowrap, 0);

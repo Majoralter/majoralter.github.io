@@ -1,6 +1,5 @@
 <template>
     <main class="post-wrapper">
-        
         <article class="post">  
             <div class="post-details">
                 <router-link to="/blog">

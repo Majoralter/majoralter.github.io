@@ -10,8 +10,14 @@
   list-style: none;
 }
 
-body {
-  min-height: 100dvh;
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
 }
 
 h1,
@@ -45,3 +51,5 @@ nav {
 blockquote {
   border-radius: var(--radius-1);
 }
+
+

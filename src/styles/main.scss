@@ -9,6 +9,22 @@ main {
   margin-block: var(--size-4);
 }
 
+.list-container {
+  @include flex-layout(flex-start, flex-start, column, nowrap, 1em);
+  margin-top: 20px;
+  width: 100%;
+
+  h2 {
+    font-size: var(--font-size-3);
+    font-weight: 500;
+
+    a {
+      font-size: 15px;
+      text-decoration: underline;
+    }
+  }
+}
+
 @include themify($themes) {
   body {
     background-color: themed(bg-default);

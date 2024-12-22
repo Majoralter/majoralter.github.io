@@ -39,14 +39,14 @@ const props = defineProps({
 .list-item-long {
     width: 100%;
     @include flex-layout(flex-start, flex-start, column, nowrap, .25em);
-    border-left: dashed var(--border-size-1) #aaa;
+    border-top: dashed var(--border-size-1) #aaa;
     padding: var(--size-2);
 
     a {
         width: 100%;
         @include flex-layout(space-between, center, row, nowrap, 1em);
         font-weight: bold;
-        font-size: 20px;
+        font-size: var(--font-size-2);
 
         time {
             font-size: 14px;
