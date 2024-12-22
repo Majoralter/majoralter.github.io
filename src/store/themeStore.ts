@@ -25,7 +25,6 @@ export const useThemeStore = defineStore("theme", {
     toggleTheme() {
       this.currentTheme = this.currentTheme === "light" ? "dark" : "light";
       this.applyTheme();
-      console.log(this.currentTheme);
     },
     applyTheme() {
       document.documentElement.classList.remove("light", "dark");

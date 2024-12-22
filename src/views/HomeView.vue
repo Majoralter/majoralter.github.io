@@ -13,11 +13,11 @@
                     </div>
 
                     <p class="bio">
-                        I'm a frontend developer with a generalist mindset (I think).
-                        I love trying my hand at stuff that challenge me. When I'm
-                        not working, you'll find me cheering Liverpool, oogling at
-                        beautifully designed components, or reading slower than a turtle.
-                        I also love playing chess, Apex legends & Fortnite. I intend to write
+                        I'm a frontend developer with a generalist mindset (I think). <br>
+                        I love trying my hand at stuff that challenge me. When I'm <br>
+                        not working, you'll find me cheering Liverpool, oogling at <br>
+                        beautifully designed components, or reading slower than a turtle. <br>
+                        I also love playing chess, Apex legends & Fortnite. I intend to write <br>
                         about stuff I'm learning or that I find interesting enough on this site.
                     </p>
                 </div>
@@ -25,7 +25,7 @@
         </div>
         <div class="home__layout--blog-section">
             <h2>
-                Latest Posts
+                Blog Posts
             </h2>
             <p v-if="posts.length < 1">No posts yet...</p>
             <div class="post-list" v-else>
@@ -65,7 +65,7 @@ onMounted(() => {
             width: 100%;
 
             img {
-                height: 200px;
+                height: 100px;
                 width: auto;
                 border-radius: var(--radius-2);
             }
@@ -74,7 +74,7 @@ onMounted(() => {
                 @include flex-layout(flex-start, flex-start, column, nowrap, .5em);
 
                 h1 {
-                    font-size: var(--font-size-5);
+                    font-size: var(--font-size-3);
                 }
 
                 p {

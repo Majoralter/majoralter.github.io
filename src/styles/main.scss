@@ -15,6 +15,10 @@ main {
     transition: background-color 0.2s var(--ease-3);
   }
 
+  header {
+    border-bottom: solid var(--border-size-1) themed(border);
+  }
+
   h1,
   h2,
   h3,
@@ -42,7 +46,7 @@ main {
       color: themed(link-active);
       padding: var(--size-1) var(--size-2);
       background-color: themed(bg-contrast);
-      border-radius: var(--radius-1);
+      border-radius: var(--radius-2);
     }
 
     &:hover {
