@@ -1,6 +1,6 @@
 <template>
     <main class="post-wrapper">
-        <article class="post">  
+        <article class="post">
             <div class="post-details">
                 <router-link to="/blog">
                     <i class="pi pi-arrow-left"></i> Posts
@@ -9,7 +9,9 @@
                 <span class="post-date">
                     Published:
                     <b>
-                    {{ new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) }}
+                        {{ new Date(post.date).toLocaleDateString('en-US', {
+                            month: 'long', day: 'numeric', year: 'numeric'
+                        }) }}
                     </b>
                 </span>
             </div>
@@ -93,8 +95,6 @@ onMounted(async () => {
 <style lang="scss">
 .post-wrapper {
     @include flex-layout(flex-start, flex-start, row, wrap, 1em);
-    width: calc(100dvw - ($page-padding--left / 2) - ($page-padding--right / 2));
-    max-width: 1024px;
     margin-block: 30px;
 
     .post {
@@ -106,7 +106,7 @@ onMounted(async () => {
             @include flex-layout(flex-start, flex-start, column, nowrap, .25em);
 
             .post-title {
-                font-size: var(--font-size-5)
+                font-size: var(--font-size-6)
             }
 
             .post-date {
@@ -118,9 +118,28 @@ onMounted(async () => {
             @include flex-layout(flex-start, flex-start, column, nowrap, 1em);
             width: 100%;
 
+            h1 {
+                font-size: var(--font-size-5);
+            }
+
+            h2 {
+                font-size: var(--font-size-3);
+            }
+
             p {
                 line-height: var(--font-lineheight-3);
                 font-size: 15px;
+                margin-top: -12px;
+            }
+
+            ul {
+                margin-top: -12px;
+                margin-left: 15px;
+
+                li {
+                    line-height: var(--font-lineheight-3);
+                    font-size: 15px;
+                }
             }
 
             blockquote {
@@ -141,6 +160,10 @@ onMounted(async () => {
                     padding: var(--size-1) var(--size-2);
                     border-radius: var(--radius-2) var(--radius-2) 0 0;
                 }
+            }
+
+            a {
+                text-decoration: underline;
             }
         }
     }
@@ -169,9 +192,11 @@ onMounted(async () => {
 @media (max-width: 925px) {
     .post-wrapper {
         flex-wrap: wrap-reverse;
+        flex-direction: column-reverse;
 
         .table-of-contents-container {
             position: static;
+            width: 100%;
         }
     }
 }

@@ -13,11 +13,10 @@
                     </div>
 
                     <p class="bio">
-                        I'm a frontend developer with a generalist mindset (I think). <br>
-                        I love trying my hand at stuff that challenge me. When I'm <br>
-                        not working, you'll find me cheering Liverpool, oogling at <br>
-                        beautifully designed components, or reading slower than a turtle. <br>
-                        I also love playing chess, Apex legends & Fortnite. I intend to write <br>
+                        I'm a frontend developer and an intending software engineer (yes, there's a difference).
+                        When I'm not working, you'll find me cheering Liverpool, oogling at
+                        beautifully designed components, or reading slower than a turtle. 
+                        I also love playing chess & Apex legends. I intend to write 
                         about stuff I'm learning or that I find interesting enough on this site.
                     </p>
                 </div>

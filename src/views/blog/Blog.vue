@@ -21,7 +21,6 @@ const posts = ref<Post[]>([])
 
 onMounted(() => {
     posts.value = getPosts()
-    console.log(posts.value)
 })
 </script>
 
