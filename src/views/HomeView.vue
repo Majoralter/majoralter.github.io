@@ -2,7 +2,7 @@
     <main class="home__layout">
         <div class="home__layout--hero-section">
             <section class="hero-intro">
-                <img :src="require(`@/assets/home/hero-image.jpg`)" alt="hero image">
+                <img :src="require(`@/assets/home/hero-image.png`)" alt="hero image">
                 <div class="content">
                     <h1>Jenrola Jackson</h1>
 
@@ -64,7 +64,7 @@ onMounted(() => {
             width: 100%;
 
             img {
-                height: 100px;
+                height: 200px;
                 width: auto;
                 border-radius: var(--radius-2);
             }
