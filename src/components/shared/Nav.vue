@@ -64,7 +64,7 @@ header {
 
                 li {
                     a {
-                        font-size: 14.4px;
+                        font-size: 18px;
                         display: flex;
                         align-items: center;
                         gap: 3px;

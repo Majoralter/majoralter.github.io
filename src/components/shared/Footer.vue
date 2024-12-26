@@ -1,17 +1,15 @@
 <template>
     <footer>
         <p>
-            <small>&copy; {{ new Date().getFullYear() }} <b>Jenrola Jackson</b> | All Rights Reserved.</small>
+            &copy; {{ new Date().getFullYear() }} <b>Jenrola Jackson</b> | All Rights Reserved.
         </p>
         <p>
-            <small>
-                Vue & Github pages. Source code: <a style="text-decoration: underline;"
-                    href="https://github.com/Majoralter/majoralter.github.io"
-                    target="_blank">gh/Majoralter/majoralter.github.io</a>
-            </small>
+            Vue & Github pages. Source code: <a style="text-decoration: underline;"
+                href="https://github.com/Majoralter/majoralter.github.io"
+                target="_blank">gh/Majoralter/majoralter.github.io</a>
         </p>
-        <p><small>The design of this site is inspired, in parts, by <a href="https://degreat.co.uk/">degreat</a> & <a
-                    href="https://trulyao.dev/">Ayodeji</a> </small>
+        <p>The design of this site is inspired, in parts, by <a href="https://degreat.co.uk/">degreat</a> & <a
+                href="https://trulyao.dev/">Ayodeji</a>
         </p>
     </footer>
 </template>

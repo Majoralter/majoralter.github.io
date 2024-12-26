@@ -44,7 +44,7 @@ onMounted(() => {
                 align-items: center;
                 gap: .25em;
                 font-weight: 500;
-                font-size: 15px;
+                font-size: 20px;
 
                 i {
                     font-size: 12px;
@@ -52,7 +52,7 @@ onMounted(() => {
             }
 
             p {
-                font-size: 14px;
+                font-size: 16px;
             }
         }
     }

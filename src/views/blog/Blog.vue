@@ -2,7 +2,7 @@
     <main class="blog-main">
         <h1>{{ posts?.length }} {{ posts?.length > 1 ? 'posts' : 'post' }} published</h1>
         <p>
-            All opinions are my own. If you think anything written <br> is wrong or in poor taste, please let me know.
+            All opinions are my own. If you think anything written  is wrong or in poor taste, please let me know.
         </p>
 
         <div class="post-list">
@@ -29,7 +29,11 @@ onMounted(() => {
     @include flex-layout(flex-start, flex-start, column, nowrap, .25em);
 
     h1 {
-        font-size: 24px;
+        font-size: var(--font-size-5);
+    }
+
+    p {
+        font-size: 18px;
     }
 
     .post-list {

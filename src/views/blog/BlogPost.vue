@@ -123,12 +123,12 @@ onMounted(async () => {
             }
 
             h2 {
-                font-size: var(--font-size-3);
+                font-size: var(--font-size-4);
             }
 
             p {
                 line-height: var(--font-lineheight-3);
-                font-size: 15px;
+                font-size: 18px;
                 margin-top: -12px;
             }
 
@@ -138,7 +138,7 @@ onMounted(async () => {
 
                 li {
                     line-height: var(--font-lineheight-3);
-                    font-size: 15px;
+                    font-size: 18px;
                 }
             }
 

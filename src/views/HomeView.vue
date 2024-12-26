@@ -71,13 +71,14 @@ onMounted(() => {
 
             .content {
                 @include flex-layout(flex-start, flex-start, column, nowrap, .5em);
+                width: 60%;
 
                 h1 {
-                    font-size: var(--font-size-3);
+                    font-size: var(--font-size-6);
                 }
 
                 p {
-                    font-size: var(--font-size-1);
+                    font-size: var(--font-size-3);
                 }
 
                 .contact-links {
@@ -97,6 +98,10 @@ onMounted(() => {
         width: 100%;
         @include flex-layout(flex-start, flex-start, column, nowrap, 1em);
 
+        h2 {
+            font-size: var(--font-size-5);
+        }
+
         .post-list {
             width: 100%;
             max-width: 650px;
@@ -106,7 +111,7 @@ onMounted(() => {
                 text-decoration: underline;
                 margin-top: 20px;
                 width: fit-content;
-                font-size: 13px;
+                font-size: 16px;
             }
         }
     }
@@ -116,6 +121,7 @@ onMounted(() => {
     .home__layout {
         .hero-intro {
             .content {
+                width: 100%;
                 p {
                     &.bio {
                         br {

@@ -35,9 +35,10 @@ const props = defineProps({
         @include flex-layout(space-between, center, row, nowrap, 1em);
         padding: var(--size-1);
         font-weight: bold;
+        font-size: 20px;
 
         time {
-            font-size: 14px;
+            font-size: 18px;
             font-weight: lighter;
         }
     }

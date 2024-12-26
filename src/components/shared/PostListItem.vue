@@ -46,16 +46,12 @@ const props = defineProps({
         width: 100%;
         @include flex-layout(space-between, center, row, nowrap, 1em);
         font-weight: bold;
-        font-size: var(--font-size-2);
+        font-size: var(--font-size-4);
 
         time {
-            font-size: 14px;
+            font-size: 18px;
             font-weight: lighter;
         }
-    }
-
-    p {
-        font-size: 14px;
     }
 
     .tags {

@@ -32,7 +32,11 @@ const listItems = ref([
 
 <style lang="scss" scoped>
 h1 {
-    font-size: var(--font-size-5);
+    font-size: var(--font-size-6);
+}
+
+p {
+    font-size: 18px;
 }
 
 .list-items {
@@ -42,6 +46,7 @@ h1 {
     li {
         a {
             text-decoration: underline;
+            font-size: 18px;
             &.router-link-active {
                 border-radius: var(--radius-round);
                 text-decoration: none;

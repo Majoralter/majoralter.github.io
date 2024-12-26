@@ -40,8 +40,12 @@ onMounted(() => {
         .film {
             @include flex-layout(flex-start, flex-start, column, nowrap, .25em);
 
+            h3 {
+                font-size: var(--font-size-3);
+            }
+
             p {
-                font-size: 14px;
+                font-size: 18px;
             }
         }
     }

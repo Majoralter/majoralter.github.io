@@ -42,10 +42,11 @@ onMounted(() => {
             img {
                 height: 300px;
                 width: auto;
+                border-radius: var(--radius-2);
             }
 
             h3 {
-                font-size: var(--font-size-2);
+                font-size: var(--font-size-4);
                 font-weight: 500;
                 display: flex;
                 align-items: flex-start;
@@ -56,6 +57,19 @@ onMounted(() => {
                     display: inline-block;
                     font-size: 14px;
                     color: #662E9B;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 530px) {
+    .list-container {
+        .books {
+            .book {
+                img {
+                    width: 75%;
+                    height: auto;
                 }
             }
         }
