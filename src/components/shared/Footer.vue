@@ -25,5 +25,6 @@ footer {
     margin-inline: auto;
     max-width: 1024px;
     padding-block: var(--size-4);
+    text-align: center;
 }
 </style>
