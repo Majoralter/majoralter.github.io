@@ -31,9 +31,20 @@ $page-padding--right: max(env(safe-area-inset-right), 32px);
   align-items: $align-items;
 }
 
-header, footer, main {
-  width: calc(100dvw - ($page-padding--left / 2) - ($page-padding--right / 2));
+header,
+footer,
+main {
+  width: calc(100dvw - 32px);
   max-width: 1024px;
+}
+
+main,
+header {
+  margin-inline: auto;
+
+  @media (max-width: 575px) {
+    margin-inline: none;
+  }
 }
 
 main {
