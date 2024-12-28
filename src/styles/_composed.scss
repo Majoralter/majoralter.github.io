@@ -30,3 +30,12 @@ $page-padding--right: max(env(safe-area-inset-right), 32px);
   justify-items: $justify-items;
   align-items: $align-items;
 }
+
+header, footer, main {
+  width: calc(100dvw - ($page-padding--left / 2) - ($page-padding--right / 2));
+  max-width: 1024px;
+}
+
+main {
+  margin-block: var(--size-4);
+}

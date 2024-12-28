@@ -3,11 +3,6 @@
 @import "theme";
 @import "primeicons/primeicons.css";
 
-main {
-  width: calc(100dvw - ($page-padding--left / 2) - ($page-padding--right / 2));
-  max-width: 1024px;
-  margin-block: var(--size-4);
-}
 
 .list-container {
   @include flex-layout(flex-start, flex-start, column, nowrap, 1em);

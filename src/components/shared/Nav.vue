@@ -31,12 +31,8 @@ onMounted(() => {
 
 <style lang="scss">
 header {
-    width: calc(100dvw - ($page-padding--left / 2) - ($page-padding--right / 2));
-    margin-inline: auto;
-
     nav {
         width: 100%;
-        max-width: 1024px;
         @include flex-layout(space-between, center, row, nowrap, 0);
         padding-block: var(--size-3);
 
