@@ -34,8 +34,9 @@ $page-padding--right: max(env(safe-area-inset-right), 32px);
 header,
 footer,
 main {
-  width: calc(100dvw - 32px);
+  width: 100dvw;
   max-width: 1024px;
+  padding-inline: 32px;
 }
 
 main,
@@ -43,7 +44,7 @@ header {
   margin-inline: auto;
 
   @media (max-width: 575px) {
-    margin-inline: none;
+    margin-inline: unset;
   }
 }
 
