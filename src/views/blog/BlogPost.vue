@@ -14,6 +14,14 @@
                         }) }}
                     </b>
                 </span>
+                <span class="post-date">
+                    Last updated:
+                    <b>
+                        {{ new Date(post.updatedAt).toLocaleDateString('en-US', {
+                            month: 'long', day: 'numeric', year: 'numeric'
+                        }) }}
+                    </b>
+                </span>
             </div>
             <div class="post-content" v-html="processedContent"></div>
         </article>
@@ -43,7 +51,7 @@ const postsStore = usePostsStore()
 const { posts, fetchPosts } = postsStore
 
 const post = computed(() =>
-    posts.find((p) => p.slug === route.params.slug) || { headings: [], title: '', date: '' }
+    posts.find((p) => p.slug === route.params.slug) || { headings: [], title: '', date: '', updatedAt: '' }
 )
 
 const addAnchorsToHeadings = () => {
@@ -119,16 +127,16 @@ onMounted(async () => {
             width: 100%;
 
             h1 {
-                font-size: var(--font-size-5);
+                font-size: var(--font-size-4);
             }
 
             h2 {
-                font-size: var(--font-size-4);
+                font-size: var(--font-size-3);
             }
 
             p {
                 line-height: var(--font-lineheight-3);
-                font-size: 18px;
+                font-size: 16px;
                 margin-top: -12px;
             }
 
@@ -138,7 +146,7 @@ onMounted(async () => {
 
                 li {
                     line-height: var(--font-lineheight-3);
-                    font-size: 18px;
+                    font-size: 15px;
                 }
             }
 
@@ -155,6 +163,10 @@ onMounted(async () => {
 
             pre {
                 width: 100%;
+
+                code {
+                    font-family: sans-serif;
+                }
 
                 .code-language {
                     padding: var(--size-1) var(--size-2);

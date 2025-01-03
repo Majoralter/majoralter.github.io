@@ -5,6 +5,7 @@ export type Post = {
   slug: string;
   title: string;
   date: string;
+  updatedAt: string;
   desc: string;
   content: string;
   tags: string[];
@@ -29,6 +30,7 @@ export function getPosts(): Post[] {
       slug: key.replace("./", "").replace(".mdx", ""),
       title: data.title || "Untitled",
       date: data.date || "",
+      updatedAt: data.updatedAt || "",
       desc: data.desc || "",
       content: rawContent,
       tags: data.tags || [],

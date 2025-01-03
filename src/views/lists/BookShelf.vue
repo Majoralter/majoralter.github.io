@@ -37,7 +37,7 @@ onMounted(() => {
         gap: 16px;
 
         .book {
-            @include flex-layout(flex-start, flex-start, column, nowrap, .25em);
+            @include flex-layout(center, center, column, nowrap, .25em);
 
             img {
                 height: 300px;
@@ -46,12 +46,13 @@ onMounted(() => {
             }
 
             h3 {
-                font-size: var(--font-size-4);
+                font-size: var(--font-size-3);
                 font-weight: 500;
                 display: flex;
-                align-items: flex-start;
+                align-items: center;
                 flex-direction: column;
                 gap: .1em;
+                text-align: center;
 
                 span {
                     display: inline-block;
