@@ -9,6 +9,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.1.9"
+    "astro": "^5.1.9",
+    "open-props": "^1.7.10",
+    "sass": "^1.83.4"
   }
 }
