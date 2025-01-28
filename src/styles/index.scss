@@ -1,9 +1,1 @@
 @use "config";
-@use "composed" as c;
-
-#main {
-  width: 100dvw;
-  max-width: c.$c-max-width;
-  margin-inline: auto;
-  margin-block: 50px;
-}

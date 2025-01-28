@@ -19,7 +19,7 @@ interface Props {
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={SITE_DESCRIPTION} />
     <script src="//unpkg.com/alpinejs" defer is:inline></script>
-    <title>{SITE_TITLE} --- {title}</title>
+    <title>{SITE_TITLE} — {title}</title>
   </head>
   <body class="">
     <NavBar />
@@ -29,3 +29,14 @@ interface Props {
     <!-- <Footer /> -->
   </body>
 </html>
+
+<style lang="scss">
+  @use "../styles/composed" as c;
+  #main {
+    width: 100dvw;
+    max-width: c.$c-max-width;
+    margin-inline: auto;
+    margin-block: 20px;
+    padding-inline: var(--size-2);
+  }
+</style>
