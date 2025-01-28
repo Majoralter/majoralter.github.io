@@ -1,3 +1,6 @@
+@use "sass:map";
+
+$theme-map: null;
 $themes: (
   light: (
     --body-bg: #f3f3f7,
@@ -13,7 +16,7 @@ $themes: (
     --text-inverted: #f3e8e2,
   ),
   dark: (
-    --body-bg: #1d120c,
+    --body-bg: #040404,
     --fore-bg: #191610,
     --blockquote-bg: #1f1d0a,
     --toc-bg: #0f0e05,
@@ -27,7 +30,7 @@ $themes: (
   ),
 );
 
-@mixin themify($key) {
+@mixin themify($themes) {
   @each $name, $values in $themes {
     .#{$name} {
       $theme-map: $values !global;
@@ -36,7 +39,6 @@ $themes: (
   }
 }
 
-
 @function themed($key) {
-    @return map-get($theme-map, $key)
+  @return map.get($theme-map, $key);
 }

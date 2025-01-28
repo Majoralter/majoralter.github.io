@@ -1,0 +1,13 @@
+@use "theme";
+@use "config" as c;
+
+
+@include theme.themify(theme.$themes) {
+    body {
+        background-color: theme.themed(--body-bg);
+    }
+
+    h1 {
+        color: theme.themed(--text-heading);
+    }
+}

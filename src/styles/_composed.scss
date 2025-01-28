@@ -1,0 +1,12 @@
+// mixins
+@mixin flex($flex-direction, $align-items, $justify-content, $gap, $flex-wrap) {
+    display: flex;
+    flex-direction: $flex-direction;
+    align-items: $align-items;
+    justify-content: $justify-content;
+    gap: $gap;
+    flex-wrap: $flex-wrap;
+}
+
+// constants
+$c-max-width: 1200px;

@@ -1,0 +1,30 @@
+---
+import NavBar from "../components/layout/NavBar.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../constants";
+
+const { title = "Home" } = Astro.props;
+
+interface Props {
+  title?: string;
+}
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={SITE_DESCRIPTION} />
+    <script src="//unpkg.com/alpinejs" defer is:inline></script>
+    <title>{SITE_TITLE} --- {title}</title>
+  </head>
+  <body class="">
+    <NavBar />
+    <main id="main">
+      <slot />
+    </main>
+    <!-- <Footer /> -->
+  </body>
+</html>
