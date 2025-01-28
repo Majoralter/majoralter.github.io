@@ -1,7 +1,142 @@
 ---
-import { Image } from "astro:assets";
+import "../../styles/themed.scss";
+import { Icon } from "astro-icon/components";
+
+const links = ["Links", "Writing", "Shelf", "Now"];
 ---
 
-<nav class="nav__bar">
-    
+<nav class="nav-bar" x-data>
+  <div class="nav--top">
+    <a class="logo" href="/">
+      JENROLA JACKSON
+    </a>
+  </div>
+  <div class="nav-bottom">
+    <ul class="nav-links">
+      {
+        links.map((link) => (
+          <li>
+            <a href={`/${link.toLowerCase()}`}>
+              <span class="text-top">{link}</span>
+              <span class="text-bottom">{link}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <button x-cloak @click="$store.theme.applyTheme()" class="toggle-btn">
+      <template x-if="$store.theme.state == 'light'">
+        <Icon name="light-bulb-off" />
+      </template>
+      <template x-if="$store.theme.state == 'dark'">
+        <Icon name="light-bulb-on" />
+      </template>
+    </button>
+  </div>
 </nav>
+
+<style lang="scss">
+  @use "../../styles/composed" as c;
+
+  [x-cloak] {
+    display: none;
+  }
+
+  .nav-bar {
+    @include c.flex(column, center, center, 0.5em, none);
+    padding: var(--size-3) var(--size-2);
+
+    .nav--top {
+      a {
+        text-decoration: none;
+        font-size: var(--font-size-4);
+      }
+    }
+
+    .nav-bottom {
+      @include c.flex(row, center, center, 1em, none);
+
+      .toggle-btn {
+        border: none;
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+        border-radius: 50%;
+        padding: var(--size-2);
+        cursor: pointer;
+      }
+
+      .nav-links {
+        @include c.flex(row, center, center, 1em, none);
+
+        li {
+          list-style: none;
+
+          a {
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+            text-decoration: none;
+            text-transform: uppercase;
+            @include c.flex(column, center, flex-start, 0, none);
+            height: 18px;
+
+            span {
+              display: inline-block;
+              transition: transform 0.75s cubic-bezier(0.625, 0.05, 0, 1);
+            }
+
+            &:hover {
+              .text-top {
+                transform: translateY(-100%);
+              }
+
+              .text-bottom {
+                transform: translateY(-100%);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+</style>
+
+<script is:inline>
+  const handleThemeChange = (theme) => {
+    const html = document.documentElement;
+    html.classList.remove("light", "dark");
+    html.classList.add(theme);
+  };
+
+  const persistedDarkModeFlag =
+    (localStorage.getItem("theme") ?? "") === "dark";
+
+  const prefersDarkMode =
+    !("theme" in localStorage) &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  if (prefersDarkMode && !(localStorage.getItem("theme") ?? "")) {
+    localStorage.setItem("theme", JSON.stringify("dark"));
+  }
+
+  handleThemeChange(
+    persistedDarkModeFlag || prefersDarkMode ? "dark" : "light"
+  );
+
+  document.addEventListener("alpine:init", () => {
+    Alpine.store("theme", {
+      state: persistedDarkModeFlag || prefersDarkMode ? "dark" : "light",
+
+      setState(value) {
+        this.state = value;
+        localStorage.setItem("theme", value);
+        handleThemeChange(value);
+      },
+
+      applyTheme() {
+        this.state === "dark" ? this.setState("light") : this.setState("dark");
+      },
+    });
+  });
+</script>

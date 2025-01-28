@@ -1,13 +1,9 @@
-@use "theme";
-@use "config" as c;
+@use "config";
+@use "composed" as c;
 
-
-@include theme.themify(theme.$themes) {
-    body {
-        background-color: theme.themed(--body-bg);
-    }
-
-    h1 {
-        color: theme.themed(--text-heading);
-    }
+#main {
+  width: 100dvw;
+  max-width: c.$c-max-width;
+  margin-inline: auto;
+  margin-block: 50px;
 }

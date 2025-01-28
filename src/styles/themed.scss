@@ -1,0 +1,48 @@
+@use "theme" as t;
+
+@include t.themify(t.$themes) {
+  body {
+    background-color: t.themed(--body-bg);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: t.themed(--text-heading);
+  }
+
+  a,
+  button {
+    color: t.themed(--text-link-button);
+  }
+
+  p,
+  span {
+    color: t.themed(--text-p);
+  }
+
+  blockquote {
+    background-color: t.themed(--blockquote-bg);
+  }
+
+  nav {
+    .nav-bottom {
+      .toggle-btn {
+        background-color: t.themed(--contrast-bg);
+        color: t.themed(--text-inverted);
+      }
+      .nav-links {
+        li {
+          a {
+            .text-bottom {
+              color: t.themed(--text-link-active);
+            }
+          }
+        }
+      }
+    }
+  }
+}
