@@ -35,8 +35,10 @@ interface Props {
   #main {
     width: 100dvw;
     max-width: c.$c-max-width;
+    min-height: 100dvh;
     margin-inline: auto;
     margin-block: 20px;
-    padding-inline: var(--size-2);
+    padding-inline: var(--size-4);
+    @include c.flex(column, flex-start, flex-start, 24px, nowrap);
   }
 </style>

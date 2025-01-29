@@ -1,21 +1,40 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
 ---
 
 <Layout>
   <div class="hero-section">
+    <div class="c-header">
+      <span> 01 — About</span>
+    </div>
     <aside>
-      <h1>HI!</h1>
+      <h1>H</h1>
     </aside>
     <p>
-      I'm Jenrola, a frontend developer based somewhere in Lagos, Nigeria. This
-      website is where I showcase everything pertaining to my work, projects,
-      studies, writing and explorations. Since 2022, I've helped a handful of
-      clients build websites for their brand or business. I continually try to
-      improve my craft by studying the works of other talented designers, engineers and artists.
-      Altough I primarily work on the frontend of the web, I also have interests in product design, 3D, graphics design and digital art (I can't draw very well).
-      I spend my free time reading, playing games, cooking and watching video essays on youtube.
+      i! I'm Jenrola, a frontend developer based somewhere in Lagos, Nigeria.
+      This website is where I showcase everything pertaining to my work,
+      projects, studies, writing and explorations. Since 2022, I've helped a
+      handful of clients build websites for their brand or business. Altough I
+      primarily work on the frontend of the web, I also have interests in
+      product design, 3D, graphics design and digital art (I can't draw very
+      well). I spend my free time reading, playing games, cooking and watching
+      video essays on youtube.
     </p>
+  </div>
+
+  <div class="socials-section">
+    <div class="c-header">
+      <span> 02 — Elsewhere </span>
+    </div>
+    <div class="social-links">
+      <a href="https://github.com/Majoralter">
+        <Icon name="github-circle" />
+      </a>
+      <a href="https://x.com/MajorAlter">
+        <Icon name="twitter" />
+      </a>
+    </div>
   </div>
 </Layout>
 
@@ -25,16 +44,38 @@ import Layout from "../layouts/Layout.astro";
   .hero-section {
     aside {
       float: left;
-      margin-right: 10px;
+      margin-right: 4px;
 
       h1 {
         font-size: var(--font-size-fluid-3);
+        line-height: var(--font-lineheight-0);
       }
     }
 
     p {
       font-size: var(--font-size-4);
       line-height: var(--font-lineheight-2);
+    }
+  }
+
+  .socials-section {
+    .social-links {
+      @include c.flex(row, center, flex-start, 1em, nowrap);
+      padding-block-start: 4px;
+
+      a {
+        font-size: var(--font-size-4);
+        display: inline-block;
+        text-align: center;
+      }
+    }
+  }
+
+  @media (max-width: 400px) {
+    .hero-section {
+      p {
+        font-size: var(--font-size-2);
+      }
     }
   }
 </style>

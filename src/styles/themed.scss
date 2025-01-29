@@ -45,4 +45,10 @@
       }
     }
   }
+
+  .c-header {
+    span {
+      color: t.themed(--text-link-active);
+    }
+  }
 }
