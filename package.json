@@ -11,7 +11,10 @@
   "dependencies": {
     "astro": "^5.1.9",
     "astro-icon": "^1.1.5",
+    "dayjs": "^1.11.13",
+    "mdast-util-to-string": "^4.0.0",
     "open-props": "^1.7.10",
+    "reading-time": "^1.5.0",
     "sass": "^1.83.4"
   }
 }

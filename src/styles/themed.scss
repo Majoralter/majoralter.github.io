@@ -20,7 +20,9 @@
   }
 
   p,
-  span {
+  span,
+  ul,
+  li {
     color: t.themed(--text-p);
   }
 
@@ -50,13 +52,17 @@
     background-color: t.themed(--fore-bg);
   }
 
- .list-item {
+  .list-item {
     border-bottom: solid var(--border-size-1) t.themed(--border-global);
-  } 
+  }
 
   .tags {
     span {
       background-color: t.themed(--badge-bg);
     }
+  }
+
+  .article-header {
+    border-left: solid var(--border-size-3) t.themed(--border-global);
   }
 }
