@@ -1,13 +1,23 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import CHeader from "../components/layout/CHeader.astro";
 import { Icon } from "astro-icon/components";
+import BlogListItem from "../components/blog/BlogListItem.astro";
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import { ARTICLE_LIMIT } from "../constants";
+
+const allArticles: CollectionEntry<"blog">[] = (
+  await getCollection("blog")
+).sort(
+  (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
+    b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
 ---
 
 <Layout>
-  <div class="hero-section">
-    <div class="c-header">
-      <span> 01 — About</span>
-    </div>
+  <div class="hero-section section">
+    <CHeader headerText="01 — About " />
     <aside>
       <h1>H</h1>
     </aside>
@@ -23,10 +33,8 @@ import { Icon } from "astro-icon/components";
     </p>
   </div>
 
-  <div class="socials-section">
-    <div class="c-header">
-      <span> 02 — Elsewhere </span>
-    </div>
+  <!-- <div class="socials-section section">
+    <CHeader headerText="02 — Elsewhere " />
     <div class="social-links">
       <a href="https://github.com/Majoralter">
         <Icon name="github-circle" />
@@ -35,11 +43,27 @@ import { Icon } from "astro-icon/components";
         <Icon name="twitter" />
       </a>
     </div>
+  </div> -->
+
+  <div class="blog-section section">
+    <CHeader headerText="02 — Writing " />
+    {
+      allArticles
+        .slice(0, ARTICLE_LIMIT)
+        .map((article) => <BlogListItem {article} />)
+    }
+    <p>
+      <a href="/articles">All articles &rarr;</a>
+    </p>
   </div>
 </Layout>
 
 <style lang="scss">
   @use "../styles/composed" as c;
+
+  .section {
+    width: 100%;
+  }
 
   .hero-section {
     aside {
@@ -47,13 +71,13 @@ import { Icon } from "astro-icon/components";
       margin-right: 4px;
 
       h1 {
-        font-size: var(--font-size-fluid-3);
+        font-size: var(--font-size-fluid-2);
         line-height: var(--font-lineheight-0);
       }
     }
 
     p {
-      font-size: var(--font-size-4);
+      font-size: var(--font-size-3);
       line-height: var(--font-lineheight-2);
     }
   }
@@ -65,9 +89,16 @@ import { Icon } from "astro-icon/components";
 
       a {
         font-size: var(--font-size-4);
-        display: inline-block;
-        text-align: center;
+        display: flex;
+        align-items: center;
       }
+    }
+  }
+
+  .blog-section {
+    p {
+      margin-top: 8px;
+      font-size: var(--font-size-2);
     }
   }
 

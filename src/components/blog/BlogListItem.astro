@@ -1,0 +1,44 @@
+---
+import { formatDate } from "../../utils";
+import type { CollectionEntry } from "astro:content";
+import Tags from "../blog/Tags.astro";
+// import Tags from "./"
+
+const { article } = Astro.props;
+
+interface Props {
+  article: CollectionEntry<"blog">;
+}
+---
+
+<div class="list-item">
+  <a href={`/articles/${article.slug}`}>
+    <div class="list-top">
+      <h2>{article.data.title}</h2>
+      <p>{formatDate(article.data.pubDate)}</p>
+    </div>
+  </a>
+
+  <!-- <Tags tags={article.data.tags} /> -->
+</div>
+
+<style lang="scss">
+  @use "../../styles/composed" as c;
+
+  .list-item {
+    width: 100%;
+    max-width: 650px;
+    padding-block: 8px;
+    a {
+      text-decoration: none;
+      &:hover {
+        h2 {
+          text-decoration: underline;
+        }
+      }
+      .list-top {
+        @include c.flex(row, center, space-between, 0, wrap);
+      }
+    }
+  }
+</style>

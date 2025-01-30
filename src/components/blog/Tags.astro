@@ -1,0 +1,36 @@
+---
+import { capitalize } from "../../utils";
+
+const { tags } = Astro.props;
+interface Props {
+  tags: string[];
+}
+---
+
+<div class="tags">
+  {
+    tags.map((tag: string) => (
+      <span>
+        <a href={`/articles/tag/${tag}`}>#{capitalize(tag)}</a>
+      </span>
+    ))
+  }
+</div>
+
+<style lang="scss">
+    @use "../../styles/composed" as c;
+
+    .tags {
+        @include  c.flex(row, center, flex-start, .5em, wrap);
+
+        span {
+            border-radius: var(--radius-1);
+            font-weight: bold;
+            padding: var(--size-1) var(--size-2);
+
+            a {
+                text-decoration: none;
+            }
+        }
+    }
+</style>
