@@ -82,4 +82,8 @@
   .toc-a {
     color: t.themed(--toc-a);
   }
+
+  footer {
+    border-top: solid var(--border-size-1) t.themed(--border-global);
+  }
 }

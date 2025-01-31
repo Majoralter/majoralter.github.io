@@ -1,0 +1,19 @@
+<footer>
+  <p>Copyright &copy; {new Date().getFullYear()} Jenrola Jackson</p>
+  <p>
+    Astro 🚀 x Github pages | <a
+      href="https://github.com/Majoralter/majoralter.github.io">Source code</a>
+  </p>
+</footer>
+
+<style lang="scss">
+  @use "../../styles/composed" as c;
+
+  footer {
+    @include c.flex(row, flex-start, space-between, 0.5em, wrap);
+    padding: var(--size-2);
+    width: 90dvw;
+    max-width: c.$c-max-width;
+    margin-inline: auto;
+  }
+</style>

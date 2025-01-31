@@ -1,6 +1,7 @@
 ---
 import "../styles/index.scss";
 import NavBar from "../components/layout/NavBar.astro";
+import Footer from "../components/layout/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../constants";
 
 const { title = "Home" } = Astro.props;
@@ -26,19 +27,19 @@ interface Props {
     <main id="main">
       <slot />
     </main>
-    <!-- <Footer /> -->
+    <Footer />
   </body>
 </html>
 
 <style lang="scss">
   @use "../styles/composed" as c;
   #main {
-    width: 100vw;
+    width: 90vw;
     max-width: c.$c-max-width;
     min-height: 100dvh;
     margin-inline: auto;
     margin-block: 20px;
-    padding-inline: var(--size-4);
+    padding-inline: var(--size-2);
     @include c.flex(column, flex-start, flex-start, var(--size-8), nowrap);
   }
 </style>

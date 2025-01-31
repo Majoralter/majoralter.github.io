@@ -38,14 +38,13 @@ const links = ["Home", "Links", "Writing", "Shelf", "Now"];
   }
 
   .nav-bar {
-    @include c.flex(column, center, center, 0.5em, none);
-    padding: var(--size-2) var(--size-4);
-    width: 100dvw;
+    padding: var(--size-2);
+    width: 90dvw;
     max-width: c.$c-max-width;
     margin-inline: auto;
 
     .nav-bottom {
-      @include c.flex(row, center, space-between, 1em, nowrap);
+      @include c.flex(row, center, space-between, .25em, nowrap);
       width: 100%;
 
       .toggle-btn {
