@@ -42,6 +42,7 @@ const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
         {formatDate(entry.data.pubDate)}
       </strong>
     </p>
+    <Tags tags={entry.data.tags} />
     <!-- <p><strong>Last updated:</strong> {lastModified}</p> -->
   </div>
   <article>
@@ -53,7 +54,7 @@ const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
   @use "../../styles/composed" as c;
 
   .article-header {
-    @include c.flex(column, flex-start, flex-start, 0.1em, nowrap);
+    @include c.flex(column, flex-start, flex-start, 0.25em, nowrap);
     padding-left: 10px;
 
     span {
@@ -64,6 +65,10 @@ const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
 
     h1 {
       font-size: var(--font-size-4);
+    }
+
+    p {
+        font-size: var(--font-size-1);
     }
   }
 
@@ -100,12 +105,6 @@ const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
     p {
       margin: 0 0 1em;
       font-size: 1em;
-    }
-
-    // Links
-    a {
-      text-decoration: none;
-      transition: all 0.2s ease-in-out;
     }
 
     // Lists
@@ -181,7 +180,6 @@ const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
     // Strong text (bold)
     strong {
       font-weight: bold;
-      color: #ff334e;
     }
 
     // Marked text (highlighted text)

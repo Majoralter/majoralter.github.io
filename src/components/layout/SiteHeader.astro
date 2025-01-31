@@ -1,0 +1,61 @@
+---
+import Cover from "../../images/cover.jpeg";
+import Pfp from "../../images/pfp.jpeg";
+import { Image } from "astro:assets";
+---
+
+<div class="site-header">
+  <div class="header-wrapper">
+    <Image src={Pfp} alt="site profile image" class="profile-img" />
+
+    <div class="info">
+      <h1>Majoralter</h1>
+
+      <ul>
+        <li><a href="mailto:jenrolajackson210@gmail.com">✧Mail</a></li>
+        <li><a href="https://x.com/MajorAlter">✧Twitter</a></li>
+        <li><a href="https://github.com/Majoralter">✧Github</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<style lang="scss">
+  @use "../../styles/composed" as c;
+
+  .site-header {
+    width: 100%;
+
+    .header-wrapper {
+      width: 100%;
+      @include c.flex(row, flex-end, flex-start, 1em, nowrap);
+
+      .profile-img {
+        width: 125px;
+        height: 125px;
+        border-radius: var(--radius-1);
+        // outline: solid var(--border-size-2) #aaa;
+      }
+
+      .info {
+        h1 {
+          font-size: var(--font-size-4);
+          font-weight: 600;
+        }
+
+        ul {
+          @include c.flex(row, center, flex-start, 0.5em, wrap);
+
+          li {
+            list-style-type: none;
+
+            a {
+              text-decoration: none;
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+</style>

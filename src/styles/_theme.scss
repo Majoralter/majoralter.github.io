@@ -9,12 +9,13 @@ $themes: (
     --toc-bg: #faf9f0,
     --contrast-bg: #1d120c,
     --badge-bg: #F0E9E5,
-    --border-global: #e0daa3,
+    --border-global: #C6CAD2,
     --text-heading: #0f0e05,
     --text-p: #2c2c2c,
     --text-link-button: #191610,
     --text-link-active: #b87551,
     --text-inverted: #f3e8e2,
+    --dot-color: #000029
   ),
   dark: (
     --body-bg: #040404,
@@ -22,13 +23,14 @@ $themes: (
     --blockquote-bg: #1f1d0a,
     --toc-bg: #0f0e05,
     --contrast-bg: #f3f3f7,
-    --badge-bg: #412F25,
+    --badge-bg: #251404,
     --border-global: #1f1d0a,
     --text-heading: #f3f3f7,
     --text-p: #d6d6d8,
-    --text-link-button: #faf9f0,
+    --text-link-button: #F7FF0A,
     --text-link-active: #f4f1de,
     --text-inverted: #0f0e05,
+    --dot-color: #007A00
   ),
 );
 

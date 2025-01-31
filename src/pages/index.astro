@@ -1,11 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import CHeader from "../components/layout/CHeader.astro";
-import { Icon } from "astro-icon/components";
 import BlogListItem from "../components/blog/BlogListItem.astro";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import { ARTICLE_LIMIT } from "../constants";
+import SiteHeader from "../components/layout/SiteHeader.astro";
 
 const allArticles: CollectionEntry<"blog">[] = (
   await getCollection("blog")
@@ -16,6 +16,7 @@ const allArticles: CollectionEntry<"blog">[] = (
 ---
 
 <Layout>
+  <SiteHeader />
   <div class="hero-section section">
     <CHeader headerText="01 — About " />
     <aside>
@@ -25,7 +26,7 @@ const allArticles: CollectionEntry<"blog">[] = (
       i! I'm Jenrola, a frontend developer based somewhere in Lagos, Nigeria.
       This website is where I showcase everything pertaining to my work,
       projects, studies, writing and explorations. Since 2022, I've helped a
-      handful of clients build websites for their brand or business. Altough I
+      handful of clients build websites for their brand or business. Although I
       primarily work on the frontend of the web, I also have interests in
       product design, 3D, graphics design and digital art (I can't draw very
       well). I spend my free time reading, playing games, cooking and watching
@@ -87,6 +88,10 @@ const allArticles: CollectionEntry<"blog">[] = (
     p {
       margin-top: 8px;
       font-size: var(--font-size-2);
+    }
+
+    a {
+      font-size: 14px;
     }
   }
 

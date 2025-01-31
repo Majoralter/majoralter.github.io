@@ -2,7 +2,15 @@
 
 @include t.themify(t.$themes) {
   body {
-    background-color: t.themed(--body-bg);
+    background: linear-gradient(
+          90deg,
+          t.themed(--body-bg) calc(22px - 1px),
+          transparent 1%
+        )
+        center / 22px 22px,
+      linear-gradient(t.themed(--body-bg) calc(22px - 1px), transparent 1%)
+        center / 22px 22px,
+      t.themed(--dot-color);
   }
 
   h1,
@@ -31,6 +39,7 @@
   }
 
   nav {
+    border-bottom: solid var(--border-size-1) t.themed(--border-global);
     .nav-bottom {
       .toggle-btn {
         background-color: t.themed(--contrast-bg);
