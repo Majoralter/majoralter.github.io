@@ -33,12 +33,12 @@ interface Props {
 <style lang="scss">
   @use "../styles/composed" as c;
   #main {
-    width: 100dvw;
+    width: 100vw;
     max-width: c.$c-max-width;
     min-height: 100dvh;
     margin-inline: auto;
     margin-block: 20px;
     padding-inline: var(--size-4);
-    @include c.flex(column, flex-start, flex-start, 24px, nowrap);
+    @include c.flex(column, flex-start, flex-start, var(--size-6), nowrap);
   }
 </style>

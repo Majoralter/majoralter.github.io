@@ -6,6 +6,9 @@ import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import { ARTICLE_LIMIT } from "../constants";
 import SiteHeader from "../components/layout/SiteHeader.astro";
+import { Image } from "astro:assets";
+import discLight from "../images/disc-light.png";
+import discDark from "../images/disc.png";
 
 const allArticles: CollectionEntry<"blog">[] = (
   await getCollection("blog")
@@ -45,13 +48,31 @@ const allArticles: CollectionEntry<"blog">[] = (
       <a href="/articles">All articles &rarr;</a>
     </p>
   </div>
+
+  <div class="work-section" x-data x-cloak>
+    <CHeader headerText="03 — Projects " />
+    <template x-if="$store.theme.state == 'dark'">
+      <Image src={discDark} alt="vector wireframe of a disc" />
+    </template>
+    <template x-if="$store.theme.state == 'light'">
+      <Image src={discLight} alt="vector wireframe of a disc" />
+    </template>
+    <p>Still working on it...</p>
+  </div>
 </Layout>
 
 <style lang="scss">
   @use "../styles/composed" as c;
 
+  [x-cloak] {
+    display: none;
+  }
+
   .section {
-    width: 100%;
+    width: 80%;
+    &:not(.hero-section) {
+      @include c.flex(column, flex-start, flex-start, .5em, nowrap);
+    }
   }
 
   .hero-section {
@@ -95,7 +116,18 @@ const allArticles: CollectionEntry<"blog">[] = (
     }
   }
 
+  .work-section {
+    img {
+      height: 110px;
+      width: auto;
+    }
+  }
+
   @media (max-width: 400px) {
+    .section {
+      width: 100%;
+    }
+
     .hero-section {
       p {
         font-size: var(--font-size-2);

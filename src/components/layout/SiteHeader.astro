@@ -7,9 +7,9 @@ import { Image } from "astro:assets";
 <div class="site-header">
   <div class="header-wrapper">
     <Image src={Pfp} alt="site profile image" class="profile-img" />
-
     <div class="info">
-      <h1>Majoralter</h1>
+      <h1 class="header-clock" id="clock"></h1>
+      <h2>Majoralter</h2>
 
       <ul>
         <li><a href="mailto:jenrolajackson210@gmail.com">✧Mail</a></li>
@@ -39,7 +39,8 @@ import { Image } from "astro:assets";
 
       .info {
         h1 {
-          font-size: var(--font-size-4);
+          font-size: var(--font-size-5);
+          font-family: "Syne Mono", serif;
           font-weight: 600;
         }
 
@@ -59,3 +60,27 @@ import { Image } from "astro:assets";
     }
   }
 </style>
+
+<script is:inline>
+  function showTime() {
+    let date = new Date();
+    let h = date.getHours();
+    let m = date.getMinutes();
+    let s = date.getSeconds();
+
+    if (h == 0) {
+      h = 12;
+    }
+    h = h < 10 ? "0" + h : h;
+    m = m < 10 ? "0" + m : m;
+    s = s < 10 ? "0" + s : s;
+
+    let time = `${h}:${m}:${s}`;
+    document.getElementById("clock").innerText = time;
+    document.getElementById("clock").textContent = time;
+
+    setTimeout(showTime, 1000);
+  }
+
+  showTime();
+</script>
