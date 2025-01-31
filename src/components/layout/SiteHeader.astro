@@ -33,7 +33,7 @@ import { Image } from "astro:assets";
       .profile-img {
         width: 125px;
         height: 125px;
-        border-radius: var(--radius-1);
+        border-radius: var(--radius-2);
         // outline: solid var(--border-size-2) #aaa;
       }
 
@@ -53,6 +53,10 @@ import { Image } from "astro:assets";
             a {
               text-decoration: none;
               font-size: 14px;
+
+              &:hover {
+                text-decoration: underline;
+              }
             }
           }
         }

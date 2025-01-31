@@ -27,12 +27,10 @@ const allArticles: CollectionEntry<"blog">[] = (
     </aside>
     <p>
       i! I'm Jenrola, a frontend developer based somewhere in Lagos, Nigeria.
-      This website is where I showcase everything pertaining to my work,
-      projects, studies, writing and explorations. Since 2022, I've helped a
-      handful of clients build websites for their brand or business. Although I
+      This website is where I showcase everything pertaining to my work, studies, writing and explorations. Although I
       primarily work on the frontend of the web, I also have interests in
       product design, 3D, graphics design and digital art (I can't draw very
-      well). I spend my free time reading, playing games, cooking and watching
+      well). I spend my free time reading, playing games, cooking or watching
       video essays on youtube.
     </p>
   </div>
@@ -70,9 +68,6 @@ const allArticles: CollectionEntry<"blog">[] = (
 
   .section {
     width: 80%;
-    &:not(.hero-section) {
-      @include c.flex(column, flex-start, flex-start, .5em, nowrap);
-    }
   }
 
   .hero-section {
