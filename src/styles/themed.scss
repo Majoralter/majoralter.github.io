@@ -74,4 +74,12 @@
   .article-header {
     border-left: solid var(--border-size-3) t.themed(--border-global);
   }
+
+  .toc {
+    background-color: t.themed(--fore-bg);
+  }
+
+  .toc-a {
+    color: t.themed(--toc-a);
+  }
 }

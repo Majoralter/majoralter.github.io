@@ -6,6 +6,7 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import { Icon } from "astro-icon/components";
 import Tags from "../../components/blog/Tags.astro";
+import TOC from "../../components/blog/TOC.astro";
 
 dayjs.extend(utc);
 
@@ -21,7 +22,7 @@ if (entry === undefined) {
   return Astro.redirect("/404");
 }
 
-const { Content, remarkPluginFrontmatter } = await entry.render();
+const { Content, remarkPluginFrontmatter, headings } = await entry.render();
 
 const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
     .utc()
@@ -36,17 +37,20 @@ const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
     <h1>
       {entry.data.title}
     </h1>
+    <Tags tags={entry.data.tags} />
     <p>
       Published:
       <strong>
         {formatDate(entry.data.pubDate)}
       </strong>
     </p>
-    <Tags tags={entry.data.tags} />
-    <!-- <p><strong>Last updated:</strong> {lastModified}</p> -->
+    <p>Last modified: <strong>{lastModified}</strong></p>
   </div>
   <article>
-    <Content />
+    <div class="content">
+      <Content />
+    </div>
+    {headings.length > 0 && <TOC {headings} />}
   </article>
 </Layout>
 
@@ -68,132 +72,145 @@ const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
     }
 
     p {
-        font-size: var(--font-size-1);
+      font-size: 14px;
     }
   }
 
   article {
-    line-height: 1.6;
+    position: relative;
     width: 100%;
+    @include c.flex(row, flex-start, space-between, 1em, nowrap);
 
-    // Headings
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      margin-top: 0;
-      margin-bottom: 0.1em;
-      font-weight: bold;
-      line-height: 1.2;
-    }
+    .content {
+      width: 70%;
+      line-height: 1.6;
+      // Headings
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin-top: 0;
+        margin-bottom: 0.1em;
+        font-weight: bold;
+        line-height: 1.2;
+      }
 
-    h1 {
-      font-size: var(--font-size-4);
-    }
+      h1 {
+        font-size: var(--font-size-4);
+      }
 
-    h2 {
-      font-size: var(--font-size-3);
-    }
+      h2 {
+        font-size: var(--font-size-3);
+      }
 
-    h3 {
-      font-size: var(--font-size-2);
-    }
+      h3 {
+        font-size: var(--font-size-2);
+      }
 
-    // Paragraphs
-    p {
-      margin: 0 0 1em;
-      font-size: 1em;
-    }
+      // Paragraphs
+      p {
+        margin: 0 0 1em;
+        font-size: 1em;
+      }
 
-    // Lists
-    ul,
-    ol {
-      margin: 1em 0;
-      padding-left: 20px;
+      // Lists
+      ul,
+      ol {
+        margin: 1em 0;
+        padding-left: 20px;
 
-      li {
+        li {
+          margin-bottom: 0.5em;
+        }
+      }
+
+      // Code blocks
+      pre {
+        border-radius: 4px;
+        padding: 1em;
+        overflow-x: auto;
+        font-size: 0.9em;
+        line-height: 1.4;
+      }
+
+      // Blockquotes
+      blockquote {
+        padding-left: 1em;
+        margin: 1em 0;
+        font-style: italic;
+      }
+
+      // Horizontal rules
+      hr {
+        border: 0;
+        border-top: 1px solid #eaeaea;
+        margin: 2em 0;
+      }
+
+      // Images
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 1em 0;
+      }
+
+      // Tables
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1em 0;
+      }
+
+      th,
+      td {
+        padding: 0.5em;
+        text-align: left;
+        border: 1px solid #ddd;
+      }
+
+      th {
+        font-weight: bold;
+      }
+
+      // Strikethrough
+      del {
+        text-decoration: line-through;
+      }
+
+      // Emphasized text (italics)
+      em {
+        font-style: italic;
+      }
+
+      // Strong text (bold)
+      strong {
+        font-weight: bold;
+      }
+
+      // Marked text (highlighted text)
+      mark {
+        background-color: yellow;
+        padding: 0.2em;
+      }
+
+      // Tables with caption (optional)
+      table caption {
+        font-size: 1.2em;
         margin-bottom: 0.5em;
+        text-align: center;
+        font-weight: bold;
       }
     }
+  }
 
-    // Code blocks
-    pre {
-      border-radius: 4px;
-      padding: 1em;
-      overflow-x: auto;
-      font-size: 0.9em;
-      line-height: 1.4;
-    }
-
-    // Blockquotes
-    blockquote {
-      padding-left: 1em;
-      margin: 1em 0;
-      font-style: italic;
-    }
-
-    // Horizontal rules
-    hr {
-      border: 0;
-      border-top: 1px solid #eaeaea;
-      margin: 2em 0;
-    }
-
-    // Images
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      margin: 1em 0;
-    }
-
-    // Tables
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1em 0;
-    }
-
-    th,
-    td {
-      padding: 0.5em;
-      text-align: left;
-      border: 1px solid #ddd;
-    }
-
-    th {
-      font-weight: bold;
-    }
-
-    // Strikethrough
-    del {
-      text-decoration: line-through;
-    }
-
-    // Emphasized text (italics)
-    em {
-      font-style: italic;
-    }
-
-    // Strong text (bold)
-    strong {
-      font-weight: bold;
-    }
-
-    // Marked text (highlighted text)
-    mark {
-      background-color: yellow;
-      padding: 0.2em;
-    }
-
-    // Tables with caption (optional)
-    table caption {
-      font-size: 1.2em;
-      margin-bottom: 0.5em;
-      text-align: center;
-      font-weight: bold;
+  @media (max-width: 768px) {
+    article {
+      .content {
+        width: 100%;
+      }
     }
   }
 </style>

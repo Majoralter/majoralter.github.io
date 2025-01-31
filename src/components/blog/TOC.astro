@@ -1,0 +1,88 @@
+---
+import type { MarkdownHeading } from "astro";
+import { Icon } from "astro-icon/components";
+
+type Props = {
+  headings: MarkdownHeading[];
+};
+
+const { headings } = Astro.props;
+---
+
+<div class="toc" x-data="{open: false}" x-cloak>
+  <button @click="open = !open">
+    On This Page
+    <template x-if="!open">
+      <Icon name="eye-solid" />
+    </template>
+
+    <template x-if="open">
+      <Icon name="eye-closed" />
+    </template>
+  </button>
+
+  <div class="headings" x-show="open">
+    <ul>
+      {
+        headings.map((heading) => (
+          <li style={`margin-left: ${(heading.depth - 1) * 1.25}rem`}>
+            <a href={`#${heading.slug}`} class="toc-a">
+              &#x21AA; {heading.text}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>
+
+<style lang="scss">
+  @use "../../styles/composed" as c;
+  
+  [x-cloak] {
+    display: none;
+  }
+
+  .toc {
+    position: sticky;
+    top: 20px;
+    width: 28%;
+    padding: var(--size-2);
+    border-radius: var(--radius-2);
+
+    button {
+      width: 100%;
+      background: none;
+      padding: var(--size-1) var(--size-2);
+      cursor: pointer;
+      border-radius: var(--radius-2);
+      margin-bottom: 4px;
+      border: solid var(--border-size-1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .headings {
+      transition: all 0.3s var(--ease-elastic-2);
+      ul {
+        @include c.flex(column, flex-start, flex-start, 0.25em, nowrap);
+
+        li {
+          list-style-type: none;
+
+          a {
+            text-decoration: none;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .toc {
+      display: none;
+    }
+  }
+</style>
