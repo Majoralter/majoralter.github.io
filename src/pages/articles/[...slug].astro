@@ -50,7 +50,7 @@ const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
     <div class="content">
       <Content />
     </div>
-    {headings.length > 0 && <TOC {headings} />}
+    <!-- {headings.length > 0 && <TOC {headings} />} -->
   </article>
 </Layout>
 
@@ -68,7 +68,7 @@ const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
     }
 
     h1 {
-      font-size: var(--font-size-4);
+      font-size: var(--font-size-3);
     }
 
     p {
@@ -78,11 +78,10 @@ const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
 
   article {
     position: relative;
-    width: 100%;
     @include c.flex(row, flex-start, space-between, 1em, nowrap);
 
     .content {
-      width: 70%;
+      width: 100%;
       line-height: 1.6;
       // Headings
       h1,
@@ -97,18 +96,10 @@ const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
         line-height: 1.2;
       }
 
-      h1 {
-        font-size: var(--font-size-4);
-      }
-
-      h2 {
-        font-size: var(--font-size-3);
-      }
-
-      h3 {
+      h1,h2,h3 {
         font-size: var(--font-size-2);
       }
-
+      
       // Paragraphs
       p {
         margin: 0 0 1em;

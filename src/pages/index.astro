@@ -26,12 +26,12 @@ const allArticles: CollectionEntry<"blog">[] = (
       <h1>H</h1>
     </aside>
     <p>
-      i! I'm Jenrola, a frontend developer based somewhere in Lagos, Nigeria.
-      This website is where I showcase everything pertaining to my work, studies, writing and explorations. Although I
-      primarily work on the frontend of the web, I also have interests in
-      product design, 3D, graphics design and digital art (I can't draw very
-      well). I spend my free time reading, playing games, cooking or watching
-      video essays on youtube.
+      i! I'm Jenrola, a frontend developer. This website is where I showcase
+      everything pertaining to my work, studies, writing and explorations.
+      Although I primarily work on the frontend of the web, I also have
+      interests in product design, 3D, graphics design and digital art (I can't
+      draw very well). I spend my free time reading, playing games, cooking or
+      watching video essays on youtube.
     </p>
   </div>
 
@@ -47,7 +47,7 @@ const allArticles: CollectionEntry<"blog">[] = (
     </p>
   </div>
 
-  <div class="work-section" x-data x-cloak>
+  <div class="work-section section" x-data x-cloak>
     <CHeader headerText="03 — Projects " />
     <template x-if="$store.theme.state == 'dark'">
       <Image src={discDark} alt="vector wireframe of a disc" />
@@ -67,7 +67,7 @@ const allArticles: CollectionEntry<"blog">[] = (
   }
 
   .section {
-    width: 80%;
+    width: 100%;
   }
 
   .hero-section {

@@ -2,15 +2,7 @@
 
 @include t.themify(t.$themes) {
   body {
-    background: linear-gradient(
-          90deg,
-          t.themed(--body-bg) calc(22px - 1px),
-          transparent 1%
-        )
-        center / 22px 22px,
-      linear-gradient(t.themed(--body-bg) calc(22px - 1px), transparent 1%)
-        center / 22px 22px,
-      t.themed(--dot-color);
+    background: t.themed(--body-bg);
   }
 
   h1,
