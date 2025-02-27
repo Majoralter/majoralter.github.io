@@ -1,6 +1,21 @@
+@use '../utils/' as u;
+
 .abs {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+}
+
+.wrapper {
+    width: min(100% - 40px, u.rem(1100));
+    margin-inline: auto;
+
+    &.has-padding {
+        padding-block: 40px;
+
+        @include u.breakpoint(medium) {
+            padding-block: 60px;
+        }
+    }
 }
