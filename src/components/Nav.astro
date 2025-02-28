@@ -1,0 +1,181 @@
+---
+const TABS = [
+  {
+    name: "Index",
+    path: "/",
+  },
+  {
+    name: "Projects",
+    path: "/projects",
+  },
+  {
+    name: "Blog",
+    path: "/blog",
+  },
+  {
+    name: "Showcase",
+    path: "/showcase",
+  },
+  {
+    name: "Bookmarks",
+    path: "/bookmarks",
+  },
+  {
+    name: "Shelf",
+    path: "/shelf",
+  },
+];
+---
+
+<nav class="wrapper">
+  <ul class="header__items" role="list">
+    {
+      TABS.map((tab, index) => (
+        <li class="header__item">
+          <a class="tab__item" href={`${tab.path}`}>
+            {tab.name}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <div aria-hidden class="clip-path-container">
+    <ul class="header__items mask" role="list">
+      {
+        TABS.map((tab, index) => (
+          <li class="header__item">
+            <a class="mask-link" href={`${tab.path}`}>
+              {tab.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</nav>
+
+<style lang="scss">
+  @use "../styles/utils/" as u;
+
+  nav {
+    background-color: rgba(26, 26, 26, 0.7);
+    width: fit-content;
+    position: relative;
+    @include u.display-flex(column, center, center, 0, nowrap);
+    margin-block-start: 24px;
+    padding: 8px;
+    border-radius: u.rem(4);
+    backdrop-filter: blur(u.rem(24));
+    border: solid 0.2px var(--color-border-blend);
+
+    .header__items {
+      list-style-position: inside;
+      position: relative;
+      @include u.display-flex(row, center, center, 0, nowrap);
+      width: 100%;
+
+      .header__item {
+        height: 32px;
+
+        a {
+          padding-inline: u.rem(16);
+          text-decoration: none;
+          font-weight: 500;
+          font-size: u.rem(14);
+          display: flex;
+          align-items: center;
+          height: 100%;
+        }
+      }
+    }
+
+    .clip-path-container {
+      position: absolute;
+      z-index: 10;
+      overflow: hidden;
+      visibility: hidden;
+
+      &.ease-out {
+        transition: clip-path 0.25s cubic-bezier(0.625, 0.05, 0, 1);
+      }
+
+      &:hover {
+        transition-duration: 0ms;
+      }
+
+      .header__items.mask {
+        .header__item {
+          a {
+            background-color: var(--color-highlight-bg);
+            color: white;
+          }
+        }
+      }
+    }
+  }
+</style>
+
+<script>
+  const tabItems = document.querySelectorAll<HTMLElement>(".tab__item");
+  const tabItemsMask = document.querySelectorAll<HTMLElement>(".mask-link");
+  const container = document.querySelector<HTMLElement>(".clip-path-container");
+
+  let currentTab: HTMLElement, currIndex: number;
+
+  //   initialize clip-path
+  const init = () => {
+    if (!sessionStorage.getItem("currIndex")) {
+      currentTab = tabItemsMask[0];
+    } else {
+      let lastIndex = JSON.parse(sessionStorage.getItem("currIndex") || "0");
+      currentTab = tabItemsMask[lastIndex];
+    }
+    setClipPath(currentTab);
+  };
+
+  //   set clip on ummasked items on hover
+  tabItems.forEach((item, index) => {
+    item.addEventListener("mouseenter", () => {
+      container?.classList.remove("ease-out");
+      setClipPath(tabItemsMask[index]);
+    });
+  });
+
+  //   set clip on masked items on hover and remove on mouseleave
+  tabItemsMask.forEach((item, index) => {
+    item.addEventListener("click", () => {
+      saveTabIndex(index);
+    });
+
+    item.addEventListener("pointerleave", () => {
+      container?.classList.add("ease-out");
+      resetCliPathPosition(index);
+    });
+  });
+
+  const setClipPath = (el: HTMLElement) => {
+    const { offsetLeft, offsetWidth } = el;
+    const clipLeft = offsetLeft;
+    const clipRight = offsetLeft + offsetWidth;
+
+    if (container) {
+      container.style.clipPath = `inset(0 ${Number(100 - (clipRight / container.offsetWidth) * 100).toFixed()}% 0 ${Number((clipLeft / container.offsetWidth) * 100).toFixed()}% round 4px)`;
+      container.style.visibility = "visible";
+    }
+  };
+
+  // save last clicked item index
+  const saveTabIndex = (index: number) => {
+    sessionStorage.setItem("currIndex", JSON.stringify(index));
+  };
+
+  const resetCliPathPosition = (index: number) => {
+    let lastIndex = JSON.parse(sessionStorage.getItem("currIndex") || "0");
+
+    if (lastIndex !== index) {
+      setClipPath(tabItemsMask[lastIndex]);
+    }
+  };
+
+  init();
+</script>
