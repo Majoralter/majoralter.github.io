@@ -1,3 +1,265 @@
-<!-- <div class="container">
+<div class="container">
+  <svg
+    class="abs"
+    id="svg"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 120 72"
+  >
+    <defs>
+      <style>
+        .cls-1 {
+          fill: #f3f3f3;
+        }
+      </style>
+      <filter id="filter">
+        <feTurbulence
+          id="heatWave"
+          type="turbulence"
+          baseFrequency="0.00"
+          numOctaves="2"
+          result="turbulence"></feTurbulence>
+        <feDisplacementMap
+          in2="turbulence"
+          in="SourceGraphic"
+          scale="8"
+          xChannelSelector="R"
+          yChannelSelector="G"></feDisplacementMap>
+      </filter>
+    </defs>
+    <g id="Layer_2" data-name="Layer 2">
+      <g id="fill">
+        <path
+          class="cls-1 path"
+          d="M 120 26.67 V 45.33 A 2.66 2.66 0 0 1 117.33 48 H 98.67 A 2.66 2.66 0 0 1 96 45.33 V 29.12 A 5.12 5.12 0 0 0 90.88 24 H 77.12 A 5.12 5.12 0 0 0 72 29.12 V 42.88 A 5.12 5.12 0 0 0 77.12 48 H 93.33 A 2.66 2.66 0 0 1 96 50.67 V 69.33 A 2.66 2.66 0 0 1 93.33 72 H 74.67 A 2.66 2.66 0 0 1 72 69.33 V 53.12 A 5.12 5.12 0 0 0 66.88 48 H 53.12 A 5.12 5.12 0 0 0 48 53.12 V 69.33 A 2.66 2.66 0 0 1 45.33 72 H 26.67 A 2.66 2.66 0 0 1 24 69.33 V 50.67 A 2.66 2.66 0 0 1 26.67 48 H 42.88 A 5.12 5.12 0 0 0 48 42.88 V 29.12 A 5.12 5.12 0 0 0 42.88 24 H 29.12 A 5.12 5.12 0 0 0 24 29.12 V 45.33 A 2.66 2.66 0 0 1 21.33 48 H 2.67 A 2.66 2.66 0 0 1 0 45.33 V 26.67 A 2.66 2.66 0 0 1 2.67 24 H 18.88 A 5.12 5.12 0 0 0 24 18.88 V 2.67 A 2.66 2.66 0 0 1 26.67 0 H 45.33 A 2.66 2.66 0 0 1 48 2.67 V 18.88 A 5.12 5.12 0 0 0 53.12 24 H 66.88 A 5.12 5.12 0 0 0 72 18.88 V 2.67 A 2.66 2.66 0 0 1 74.67 0 H 93.33 A 2.66 2.66 0 0 1 96 2.67 V 18.88 A 5.12 5.12 0 0 0 101.12 24 h 16.21 A 2.66 2.66 0 0 1 120 26.67 Z"
+        ></path>
+      </g>
+    </g>
+  </svg>
+</div>
 
-</div> -->
+<style lang="scss">
+  .container {
+    --svg-width: 600px;
+    height: 100dvh;
+    width: 100dvw;
+    position: fixed;
+    top: 0;
+    will-change: transform;
+    transition: transform 0.75s cubic-bezier(0.625, 0.05, 0, 1);
+    transform: skew(-48deg, 8deg);
+
+    svg {
+      width: var(--svg-width);
+      filter: url(#filter);
+      z-index: 99;
+      margin: -3px;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  const numberOfSquares = 15,
+    numberofHandles = 4;
+
+  const svg = document.getElementById("svg");
+  const container = document.querySelector(".container");
+
+  function createHiPPICanvas(width: number, height: number) {
+    const ratio = window.devicePixelRatio;
+    const canvas = document.createElement("canvas");
+    canvas.id = "canvas";
+
+    canvas.width = width * ratio;
+    canvas.height = height * ratio;
+    canvas.style.width = width + "px";
+    canvas.style.height = height + "px";
+    canvas.getContext("2d")?.scale(ratio, ratio);
+
+    return canvas;
+  }
+
+  let canvas = createHiPPICanvas(window.innerWidth, window.innerHeight),
+    ctx = canvas.getContext("2d");
+  document.body.append(canvas);
+
+  const init = () => {
+    const grid = document.createElement("div");
+    grid.className = "grid";
+    grid.style.height = `${svg?.clientHeight}px`;
+    grid.style.width = `${svg?.clientWidth}px`;
+    container?.append(grid);
+
+    for (let i = 0; i < numberOfSquares; i++) {
+      const cell = document.createElement("div");
+      cell.className = "cell";
+      cell.style.height = cell.style.width = `${grid.clientWidth * 0.2}px`;
+      for (let j = 0; j < numberofHandles; j++) {
+        const handle = document.createElement("div");
+        handle.className = `t-${j + 1}`;
+        handle.classList.add("hdl");
+        cell.append(handle);
+      }
+      grid.append(cell);
+    }
+  };
+
+  init();
+
+  const hdls = document.querySelectorAll(".hdl");
+
+  const grid = document.querySelector(".grid");
+
+  grid?.addEventListener("mouseover", () => {
+    const squares = document.querySelectorAll(".square");
+    gsap.to("#heatWave", {
+      attr: { baseFrequency: "0.022 0.02" },
+      ease: "power3.out",
+      duration: 3,
+    });
+  });
+
+  grid?.addEventListener("mouseleave", () => {
+    gsap.to("#heatWave", {
+      attr: { baseFrequency: "0.00 0.00" },
+      ease: "power3.out",
+      duration: 3,
+    });
+  });
+
+  function getBoundingCoordinates() {
+    const grid_box = document.querySelector(".grid");
+    const rect = grid_box?.getBoundingClientRect();
+
+    const topLeft = { x: rect?.left ?? 0, y: rect?.top ?? 0 };
+    const topRight = { x: rect?.right ?? 0, y: rect?.top ?? 0 };
+    const bottomLeft = { x: rect?.left ?? 0, y: rect?.bottom ?? 0 };
+    const bottomRight = { x: rect?.right ?? 0, y: rect?.bottom ?? 0 };
+
+    return { topLeft, topRight, bottomLeft, bottomRight };
+  }
+
+  function getSkewCoordinates() {
+    const skewCoords: { top: number; left: number }[] = [];
+    hdls.forEach((hdl) => {
+      const rect = hdl.getBoundingClientRect();
+      skewCoords.push({
+        top: rect.top,
+        left: rect.left,
+      });
+    });
+    return skewCoords;
+  }
+
+  function filterCoordinates() {
+    const coordinates = getSkewCoordinates();
+    const epsilon = 1;
+    const uniqueCoords: { top: number; left: number }[] = [];
+
+    coordinates.forEach((coord) => {
+      const alreadyExists = uniqueCoords.some(
+        (existing) =>
+          Math.abs(Math.trunc(existing.top) - Math.trunc(coord.top)) <=
+            epsilon &&
+          Math.abs(Math.trunc(existing.left) - Math.trunc(coord.left)) <=
+            epsilon
+      );
+
+      if (!alreadyExists) {
+        uniqueCoords.push(coord);
+      }
+    });
+
+    return uniqueCoords;
+  }
+
+  function drawLines() {
+    const newCoords = filterCoordinates();
+    const { topLeft, topRight, bottomLeft, bottomRight } =
+      getBoundingCoordinates();
+
+    ctx?.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (ctx) {
+      ctx.strokeStyle = "rgb(38, 38, 38)";
+      ctx.lineWidth = 0.5;
+      ctx.lineCap = "butt";
+      ctx.font = "12px sans-serif";
+      ctx.fillStyle = "#b3b3b3";
+    }
+
+    ctx?.beginPath();
+
+    newCoords.forEach((coord) => {
+      ctx?.moveTo(coord.left, coord.top);
+      ctx?.lineTo(coord.left, 0);
+      ctx?.moveTo(coord.left, coord.top);
+      ctx?.lineTo(coord.left, canvas.height);
+    });
+
+    // draw horizontal lines
+    ctx?.moveTo(topLeft.x, topLeft.y);
+    ctx?.lineTo(topRight.x, topRight.y);
+    ctx?.moveTo(bottomLeft.x, bottomLeft.y);
+    ctx?.lineTo(bottomRight.x, bottomRight.y);
+
+    // conditional lines
+    // ctx?.moveTo(topLeft.x, topLeft.y)
+    // ctx?.lineTo(topLeft.x, 0)
+    // ctx?.moveTo(topLeft.x, topLeft.y)
+    // ctx?.lineTo(topLeft.x, canvas.height)
+    // ctx?.moveTo(topRight.x, topRight.y)
+    // ctx?.lineTo(topRight.x, 0)
+    // ctx?.moveTo(topRight.x, topRight.y)
+    // ctx?.lineTo(topRight.x, canvas.height)
+
+    if (ctx) {
+      ctx.textAlign = "left";
+    }
+    ctx?.fillText(
+      `[${Math.trunc(topLeft.x)},${Math.trunc(topLeft.y)}]`,
+      topLeft.x,
+      topLeft.y
+    );
+    if (ctx) {
+      ctx.textAlign = "right";
+    }
+    ctx?.fillText("Jenrola Jackson", topRight.x, topRight.y);
+    if (ctx) {
+      ctx.textAlign = "left";
+    }
+    ctx?.fillText("Design Engineer", bottomLeft.x, bottomLeft.y);
+    if (ctx) {
+      ctx.textAlign = "right";
+    }
+    ctx?.fillText(
+      `[${Math.trunc(bottomRight.x)},${Math.trunc(bottomRight.y)}]`,
+      bottomRight.x,
+      bottomRight.y
+    );
+    ctx?.stroke();
+  }
+  drawLines();
+
+  function resizeCanvas() {
+    const canvas = document.getElementById("canvas") as HTMLCanvasElement;
+    const ratio = window.devicePixelRatio || 1;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    if (canvas) {
+      canvas.width = width * ratio;
+      canvas.height = height * ratio;
+      canvas.style.width = width + "px";
+      canvas.style.height = height + "px";
+    }
+
+    const ctx = canvas.getContext("2d");
+    ctx?.setTransform(1, 0, 0, 1, 0, 0);
+    ctx?.scale(ratio, ratio);
+
+    drawLines();
+  }
+
+  window.addEventListener("resize", resizeCanvas);
+</script>

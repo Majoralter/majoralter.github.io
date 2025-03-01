@@ -37,12 +37,13 @@ import Nav from "../components/Nav.astro";
 
     &[data-side="top"] {
       top: 0;
-      height: 300px;
+      height: 200px;
       background: linear-gradient(to top, transparent, #161616);
       mask-image: linear-gradient(to bottom, #161616 25%, transparent);
     }
 
     &[data-side="bottom"] {
+		height: 100px;
       bottom: 0;
       z-index: 3;
       background: linear-gradient(to bottom, transparent, #161616);

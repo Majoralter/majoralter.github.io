@@ -1,0 +1,48 @@
+.grid {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(5, 1fr);
+      border: solid 1px #262626;
+      border-right: none;
+      border-bottom: none;
+      z-index: 999;
+      cursor: pointer;
+
+      .cell {
+        border: solid 1px #262626;
+        border-left: none;
+        border-top: none;
+        position: relative;
+        /* background-color: dodgerblue; */
+
+        .hdl {
+          height: 0px;
+          width: 0px;
+          position: absolute;
+
+          &.t-1 {
+            top: 0;
+            left: 0;
+          }
+
+          &.t-2 {
+            top: 0;
+            right: 0;
+          }
+
+          &.t-3 {
+            bottom: 0;
+            right: 0;
+          }
+
+          &.t-4 {
+            bottom: 0;
+            left: 0;
+          }
+        }
+      }
+    }
