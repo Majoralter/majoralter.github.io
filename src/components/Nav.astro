@@ -27,7 +27,7 @@ const TABS = [
 ];
 ---
 
-<nav class="wrapper">
+<nav>
   <ul class="header__items" role="list">
     {
       TABS.map((tab, index) => (
@@ -60,6 +60,7 @@ const TABS = [
   nav {
     background-color: rgba(26, 26, 26, 0.7);
     width: fit-content;
+    margin-inline: auto;
     position: relative;
     z-index: 10;
     @include u.display-flex(column, center, center, 0, nowrap);
@@ -121,7 +122,7 @@ const TABS = [
   const tabItemsMask = document.querySelectorAll<HTMLElement>(".mask-link");
   const container = document.querySelector<HTMLElement>(".clip-path-container");
 
-  let currentTab: HTMLElement, currIndex: number;
+  let currentTab: HTMLElement;
 
   //   initialize clip-path
   const init = () => {
@@ -136,7 +137,7 @@ const TABS = [
 
   //   set clip on ummasked items on hover
   tabItems.forEach((item, index) => {
-    item.addEventListener("mouseenter", () => {
+    item.addEventListener("mouseover", () => {
       container?.classList.remove("ease-out");
       setClipPath(tabItemsMask[index]);
     });

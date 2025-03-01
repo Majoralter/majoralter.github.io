@@ -1,6 +1,13 @@
+@use "../utils/" as u;
+
 #canvas {
   z-index: -1;
-  position: absolute;
+  position: fixed;
   image-rendering: pixelated;
   top: 0;
+  left: 0;
+
+  @include u.breakpoint-down(medium) {
+    display: none;
+  }
 }
