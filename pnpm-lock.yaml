@@ -14,6 +14,9 @@ importers:
       gsap:
         specifier: ^3.12.7
         version: 3.12.7
+      iconoir:
+        specifier: ^7.10.1
+        version: 7.10.1
       sass:
         specifier: ^1.85.1
         version: 1.85.1
@@ -863,6 +866,9 @@ packages:
 
   http-cache-semantics@4.1.1:
     resolution: {integrity: sha512-er295DKPVsV82j5kw1Gjt+ADA/XYHsajl82cGNQG2eyoPkvgUhX+nDIyelzhIWbbsXP39EHcI6l5tYs2FYqYXQ==}
+
+  iconoir@7.10.1:
+    resolution: {integrity: sha512-cSH+dBz1YOtvsYBRsrvDnVHX1w8OtiylGSIgbzjc8l8+AiXlD+oDVLAA+yfoYV6eL8LypWlrbnHkYcBif+7BvQ==}
 
   immutable@5.0.3:
     resolution: {integrity: sha512-P8IdPQHq3lA1xVeBRi5VPqUm5HDgKnx0Ru51wZz5mjxHr5n3RWhjIpOFU7ybkUxfB+5IToy+OLaHYDBIWsv+uw==}
@@ -2392,6 +2398,8 @@ snapshots:
   html-void-elements@3.0.0: {}
 
   http-cache-semantics@4.1.1: {}
+
+  iconoir@7.10.1: {}
 
   immutable@5.0.3: {}
 

@@ -1,6 +1,7 @@
 ---
 import "../styles/styles.scss";
 import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
 ---
 
 <!doctype html>
@@ -9,6 +10,10 @@ import Nav from "../components/Nav.astro";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css"
+    />
     <meta name="generator" content={Astro.generator} />
     <title>Astro Basics</title>
   </head>
@@ -19,6 +24,7 @@ import Nav from "../components/Nav.astro";
     <div class="horizontal-fade" aria-hidden="true" data-side="right"></div>
     <Nav />
     <slot />
+    <Footer />
   </body>
 </html>
 
@@ -43,7 +49,7 @@ import Nav from "../components/Nav.astro";
     }
 
     &[data-side="bottom"] {
-		height: 100px;
+      height: 100px;
       bottom: 0;
       z-index: 3;
       background: linear-gradient(to bottom, transparent, #161616);

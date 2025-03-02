@@ -1,0 +1,88 @@
+---
+
+---
+
+<footer>
+  <div class="footer__section">
+    <img id="logo" src="/logo.svg" alt="Site Logo" class="logo" />
+
+    <div class="sep"></div>
+
+    <ul role="list" class="footer__links">
+      <li class="footer__link">
+        <a href="https://github.com/Majoralter">Github</a>
+      </li>
+      <li class="footer__link">
+        <a href="https://x.com/MajorAlter">Twitter</a>
+      </li>
+      <li class="footer__link">
+        <a href="mailto:jenrolajackson210@gmail.com">Mail</a>
+      </li>
+      <li class="footer__link">
+        <a href="https://github.com/Majoralter/majoralter.github.io">Source</a>
+      </li>
+    </ul>
+  </div>
+</footer>
+
+<style lang="scss">
+  @use "../styles/utils/" as u;
+  footer {
+    position: fixed;
+    top: unset;
+    bottom: u.rem(24);
+    z-index: 100;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgb(26, 26, 26);
+    border-radius: u.rem(4);
+    padding: u.rem(4) u.rem(8);
+    border: solid 0.2px var(--color-border-blend);
+    width: max-content;
+
+    .footer__section {
+      @include u.display-flex(row, center, center, 0.5rem, nowrap);
+
+      p {
+        font-size: 14px;
+      }
+
+      .sep {
+        height: 24px;
+        width: 1px;
+        background-color: var(--color-border);
+        border-radius: 2px;
+      }
+
+      #logo {
+        height: 20px;
+        width: auto;
+      }
+
+      .footer__links {
+        @include u.display-flex(row, center, center, 0.5rem, nowrap);
+
+        li {
+          a {
+            padding: u.rem(8);
+            text-decoration: none;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            font-size: 14px;
+
+            i {
+              font-size: 14px;
+            }
+
+            &:hover {
+              color: white;
+              background-color: var(--color-highlight-bg);
+            }
+          }
+        }
+      }
+    }
+  }
+</style>
