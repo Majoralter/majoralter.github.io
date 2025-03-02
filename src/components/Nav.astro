@@ -25,13 +25,19 @@ const TABS = [
     path: "/shelf",
   },
 ];
+
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname.slice(1);
 ---
 
 <nav>
   <ul class="header__items" role="list">
     {
       TABS.map((tab, index) => (
-        <li class="header__item">
+        <li
+          class="header__item"
+          id={currentPath === `${tab.path.replace(/\//g, "")}` ? "active" : ""}
+        >
           <a class="tab__item" href={`${tab.path}`}>
             {tab.name}
           </a>
@@ -43,7 +49,7 @@ const TABS = [
     <ul class="header__items mask" role="list">
       {
         TABS.map((tab, index) => (
-          <li class="header__item">
+          <li class="header__item hidden">
             <a class="mask-link" href={`${tab.path}`}>
               {tab.name}
             </a>
@@ -79,8 +85,23 @@ const TABS = [
       .header__item {
         height: 32px;
 
+        &#active {
+          &::after {
+            display: inline-block;
+            content: "";
+            width: 100%;
+            height: 2px;
+            margin-bottom: u.rem(9);
+            background-image: radial-gradient(
+              circle at 50% 50%,
+              oklch(from #6b6b6b l c h / 80%) 0%,
+              transparent 100%
+            );
+          }
+        }
+
         a {
-          padding-inline: u.rem(16);
+          padding-inline: u.rem(12);
           text-decoration: none;
           font-weight: 500;
           font-size: u.rem(14);
@@ -96,22 +117,57 @@ const TABS = [
       z-index: 10;
       overflow: hidden;
       visibility: hidden;
-
-      &.ease-out {
-        transition: clip-path 0.25s cubic-bezier(0.625, 0.05, 0, 1);
-      }
-
-      &:hover {
-        transition-duration: 0ms;
-      }
+      transition: clip-path 0.25s cubic-bezier(0.625, 0.05, 0, 1);
 
       .header__items.mask {
         .header__item {
           a {
-            background-color: var(--color-highlight-bg);
-            color: white;
+            transition: background 0.2s ease;
+            visibility: hidden;
           }
         }
+      }
+    }
+
+    &:hover {
+      .clip-path-container {
+        .header__items.mask {
+          .header__item {
+            a {
+              background-color: var(--color-highlight-bg);
+              visibility: visible;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 500px) {
+    nav {
+      width: calc(100% - 24px);
+      overflow-x: scroll;
+      overflow-y: hidden;
+      scrollbar-width: none;
+
+      &::--webkit-scrollbar {
+        display: none;
+      }
+
+      .header__items {
+        justify-content: flex-start;
+
+        .header__item {
+          &#active {
+            &::after {
+              margin-bottom: u.rem(10);
+            }
+          }
+        }
+      }
+
+      .clip-path-container {
+        display: none;
       }
     }
   }
@@ -119,39 +175,19 @@ const TABS = [
 
 <script>
   const tabItems = document.querySelectorAll<HTMLElement>(".tab__item");
-  const tabItemsMask = document.querySelectorAll<HTMLElement>(".mask-link");
   const container = document.querySelector<HTMLElement>(".clip-path-container");
 
-  let currentTab: HTMLElement;
+  let currentTab: HTMLElement, lastIndex: number;
 
-  //   initialize clip-path
   const init = () => {
-    if (!sessionStorage.getItem("currIndex")) {
-      currentTab = tabItemsMask[0];
-    } else {
-      let lastIndex = JSON.parse(sessionStorage.getItem("currIndex") || "0");
-      currentTab = tabItemsMask[lastIndex];
-    }
+    currentTab = tabItems[0];
     setClipPath(currentTab);
   };
 
-  //   set clip on ummasked items on hover
   tabItems.forEach((item, index) => {
     item.addEventListener("mouseover", () => {
       container?.classList.remove("ease-out");
-      setClipPath(tabItemsMask[index]);
-    });
-  });
-
-  //   set clip on masked items on hover and remove on mouseleave
-  tabItemsMask.forEach((item, index) => {
-    item.addEventListener("click", () => {
-      saveTabIndex(index);
-    });
-
-    item.addEventListener("mouseleave", () => {
-      container?.classList.add("ease-out");
-      resetCliPathPosition(index);
+      setClipPath(tabItems[index]);
     });
   });
 
@@ -163,19 +199,6 @@ const TABS = [
     if (container) {
       container.style.clipPath = `inset(0 ${Number(100 - (clipRight / container.offsetWidth) * 100).toFixed()}% 0 ${Number((clipLeft / container.offsetWidth) * 100).toFixed()}% round 4px)`;
       container.style.visibility = "visible";
-    }
-  };
-
-  // save last clicked item index
-  const saveTabIndex = (index: number) => {
-    sessionStorage.setItem("currIndex", JSON.stringify(index));
-  };
-
-  const resetCliPathPosition = (index: number) => {
-    let lastIndex = JSON.parse(sessionStorage.getItem("currIndex") || "0");
-
-    if (lastIndex !== index) {
-      setClipPath(tabItemsMask[lastIndex]);
     }
   };
 
