@@ -7,6 +7,7 @@
   --color-accent: hsl(210, 100%, 56%);
   --color-border: hsl(0, 0%, 50%);
   --color-border-blend: hsl(0, 0%, 15%);
+  --color-border-code: hsl(0, 0%, 10%);
 }
 
 body {
@@ -26,6 +27,7 @@ p,
 a,
 button,
 span,
-ul {
+ul,
+ol {
   color: var(--color-text-p);
 }

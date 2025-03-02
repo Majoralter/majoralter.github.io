@@ -9,7 +9,7 @@
       <defs>
         <style>
           .cls-1 {
-            fill: #f3f3f3;
+            fill: hsl(0, 0%, 95%);
           }
         </style>
         <filter id="filter">
@@ -266,7 +266,8 @@
 
     cells.forEach((cell) => {
       const htmlCell = cell as HTMLElement;
-      htmlCell.style.height = htmlCell.style.width = `${grid.clientWidth * 0.2}px`;
+      htmlCell.style.height =
+        htmlCell.style.width = `${grid.clientWidth * 0.2}px`;
     });
   };
 

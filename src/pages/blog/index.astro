@@ -1,0 +1,39 @@
+---
+import BlogListItem from '../../components/BlogListItem.astro'
+import { getCollection } from 'astro:content'
+import type { CollectionEntry } from 'astro:content'
+import Layout from '../../layouts/Layout.astro'
+
+const blogPosts: CollectionEntry<'blog'>[] = await getCollection('blog')
+---
+
+<Layout>
+    <div class="wrapper has-padding">
+        <div class="blog">
+            <h1>Blog posts <sup>{blogPosts.length}</sup></h1>
+            {
+                blogPosts.map((post) => (
+                    <BlogListItem post={post} />
+                ))
+            }
+        </div>
+    </div>
+</Layout>
+
+<style lang="scss">
+    @use "../../styles/utils/" as u;
+    .wrapper {
+        .blog {
+            // @include u.display-flex(column, flex-start, flex-start, 1em, nowrap);
+
+            h1 {
+                font-size: u.rem(24);
+                margin-bottom: .5em;
+
+                sup {
+                    font-size: u.rem(16);
+                }
+            }
+        }
+    }
+</style>

@@ -1,0 +1,59 @@
+---
+import { formatDate } from "../utils";
+import type { CollectionEntry } from "astro:content";
+
+const { post } = Astro.props;
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+---
+
+<div class="post">
+  <a href={`/blog/${post.id}`}>
+    <span>
+      {post.data.title}
+    </span>
+    <div class="sep"></div>
+    <span class="date">{formatDate(post.data.pubDate)}</span>
+  </a>
+</div>
+
+<style lang="scss">
+  @use "../styles/utils/" as u;
+  .post {
+    width: 100%;
+
+    a {
+      @include u.display-flex(row, center, space-between, 5px, nowrap);
+      padding: u.rem(8);
+      border-radius: 4px;
+
+      &:hover {
+        background-color: var(--color-fore-bg);
+      }
+
+      .sep {
+        height: 1px;
+        flex: 1 1 0%;
+        background-color: var(--color-border-blend);
+      }
+
+      span {
+        @include u.breakpoint-down(small) {
+          &:not(.date) {
+            width: 125px;
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+        }
+
+        &.date {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+</style>

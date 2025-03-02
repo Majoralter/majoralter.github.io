@@ -5,4 +5,9 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   site: "https://majoralter.github.io",
   // base: "https://github.com/Majoralter/majoralter.github.io",
+  markdown: {
+    shikiConfig: {
+      theme: 'vesper'
+    }
+  }
 });

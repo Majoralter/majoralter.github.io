@@ -1,0 +1,158 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from "../../layouts/Layout.astro";
+import { getCollection, render } from "astro:content";
+import { formatDate } from "../../utils";
+
+export const getStaticPaths = (async () => {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}) satisfies GetStaticPaths;
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout>
+  <div class="wrapper has-padding">
+    <div class="post__header">
+      <button class="sh-btn"><i class="iconoir-share-ios"></i></button>
+      <h1>{post.data.title}</h1>
+      <p>Published: {formatDate(post.data.pubDate)}</p>
+    </div>
+
+    <div class="content">
+      <Content />
+    </div>
+  </div>
+</Layout>
+
+<style lang="scss">
+  @use "../../styles/utils/" as u;
+  .wrapper {
+    @include u.display-flex(column, center, flex-start, 2em, nowrap);
+
+    .post__header {
+      width: 70%;
+      @include u.display-flex(column, flex-start, flex-start, 0.5em, nowrap);
+
+      h1 {
+        font-size: u.rem(16);
+        font-weight: 400;
+      }
+
+      p {
+        font-size: u.rem(14);
+      }
+
+      .sh-btn {
+        border: none;
+        height: 32px;
+        width: 32px;
+        border-radius: 50%;
+        background-color: var(--color-fore-bg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: u.rem(8);
+        cursor: pointer;
+
+        &:hover {
+          background-color: var(--color-highlight-bg);
+        }
+
+        i {
+          font-size: 18px;
+        }
+      }
+    }
+
+    .content {
+      width: 70%;
+    }
+  }
+</style>
+
+<style is:global lang="scss">
+  @use "../../styles/utils/" as u;
+  .content {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-size: u.rem(16);
+      margin-block: u.rem(8);
+      font-weight: 500;
+    }
+
+    p {
+      line-height: 1.5;
+    }
+
+    pre {
+      padding: u.rem(16);
+      margin: u.rem(8) 0 u.rem(16);
+      border-radius: u.rem(4);
+      border: solid 1px var(--color-border-code);
+
+      code {
+        // padding: u.rem(16);
+        font-weight: 300;
+        font-family: "JetBrains Mono" Menlo monospace !important;
+
+        span {
+          font-size: 14px;
+        }
+      }
+    }
+
+    blockquote {
+      padding: 8px;
+      margin: u.rem(8);
+      font-size: u.rem(18);
+      background-color: var(--color-fore-bg);
+      border-radius: 4px;
+
+      p {
+        font-style: italic;
+      }
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: u.rem(14);
+      text-align: left;
+      color: var(--color-text-heading);
+
+      th,
+      td {
+        padding: 0.75rem;
+        border: 1px solid var(--color-border-blend);
+      }
+
+      th {
+        background-color: var(--color-fore-bg);
+      }
+    }
+
+    ul,
+    ol {
+      li {
+        margin-left: u.rem(16);
+      }
+    }
+
+    hr {
+      border: none;
+      height: 1px;
+      background-color: var(--color-border-blend);
+    }
+  }
+</style>
