@@ -1,0 +1,21 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout>
+  <div class="wrapper shc">
+    <p>Shipping soon...</p>
+  </div>
+</Layout>
+
+<style lang="scss">
+  @use "../../styles/utils/" as u;
+  .shc {
+    @include u.display-flex(column, center, center, 0, nowrap);
+
+    p {
+      font-size: 20px;
+      font-style: italic;
+    }
+  }
+</style>
