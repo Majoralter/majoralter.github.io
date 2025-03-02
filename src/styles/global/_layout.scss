@@ -8,9 +8,13 @@
 }
 
 .wrapper {
-    width: min(100% - 40px, u.rem(1100));
+    width: min(50% - 40px, u.rem(1100));
     margin-inline: auto;
     min-height: 80vh;
+
+    @include u.breakpoint-down(medium) {
+    width: min(100% - 40px, u.rem(1100));
+    }
 
     &.has-padding {
         padding-block: 40px;

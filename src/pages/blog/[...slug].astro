@@ -2,7 +2,7 @@
 import type { GetStaticPaths } from "astro";
 import Layout from "../../layouts/Layout.astro";
 import { getCollection, render } from "astro:content";
-import { formatDate } from "../../utils";
+import { formatDate, capitalize } from "../../utils";
 
 export const getStaticPaths = (async () => {
   const posts = await getCollection("blog");
@@ -19,10 +19,15 @@ const { Content, remarkPluginFrontmatter } = await render(post);
 <Layout>
   <div class="wrapper has-padding">
     <div class="post__header">
-      <button class="sh-btn"><i class="iconoir-share-ios"></i></button>
-      <!-- <p>{remarkPluginFrontmatter.minutesRead}</p> -->
-      <h1>{post.data.title}</h1>
-      <p>Published: {formatDate(post.data.pubDate)}</p>
+      <!-- <button class="sh-btn"><i class="iconoir-share-ios"></i></button> -->
+
+      <h1>{capitalize(post.data.title)}</h1>
+      <p>
+        Published: {formatDate(post.data.pubDate)}
+        –
+        <span>{remarkPluginFrontmatter.minutesRead}</span>
+      </p>
+      <p></p>
     </div>
 
     <div class="content">
@@ -37,16 +42,20 @@ const { Content, remarkPluginFrontmatter } = await render(post);
     @include u.display-flex(column, center, flex-start, 2em, nowrap);
 
     .post__header {
-      width: 70%;
-      @include u.display-flex(column, flex-start, flex-start, 0.5em, nowrap);
+      width: 100%;
+      @include u.display-flex(column, flex-start, flex-start, 0.25em, nowrap);
 
       h1 {
-        font-size: u.rem(16);
+        font-size: u.rem(20);
         font-weight: 400;
       }
 
       p {
         font-size: u.rem(14);
+
+        span {
+          font-style: italic;
+        }
       }
 
       .sh-btn {
@@ -72,7 +81,7 @@ const { Content, remarkPluginFrontmatter } = await render(post);
     }
 
     .content {
-      width: 70%;
+      width: 100%;
       padding-block-end: 30px;
     }
   }
