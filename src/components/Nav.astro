@@ -27,7 +27,7 @@ const TABS = [
 ];
 
 const pathname = new URL(Astro.request.url).pathname;
-const currentPath = pathname.slice(1);
+const currentPath = pathname.slice(1).replace(/\//g, "");
 ---
 
 <nav>
