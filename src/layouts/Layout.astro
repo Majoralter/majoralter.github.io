@@ -1,4 +1,5 @@
 ---
+import "animate.css";
 import "../styles/styles.scss";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
@@ -45,7 +46,11 @@ import Footer from "../components/Footer.astro";
       top: 0;
       height: 100px;
       background: linear-gradient(to top, transparent, var(--color-body-bg));
-      mask-image: linear-gradient(to bottom, var(--color-body-bg) 25%, transparent);
+      mask-image: linear-gradient(
+        to bottom,
+        var(--color-body-bg) 25%,
+        transparent
+      );
     }
 
     &[data-side="bottom"] {
@@ -53,7 +58,11 @@ import Footer from "../components/Footer.astro";
       bottom: 0;
       z-index: 3;
       background: linear-gradient(to bottom, transparent, var(--color-body-bg));
-      mask-image: linear-gradient(to top, var(--color-body-bg) 25%, transparent);
+      mask-image: linear-gradient(
+        to top,
+        var(--color-body-bg) 25%,
+        transparent
+      );
     }
 
     .horizontal-fade {
@@ -75,14 +84,30 @@ import Footer from "../components/Footer.astro";
 
       &[data-side="left"] {
         left: -24px;
-        background: linear-gradient(to left, var(---fade-color), var(--color-body-bg));
-        mask-image: linear-gradient(to right, var(--color-body-bg), var(---fadeColor));
+        background: linear-gradient(
+          to left,
+          var(---fade-color),
+          var(--color-body-bg)
+        );
+        mask-image: linear-gradient(
+          to right,
+          var(--color-body-bg),
+          var(---fadeColor)
+        );
       }
 
       &[data-side="right"] {
         right: 0;
-        background: linear-gradient(to right, var(---fade-color), var(--color-body-bg));
-        mask-image: linear-gradient(to left, var(--color-body-bg), var(---fade-color));
+        background: linear-gradient(
+          to right,
+          var(---fade-color),
+          var(--color-body-bg)
+        );
+        mask-image: linear-gradient(
+          to left,
+          var(--color-body-bg),
+          var(---fade-color)
+        );
       }
     }
   }

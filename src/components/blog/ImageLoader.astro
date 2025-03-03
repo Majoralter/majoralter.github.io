@@ -6,34 +6,31 @@ interface Props {
 }
 ---
 
-<div class="image-wrapper">
-  <img id="img" src={src} alt={alt} />
-</div>
+<img
+  id="img"
+  class="animate__animated animate__fadeIn"
+  src={src}
+  alt={alt}
+/>
 
 <style lang="scss">
-  .image-wrapper {
-    width: 100%;
-    height: fit-content;
+  #img {
     margin-top: 20px;
-
-    img {
-      width: 100%;
-      height: auto;
-      filter: blur(24px);
-    }
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    // back
   }
 </style>
 
 <script>
-  const image = document.querySelector(
-    "#img"
-  ) as HTMLImageElement;
+  const image = document.querySelector("#img") as HTMLImageElement;
 
   const handleLoad = () => {
-    if(image.complete) {
+    if (image.complete) {
       image.style.filter = "blur(0px)";
     }
   };
 
-  handleLoad()
+  handleLoad();
 </script>

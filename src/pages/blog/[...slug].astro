@@ -32,10 +32,13 @@ const { Content, remarkPluginFrontmatter } = await render(post);
           ><i class="iconoir-share-ios"></i></button
         >
       </div>
-      <ImageLoader src={`/images/blog/${post.id}/cover.jpg`} alt={`cover image for ${post.data.title}`} />
+      <ImageLoader
+        src={`/images/blog/${post.id}/cover.jpg`}
+        alt={`cover image for ${post.data.title}`}
+      />
     </div>
 
-    <div class="content">
+    <div class="content animate__animated animate__fadeIn">
       <Content />
     </div>
   </div>

@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^4.1.0",
+    "@unpic/astro": "^1.0.0",
+    "animate.css": "^4.1.1",
     "astro": "^5.4.0",
     "gsap": "^3.12.7",
     "iconoir": "^7.10.1",
