@@ -3,6 +3,7 @@ import type { GetStaticPaths } from "astro";
 import Layout from "../../layouts/Layout.astro";
 import { getCollection, render } from "astro:content";
 import { formatDate, capitalize } from "../../utils";
+import ImageLoader from "../../components/blog/ImageLoader.astro";
 
 export const getStaticPaths = (async () => {
   const posts = await getCollection("blog");
@@ -19,15 +20,19 @@ const { Content, remarkPluginFrontmatter } = await render(post);
 <Layout>
   <div class="wrapper has-padding">
     <div class="post__header">
-      <!-- <button class="sh-btn"><i class="iconoir-share-ios"></i></button> -->
-
       <h1>{capitalize(post.data.title)}</h1>
       <p>
-        Published: {formatDate(post.data.pubDate)}
+        {formatDate(post.data.pubDate)}
         –
         <span>{remarkPluginFrontmatter.minutesRead}</span>
       </p>
-      <p></p>
+      <div class="controls">
+        <a class="ctrl" href="/blog"><i class="iconoir-dot-arrow-left"></i></a>
+        <button id="sh-btn" class="ctrl"
+          ><i class="iconoir-share-ios"></i></button
+        >
+      </div>
+      <ImageLoader src={`/images/blog/${post.id}/cover.jpg`} alt={`cover image for ${post.data.title}`} />
     </div>
 
     <div class="content">
@@ -46,7 +51,7 @@ const { Content, remarkPluginFrontmatter } = await render(post);
       @include u.display-flex(column, flex-start, flex-start, 0.25em, nowrap);
 
       h1 {
-        font-size: u.rem(20);
+        font-size: u.rem(16);
         font-weight: 400;
       }
 
@@ -58,24 +63,28 @@ const { Content, remarkPluginFrontmatter } = await render(post);
         }
       }
 
-      .sh-btn {
-        border: none;
-        height: 32px;
-        width: 32px;
-        border-radius: 50%;
-        background-color: var(--color-fore-bg);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: u.rem(8);
-        cursor: pointer;
+      .controls {
+        @include u.display-flex(row, center, flex-start, 0.5em, nowrap);
 
-        &:hover {
-          background-color: var(--color-highlight-bg);
-        }
+        .ctrl {
+          border: none;
+          height: 32px;
+          width: 32px;
+          border-radius: 50%;
+          background-color: var(--color-fore-bg);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: u.rem(8);
+          cursor: pointer;
 
-        i {
-          font-size: 18px;
+          &:hover {
+            background-color: var(--color-highlight-bg);
+          }
+
+          i {
+            font-size: 18px;
+          }
         }
       }
     }
@@ -103,6 +112,8 @@ const { Content, remarkPluginFrontmatter } = await render(post);
 
     p {
       line-height: 2;
+      color: whitesmoke;
+      font-size: u.rem(15);
     }
 
     pre {
@@ -112,7 +123,6 @@ const { Content, remarkPluginFrontmatter } = await render(post);
       border: solid 1px var(--color-border-code);
 
       code {
-        // padding: u.rem(16);
         font-weight: 300;
         font-family: "JetBrains Mono" Menlo monospace !important;
 
@@ -155,8 +165,11 @@ const { Content, remarkPluginFrontmatter } = await render(post);
 
     ul,
     ol {
+      font-size: u.rem(15);
       li {
         margin-left: u.rem(16);
+        color: whitesmoke;
+        line-height: 2;
       }
     }
 

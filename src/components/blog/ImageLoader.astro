@@ -1,0 +1,39 @@
+---
+const { src, alt } = Astro.props;
+interface Props {
+  src: string;
+  alt: string;
+}
+---
+
+<div class="image-wrapper">
+  <img id="img" src={src} alt={alt} />
+</div>
+
+<style lang="scss">
+  .image-wrapper {
+    width: 100%;
+    height: fit-content;
+    margin-top: 20px;
+
+    img {
+      width: 100%;
+      height: auto;
+      filter: blur(24px);
+    }
+  }
+</style>
+
+<script>
+  const image = document.querySelector(
+    "#img"
+  ) as HTMLImageElement;
+
+  const handleLoad = () => {
+    if(image.complete) {
+      image.style.filter = "blur(0px)";
+    }
+  };
+
+  handleLoad()
+</script>

@@ -11,7 +11,7 @@
     width: min(50% - 40px, u.rem(1100));
     margin-inline: auto;
     min-height: 100vh;
-    margin-block-start: u.rem(50);
+    margin-block-start: u.rem(74);
 
     @include u.breakpoint-down(medium) {
     width: min(100% - 40px, u.rem(1100));
