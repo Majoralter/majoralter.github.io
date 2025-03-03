@@ -6,20 +6,26 @@ interface Props {
 }
 ---
 
-<img
-  id="img"
-  class="animate__animated animate__fadeIn"
-  src={src}
-  alt={alt}
-/>
+<div class="image--wrapper">
+  <img id="img" class="animate__animated animate__fadeIn" src={src} alt={alt} />
+</div>
 
 <style lang="scss">
-  #img {
-    margin-top: 20px;
+  @use "../../styles/utils/" as u;
+  .image--wrapper {
     width: 100%;
-    height: auto;
     aspect-ratio: 4 / 3;
-    // back
+    margin-top: 20px;
+    border-radius: u.rem(8);
+    border: solid 1px var(--color-border-code);
+    background: radial-gradient(circle, var(--color-body-bg) 0%, var(--color-fore-bg) 100%);
+
+    #img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: inherit;
+    }
   }
 </style>
 
