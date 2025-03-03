@@ -10,7 +10,8 @@
 .wrapper {
     width: min(50% - 40px, u.rem(1100));
     margin-inline: auto;
-    min-height: 80vh;
+    min-height: 100vh;
+    margin-block-start: u.rem(50);
 
     @include u.breakpoint-down(medium) {
     width: min(100% - 40px, u.rem(1100));

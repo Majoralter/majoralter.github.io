@@ -32,109 +32,117 @@ const isActive = (link: string) => {
 };
 ---
 
-<nav>
-  <ul class="header__items" role="list">
-    {
-      TABS.map((tab) => (
-        <li class="header__item" id={isActive(tab.path) ? "active" : ""}>
-          <a class="tab__item" href={`${tab.path}`}>
-            {tab.name}
-          </a>
-        </li>
-      ))
-    }
-  </ul>
-  <div aria-hidden class="clip-path-container">
-    <ul class="header__items mask" role="list">
+<header>
+  <nav>
+    <ul class="header__items" role="list">
       {
-        TABS.map((tab, index) => (
-          <li class="header__item hidden">
-            <a class="mask-link" href={`${tab.path}`}>
+        TABS.map((tab) => (
+          <li class="header__item" id={isActive(tab.path) ? "active" : ""}>
+            <a class="tab__item" href={`${tab.path}`}>
               {tab.name}
             </a>
           </li>
         ))
       }
     </ul>
-  </div>
-</nav>
+    <div aria-hidden class="clip-path-container">
+      <ul class="header__items mask" role="list">
+        {
+          TABS.map((tab, index) => (
+            <li class="header__item hidden">
+              <a class="mask-link" href={`${tab.path}`}>
+                {tab.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </nav>
+</header>
 
 <style lang="scss">
   @use "../styles/utils/" as u;
 
-  nav {
-    background-color: rgba(26, 26, 26, 0.7);
-    width: fit-content;
-    margin-inline: auto;
-    position: relative;
+  header {
+    position: fixed;
+    top: u.rem(24);
+    width: 100vw;
     z-index: 10;
-    @include u.display-flex(column, center, center, 0, nowrap);
-    margin-block-start: u.rem(24);
-    padding: 8px;
-    border-radius: u.rem(4);
-    backdrop-filter: blur(u.rem(24));
-    border: solid 0.2px var(--color-border-blend);
 
-    .header__items {
-      list-style-position: inside;
+    nav {
+      background-color: rgba(26, 26, 26, 0.7);
+      width: fit-content;
+      margin-inline: auto;
       position: relative;
-      @include u.display-flex(row, center, center, 0, nowrap);
-      width: 100%;
+      @include u.display-flex(column, center, center, 0, nowrap);
+      // margin-block-start: u.rem(24);
+      padding: 8px;
+      border-radius: u.rem(4);
+      backdrop-filter: blur(u.rem(24));
+      border: solid 0.2px var(--color-border-blend);
 
-      .header__item {
-        height: 32px;
+      .header__items {
+        list-style-position: inside;
+        position: relative;
+        @include u.display-flex(row, center, center, 0, nowrap);
+        width: 100%;
 
-        &#active {
-          &::after {
-            display: inline-block;
-            content: "";
-            width: 100%;
-            height: 2px;
-            margin-bottom: u.rem(9);
-            background-image: radial-gradient(
-              circle at 50% 50%,
-              oklch(from #6b6b6b l c h / 80%) 0%,
-              transparent 100%
-            );
-          }
-        }
-
-        a {
-          padding-inline: u.rem(12);
-          text-decoration: none;
-          font-weight: 500;
-          font-size: u.rem(14);
-          display: flex;
-          align-items: center;
-          height: 100%;
-        }
-      }
-    }
-
-    .clip-path-container {
-      position: absolute;
-      z-index: 10;
-      overflow: hidden;
-      visibility: hidden;
-      transition: clip-path 0.25s cubic-bezier(0.625, 0.05, 0, 1);
-
-      .header__items.mask {
         .header__item {
+          height: 32px;
+
+          &#active {
+            &::after {
+              display: inline-block;
+              content: "";
+              width: 100%;
+              height: 2px;
+              margin-bottom: u.rem(9);
+              background-image: radial-gradient(
+                circle at 50% 50%,
+                oklch(from #6b6b6b l c h / 80%) 0%,
+                transparent 100%
+              );
+            }
+          }
+
           a {
-            transition: background 0.2s ease;
-            visibility: hidden;
+            padding-inline: u.rem(12);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: u.rem(14);
+            display: flex;
+            align-items: center;
+            height: 100%;
           }
         }
       }
-    }
 
-    &:hover {
       .clip-path-container {
+        position: absolute;
+        z-index: 10;
+        overflow: hidden;
+        visibility: hidden;
+        transition: clip-path 0.25s cubic-bezier(0.625, 0.05, 0, 1);
+
         .header__items.mask {
           .header__item {
             a {
-              background-color: var(--color-highlight-bg);
-              visibility: visible;
+              transition: background 0.2s ease;
+              visibility: hidden;
+            }
+          }
+        }
+      }
+
+      &:hover {
+        .clip-path-container {
+          .header__items.mask {
+            .header__item {
+              a {
+                background-color: var(--color-highlight-bg);
+                visibility: visible;
+              }
             }
           }
         }
@@ -143,30 +151,32 @@ const isActive = (link: string) => {
   }
 
   @media (max-width: 500px) {
-    nav {
-      width: calc(100% - 24px);
-      overflow-x: scroll;
-      overflow-y: hidden;
-      scrollbar-width: none;
+    header {
+      nav {
+        width: calc(100% - 24px);
+        overflow-x: scroll;
+        overflow-y: hidden;
+        scrollbar-width: none;
 
-      &::--webkit-scrollbar {
-        display: none;
-      }
+        &::--webkit-scrollbar {
+          display: none;
+        }
 
-      .header__items {
-        justify-content: flex-start;
+        .header__items {
+          justify-content: flex-start;
 
-        .header__item {
-          &#active {
-            &::after {
-              margin-bottom: u.rem(10);
+          .header__item {
+            &#active {
+              &::after {
+                margin-bottom: u.rem(10);
+              }
             }
           }
         }
-      }
 
-      .clip-path-container {
-        display: none;
+        .clip-path-container {
+          display: none;
+        }
       }
     }
   }
