@@ -12,7 +12,7 @@ const blogPosts: CollectionEntry<"blog">[] = (await getCollection("blog"))
   .filter((post) => !post.data.draft);
 ---
 
-<Layout>
+<Layout title="Blog">
   <div class="wrapper has-padding">
     <div class="blog">
       <h1>Blog posts <sup>{blogPosts.length}</sup></h1>
