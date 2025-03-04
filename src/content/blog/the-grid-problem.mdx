@@ -1,0 +1,106 @@
+---
+title: The grid problem
+pubDate: 2025-03-04
+---
+
+While sketching ideas for the design of this site, I knew I wanted to have my logo to be front and center of the home page, housed in a grid system. That sounded simple enough on paper, but how would it be translated into code? It had to be a dynamic setup, meaning it had to adjust to different images (or even text!) with as minimal tweaks to the core driving logic as is possible. The process of figuring out the best approach to this problem was very interesting and I can say I learned a lot.
+
+<br />
+# Initial setup
+The skeleton of the **gid system** is basic enough:
+```html
+HTML
+<div class="container">
+<div class="inner">
+// image or text goes here
+</div>
+</div>
+```
+In my case the *_image_* is my logo rendered as an SVG. So, there's an outer container and an inner container (that houses the image and grid) and they have this simplified styling: 
+```scss
+SCSS
+.container {
+    height: 100vh;
+    width: 100vw;
+
+    .inner {
+      height: 100%;
+      width: 100%;
+
+      svg {
+        width: 40vw;
+        z-index: 99;
+      }
+    }
+}
+
+````
+<br />
+## Rendering the grid
+With the basic layout and styling out of the way, I had to now tackle how to draw the grid on top of the SVG on page load. This part was easiest to figure out. As stated earlier, the logic had to be dynamic so everything was done in javascript:
+
+```js
+JS
+const svg = document.getElementById("svg");
+const container = document.querySelector(".container");
+const inner = document.querySelector(".inner");
+const NUMBER_OF_CELLS = 15 // This can be anything really
+
+const initGrid = () => {
+    const grid = document.createElement("div");
+    grid.className = "grid";
+    grid.style.height = `${svg?.clientHeight}px`;
+    grid.style.width = `${svg?.clientWidth}px`;
+    inner?.append(grid);
+
+    for (let i = 0; i < NUMBER_OF_CELLS; i++) {
+      const cell = document.createElement("div");
+      cell.className = "cell";
+      cell.style.height = cell.style.width = `${grid.clientWidth * 0.2}px`;
+      grid.append(cell);
+    }
+}
+````
+The *grid* is created with document.createElement(). Then, the width and height are set to the width and height of the image (an SVG in this case) and it's appended to the inner container. 
+
+The cells in the grid are created and appended to the grid in a *for loop* that runs for the amount of cells needed. Each cell has to be a perfect square and since there are 15 cells to be distributed evenly in the grid, the value of the length of each cell is calculated as *20%* of the width of the grid in *px*. Take note that this calculation only works for this case.
+
+With some styling we have a driver for our grid system:
+```css
+SCSS
+.grid {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(5, 1fr);
+      border: solid 1px #262626;
+      border-right: none;
+      border-bottom: none;
+      z-index: 999;
+
+      .cell {
+        border: solid 1px #262626;
+        border-left: none;
+        border-top: none;
+      }
+    }
+```
+![Image of a skewed SVG housed in a grid](/images/blog/the-grid-problem/init-grid.png)
+<br />
+## Drawing lines
+The initial grid was looking rather boring, so I thought to take it a step further. What if I applied a  *skew* transform on the inner container? 
+```css
+CSS
+.inner {
+      transform: skew(-48deg, 8deg);
+}
+```
+![Image of an SVG housed in a grid](/images/blog/the-grid-problem/skew-grid.png)
+This is more interesting visually. But it still doesn't feel interesting enough to leave a lasting impression. So I decided to draw vertical lines from the corners of the cells in the grid, almost like plotting a graph.
+
+Now, the viewport coordinates start at the top-left corner at (x: 0,y: 0) and this is important because every element on the screen is rendered starting at a certain coordinate e.g *x: 538* and *y: 105*, which is basically *538px* from the left and *105px* from the top:
+![Image explaining the browser rendering coordinates](/images/blog/the-grid-problem/browser-coord.png)
+These values are gotten with the *getBoundingClientRect()* method which returns an object [which is the smallest bounding rectangle that contains the entire element](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect "MDN documentation"). And since this "rectangle" takes padding and border width sizes into account it essentially hugs the element, tightly. We've safely assumed that no transforms have been
