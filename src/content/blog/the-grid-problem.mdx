@@ -3,7 +3,7 @@ title: The grid problem
 pubDate: 2025-03-04
 ---
 
-While sketching ideas for the design of this site, I knew I wanted to have my logo to be front and center of the home page, housed in a grid system. That sounded simple enough on paper, but how would it be translated into code? It had to be a dynamic setup, meaning it had to adjust to different images (or even text!) with as minimal tweaks to the core driving logic as is possible. The process of figuring out the best approach to this problem was very interesting and I can say I learned a lot.
+While sketching ideas for the design of this site, I knew I wanted my logo to be front and center on the homepage, housed within a grid system. That sounded simple enough on paper, but how would it translate into code? It had to be a dynamic setup, meaning it needed to adjust to different images (or even text!) with minimal tweaks to the core driving logic. The process of figuring out the best approach to this problem was very interesting, and I can say I learned a lot.
 
 <br />
 # Initial setup
@@ -16,7 +16,7 @@ HTML
 </div>
 </div>
 ```
-In my case the *_image_* is my logo rendered as an SVG. So, there's an outer container and an inner container (that houses the image and grid) and they have this simplified styling: 
+In my case, the *_image_* is my logo rendered as an SVG. There’s an outer container and an inner container (which houses the image and grid), and they have the following simplified styling:
 ```scss
 SCSS
 .container {
@@ -32,15 +32,15 @@ SCSS
         z-index: 99;
       }
     }
-}
 
+}
 ````
 <br />
 ## Rendering the grid
-With the basic layout and styling out of the way, I had to now tackle how to draw the grid on top of the SVG on page load. This part was easiest to figure out. As stated earlier, the logic had to be dynamic so everything was done in javascript:
+With the basic layout and styling out of the way, I now had to tackle how to draw the grid on top of the SVG on page load. This part was the easiest to figure out. As stated earlier, the logic had to be dynamic, so everything was done in JavaScript:
 
-```js
-JS
+```ts
+TS
 const svg = document.getElementById("svg");
 const container = document.querySelector(".container");
 const inner = document.querySelector(".inner");
@@ -61,37 +61,41 @@ const initGrid = () => {
     }
 }
 ````
-The *grid* is created with document.createElement(). Then, the width and height are set to the width and height of the image (an SVG in this case) and it's appended to the inner container. 
 
-The cells in the grid are created and appended to the grid in a *for loop* that runs for the amount of cells needed. Each cell has to be a perfect square and since there are 15 cells to be distributed evenly in the grid, the value of the length of each cell is calculated as *20%* of the width of the grid in *px*. Take note that this calculation only works for this case.
+The *grid* is created using *document.createElement()*. Then, its width and height are set to match those of the image (an SVG in this case), and it is appended to the inner container.
 
-With some styling we have a driver for our grid system:
+The cells in the grid are created and appended to the grid in a for loop that runs for the required number of cells. Each cell has to be a perfect square, and since there are *15* cells to be distributed evenly in the grid, the length of each cell is calculated as *20%* of the grid’s width in *px*. Take note that this calculation only works for this specific case.
+
+With some styling, I had a driver for the grid system:
+
 ```css
-SCSS
+SCSS 
 .grid {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      grid-template-rows: repeat(5, 1fr);
-      border: solid 1px #262626;
-      border-right: none;
-      border-bottom: none;
-      z-index: 999;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  border: solid 1px white;
+  border-right: none;
+  border-bottom: none;
+  z-index: 999;
 
-      .cell {
-        border: solid 1px #262626;
-        border-left: none;
-        border-top: none;
-      }
-    }
+  .cell {
+    border: solid 1px white;
+    border-left: none;
+    border-top: none;
+  }
+}
 ```
+
 ![Image of a skewed SVG housed in a grid](/images/blog/the-grid-problem/init-grid.png)
+
 <br />
 ## Drawing lines
-The initial grid was looking rather boring, so I thought to take it a step further. What if I applied a  *skew* transform on the inner container? 
+The initial grid was looking rather boring, so I decided to take it a step further. What if I applied a *skew transform* to the inner container?
 ```css
 CSS
 .inner {
@@ -99,8 +103,151 @@ CSS
 }
 ```
 ![Image of an SVG housed in a grid](/images/blog/the-grid-problem/skew-grid.png)
-This is more interesting visually. But it still doesn't feel interesting enough to leave a lasting impression. So I decided to draw vertical lines from the corners of the cells in the grid, almost like plotting a graph.
+This is more visually interesting, but it still doesn't feel compelling enough to leave a lasting impression. So, I decided to draw vertical lines from the corners of the gird cells almost like plotting a graph.
 
-Now, the viewport coordinates start at the top-left corner at (x: 0,y: 0) and this is important because every element on the screen is rendered starting at a certain coordinate e.g *x: 538* and *y: 105*, which is basically *538px* from the left and *105px* from the top:
+Now, the viewport coordinates start at the top-left corner at (x: 0,y: 0), which is important because every element on the screen is rendered starting at a specific coordinate. For example, _x: 538_ and _y: 105_, means the element is positioned _538px_ from the left and _105px_ from the top:
 ![Image explaining the browser rendering coordinates](/images/blog/the-grid-problem/browser-coord.png)
-These values are gotten with the *getBoundingClientRect()* method which returns an object [which is the smallest bounding rectangle that contains the entire element](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect "MDN documentation"). And since this "rectangle" takes padding and border width sizes into account it essentially hugs the element, tightly. We've safely assumed that no transforms have been
+These values are obtained with the _getBoundingClientRect()_ method, which returns an object [representing the smallest bounding rectangle that contains the entire element](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect "MDN documentation"). Since this "rectangle" takes padding and border width into account, it essentially hugs the element tightly. We've safely assumed that no transforms have been applied to the element, but how do these values change(?) if say, we _skew_ an element? 
+
+When an element hasn't been transformed in any way, the _bounding rect_ provides the actual coordinates of the  element's corners.
+![Image explaining the browser rendering coordinates](/images/blog/the-grid-problem/unskew-cell.png)
+However, when the element is transformed (skewed, in this case) the _bounding rect_ itself remains untransformed. It simply contains the skewed element in its entirety.
+![Image explaining the browser rendering coordinates](/images/blog/the-grid-problem/skew-cell.png)
+Now, the coordinates of the cell's corners have changed. In fact, we no longer know these coordinates at all and they can't be eyeballed either. This was the first major challenge I faced.
+
+I turned to Stack Overflow for help, and to my surprise, [this was a pretty common problem](https://stackoverflow.com/questions/29187014/get-real-2d-vertex-coordinates-of-a-div-after-css-3d-transformations-with-javasc). But the accepted answer was anything but trivial for me. After digging further, I came a genius suggestion: position handles at each corner of the cells and set their width and height to *0*, making them invisible. The beauty of this approach is that even though the handles are invisible, they still have a _bounding rect_! Since these handles are technically just points in the viewport, their corners meet at a single point, meaning the only coordinates that matter are the _top_ and _left_.
+
+ The downside to this approach is more elements in the DOM, but I don't think that matters too much.
+
+All I had to do was create and append the handles to each cell and add more styling:
+
+```ts
+TS;
+// updated for loop from the initGrid function
+for (let i = 0; i < NUMBER_OF_CELLS; i++) {
+  const cell = document.createElement("div");
+  cell.className = "cell";
+  cell.style.height = cell.style.width = `${grid.clientWidth * 0.2}px`;
+  for (let j = 0; j < NUMBER_OF_HANDLES; j++) {
+    // the number of handles here is 4
+    const handle = document.createElement("div");
+    handle.className = `t-${j + 1}`;
+    handle.classList.add("hdl");
+    cell.append(handle);
+  }
+  grid.append(cell);
+}
+```
+
+```css
+SCSS 
+.cell {
+  border: solid 1px white;
+  border-left: none;
+  border-top: none;
+  position: relative;
+
+  .hdl {
+    height: 0px;
+    width: 0px;
+    position: absolute;
+
+    &.t-1 {
+      top: 0;
+      left: 0;
+    }
+
+    &.t-2 {
+      top: 0;
+      right: 0;
+    }
+
+    &.t-3 {
+      bottom: 0;
+      right: 0;
+    }
+
+    &.t-4 {
+      bottom: 0;
+      left: 0;
+    }
+  }
+}
+```
+
+It was now easy to get the actual coordinates of the corners of the transformed cells. All that was left was to draw the lines. I used the HTML Canvas API for this.
+
+First, I had to get the coordinates of the handles (technically, the coordinates of the transformed corners of each cell):
+
+```ts
+TS
+const hdls = document.querySelectorAll(".hdl");
+const getSkewCoordinates = () => {
+  const skewCoords: { top: number, left: number }[] = [];
+  hdls.forEach((hdl) => {
+    const rect = hdl.getBoundingClientRect();
+    skewCoords.push({
+      top: rect.top,
+      left: rect.left,
+    });
+  });
+  return skewCoords;
+};
+```
+
+But there was a minor issue: the cells shared adjacent corners in the grid, meaning the coordinates of the handles at these corners shared almost identical *top* and *left* values. If I drew lines from every *top* and *left* coordinate, there would be ugly overlaps. 
+
+So, I removed the "duplicate" values:
+```ts
+TS
+  const filterCoordinates = () => {
+    const coordinates = getSkewCoordinates();
+    const diff = 1;
+    const uniqueCoords: { top: number; left: number }[] = [];
+
+    coordinates.forEach((coord) => {
+      const alreadyExists = uniqueCoords.some(
+        (existing) =>
+          Math.abs(Math.trunc(existing.top) - Math.trunc(coord.top)) <=
+            epsilon &&
+          Math.abs(Math.trunc(existing.left) - Math.trunc(coord.left)) <=
+            epsilon
+      );
+
+      if (!alreadyExists) {
+        uniqueCoords.push(coord);
+      }
+    });
+
+    return uniqueCoords;
+  }
+```
+Then I drew the lines:
+```ts
+TS
+  const drawLines = () => {
+    const newCoords = filterCoordinates();
+
+    ctx?.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (ctx) {
+      ctx.strokeStyle = "white";
+      ctx.lineWidth = 0.5;
+      ctx.lineCap = "butt";
+    }
+
+    ctx?.beginPath();
+
+    newCoords.forEach((coord) => {
+      ctx?.moveTo(coord.left, coord.top);
+      ctx?.lineTo(coord.left, 0);
+      ctx?.moveTo(coord.left, coord.top);
+      ctx?.lineTo(coord.left, canvas.height);
+    });
+  }
+```
+![Image of an SVG housed in a grid](/images/blog/the-grid-problem/final-grid.png)
+And that's the gist of it! Obviously, the effect is more subtle on the homepage, but that's just an aesthetic choice.
+
+## Conclusion
+I learned a lot while working on this particular component, and I definitely want to explore more layouts like this. If you made it this far, thank you reading!
