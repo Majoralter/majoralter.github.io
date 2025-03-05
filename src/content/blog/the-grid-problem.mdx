@@ -209,9 +209,9 @@ TS
       const alreadyExists = uniqueCoords.some(
         (existing) =>
           Math.abs(Math.trunc(existing.top) - Math.trunc(coord.top)) <=
-            epsilon &&
+            diff &&
           Math.abs(Math.trunc(existing.left) - Math.trunc(coord.left)) <=
-            epsilon
+            diff
       );
 
       if (!alreadyExists) {
