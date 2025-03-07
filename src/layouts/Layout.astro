@@ -24,6 +24,7 @@ interface Props {
     />
     <meta name="generator" content={Astro.generator} />
     <title>{SITE_TITLE} — {title}</title>
+    <script async src="https://cdn.seline.so/seline.js" data-token={import.meta.env.SECRET_SELINE_TOKEN}></script>
   </head>
   <body>
     <div class="vertical-fade" aria-hidden="true" data-side="top"></div>
