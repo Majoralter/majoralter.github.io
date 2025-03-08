@@ -59,6 +59,9 @@
         filter: url(#filter);
         z-index: 99;
         margin: u.rem(-4);
+        @include u.breakpoint-down(small) {
+          width: 58vw;
+        }
       }
     }
   }
