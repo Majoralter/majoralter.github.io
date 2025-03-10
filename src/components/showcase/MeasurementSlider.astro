@@ -1,0 +1,151 @@
+<div class="p">
+  <div class="l-c c">
+    <p class="t l-t">
+      <span class="l-s">50%</span>
+      Grind
+    </p>
+  </div>
+
+  <div class="t-c"></div>
+
+  <div class="r-c c">
+    <p class="t r-t">
+      <span class="l-s">50%</span>
+      Talent
+    </p>
+  </div>
+</div>
+
+<style lang="scss">
+  @use "../../styles/utils/" as u;
+  @import "https://unpkg.com/open-props";
+
+  .p {
+    width: 100%;
+    height: u.rem(80);
+    position: relative;
+    border-radius: u.rem(2);
+    user-select: none;
+    @include u.display-flex(row, flex-start, space-between, 0, nowrap);
+    transition: height 200ms var(--ease-2);
+
+    .t-c {
+      width: u.rem(4);
+      height: 200%;
+      background-color: #f24236;
+      cursor: grab;
+      border-radius: u.rem(4);
+      margin-inline: u.rem(8);
+      will-change: transform;
+    }
+
+    .c {
+      width: 50%;
+      height: 100%;
+      border-radius: inherit;
+      display: flex;
+      align-items: center;
+      background-color: var(--color-highlight-bg);
+
+      &.l-c {
+        padding-inline-start: u.rem(10);
+      }
+
+      &.r-c {
+        padding-inline-end: u.rem(10);
+        justify-content: flex-end;
+      }
+
+      .t {
+        font-size: u.rem(13);
+        transition: all 0.2s var(--ease-2);
+        width: max-content;
+
+        &.trns {
+          transform: translateY(-100%);
+          margin-top: u.rem(-15);
+          color: var(--color-text-p);
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+</style>
+
+<script>
+  const parent = document.querySelector(".p") as HTMLElement,
+    thumb = document.querySelector(".t-c") as HTMLElement,
+    lCon = document.querySelector(".l-c") as HTMLElement,
+    rCon = document.querySelector(".r-c") as HTMLElement,
+    t = document.querySelectorAll(".t"),
+    lS = document.querySelectorAll(".l-s");
+
+  let isDragging = false,
+    startX = 0,
+    initialX = 0;
+
+  const init = (e: { clientX: number }) => {
+    isDragging = true;
+    startX = e.clientX;
+    initialX = thumb?.offsetLeft;
+    thumb.style.cursor = document.body.style = parent.style.cursor = "grabbing";
+  };
+
+  thumb.addEventListener("mousedown", (e) => {
+    init(e);
+  });
+
+  const handleMouseMove = (e: { clientX: number }) => {
+    if (!isDragging) return;
+    let clientX = e.clientX;
+    let deltaX = clientX - startX,
+      newX = initialX + deltaX;
+
+    let minX = parent.clientWidth * 0.1,
+      maxX = parent.clientWidth * 0.9;
+    newX = Math.max(minX, Math.min(newX, maxX));
+
+    let percentX = Math.trunc((newX * 100) / parent.clientWidth);
+
+    if (percentX < 30 || percentX > 79) {
+      parent.style.height = "30px";
+      t.forEach((el) => {
+        el.classList.add("trns");
+      });
+    } else {
+      parent.style.height = "80px";
+      t.forEach((el) => {
+        el.classList.remove("trns");
+      });
+    }
+
+    thumb.style.left = `${newX}px`;
+    lS.forEach((s, i) => {
+      i < 1
+        ? (s.textContent = `${percentX}%`)
+        : (s.textContent = `${100 - percentX}%`);
+    });
+
+    lCon.style.width = `${Math.trunc(percentX)}%`;
+    rCon.style.width = `${100 - Math.ceil(percentX)}%`;
+  };
+
+  document.addEventListener("mousemove", (e) => {
+    handleMouseMove(e);
+  });
+
+  const handleMouseUp = () => {
+    isDragging = false;
+    thumb.style.cursor = "grab";
+
+    document.body.style.cursor = parent.style.cursor = "default";
+  };
+
+  document.addEventListener("mouseup", handleMouseUp);
+
+  thumb.addEventListener("touchstart", (e: TouchEvent) => init({ clientX: e.touches[0].clientX }))
+
+  document.addEventListener("touchmove", (e) => handleMouseMove({ clientX: e.touches[0].clientX }))
+
+  document.addEventListener("touchend", handleMouseUp)
+</script>

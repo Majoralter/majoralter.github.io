@@ -1,0 +1,18 @@
+---
+import { formatDate } from "../utils";
+import type { CollectionEntry } from "astro:content";
+
+const { item } = Astro.props;
+
+interface Props {
+  item: CollectionEntry<"showcase">;
+}
+---
+
+<div class="item">
+    <a href={`/showcase/${item.id}`}>
+        <h1>
+            {item.data.title}
+        </h1>
+    </a>
+</div>

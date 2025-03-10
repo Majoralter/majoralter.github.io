@@ -1,35 +1,45 @@
-@use '../utils/' as u;
+@use "../utils/" as u;
 
 .abs {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .wrapper {
-    width: min(50% - 40px, u.rem(1200));
-    margin-inline: auto;
-    min-height: 80vh;
-    margin-block-start: u.rem(74);
-    position: relative;
+  width: min(50% - 40px, u.rem(1200));
+  margin-inline: auto;
+  min-height: 80vh;
+  margin-block-start: u.rem(74);
+  position: relative;
 
-    @include u.breakpoint-down(large) {
+  @include u.breakpoint-down(large) {
     width: min(80% - 40px, u.rem(1100));
-    }
-    @include u.breakpoint-down(medium) {
+  }
+  @include u.breakpoint-down(medium) {
     width: min(100% - 40px, u.rem(1100));
+  }
+
+  &.has-padding {
+    padding-block: 40px;
+
+    @include u.breakpoint(medium) {
+      padding-block: 60px;
     }
+  }
 
-    &.has-padding {
-        padding-block: 40px;
-
-        @include u.breakpoint(medium) {
-            padding-block: 60px;
-        }
-    }
-
-    &.is-full-width {
+  &.is-full-width {
     width: min(70% - 40px, u.rem(1400));
-    }
+  }
+
+  &.flex-start {
+    @include u.display-flex(column, flex-start, flex-start, 1.5rem, nowrap);
+  }
+  &.flex-start-center {
+    @include u.display-flex(column, center, flex-start, 1.5rem, nowrap);
+  }
+  &.flex-center {
+    @include u.display-flex(column, center, center, 1.5rem, nowrap);
+  }
 }

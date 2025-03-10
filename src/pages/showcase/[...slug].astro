@@ -1,0 +1,134 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from "../../layouts/Layout.astro";
+import { getCollection, render } from "astro:content";
+import { formatDate, capitalize } from "../../utils";
+
+export const getStaticPaths = (async () => {
+  const items = await getCollection("showcase");
+  return items.map((item) => ({
+    params: { slug: item.id },
+    props: { item },
+  }));
+}) satisfies GetStaticPaths;
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+---
+
+<Layout>
+  <div class="wrapper has-padding flex-start shc">
+    <div class="item-header">
+      <div class="info">
+        <h1>{capitalize(item.data.title)}</h1>
+        <p>{formatDate(item.data.pubDate)}</p>
+      </div>
+      <div class="controls">
+        <a class="ctrl" href="/showcase"><i class="iconoir-dot-arrow-left"></i></a>
+        <button id="sh-btn" class="ctrl"
+          ><i class="iconoir-share-ios"></i></button
+        >
+      </div>
+    </div>
+    <div class="item-c">
+      <Content />
+    </div>
+  </div>
+</Layout>
+
+<style lang="scss">
+  @use "../../styles/utils/" as u;
+  .shc {
+    .item-header {
+      @include u.display-flex(row, flex-end, space-between, 0.25em, wrap);
+      width: 100%;
+
+      .info {
+        @include u.display-flex(column, flex-start, flex-start, 0.25em, nowrap);
+        h1 {
+          font-size: u.rem(16);
+          font-weight: 400;
+        }
+
+        p {
+          font-size: u.rem(14);
+
+          span {
+            font-style: italic;
+          }
+        }
+      }
+
+      .controls {
+        @include u.display-flex(row, center, flex-start, 0.5em, nowrap);
+
+        button {
+          &:hover {
+            &::before {
+              content: "Copy URL";
+              position: absolute;
+              right: 0;
+              top: u.rem(-30);
+              background-color: var(--color-fore-bg);
+              padding: u.rem(2);
+              border: solid 1px var(--color-border-blend);
+              width: max-content;
+              font-size: u.rem(12);
+              border-radius: u.rem(2);
+            }
+          }
+
+          &:active {
+            transform: scale(0.9);
+
+            &::before {
+              content: "Copied";
+            }
+          }
+        }
+
+        .ctrl {
+          border: none;
+          height: 32px;
+          border-radius: u.rem(4);
+          background-color: var(--color-fore-bg);
+          @include u.display-flex(row, center, flex-start, 0.5em, nowrap);
+          padding: u.rem(8);
+          cursor: pointer;
+          position: relative;
+
+          &:hover {
+            background-color: var(--color-highlight-bg);
+          }
+
+          i {
+            font-size: 18px;
+          }
+        }
+      }
+    }
+
+    .item-c {
+      background-color: #111;
+      width: 100%;
+      @include u.display-flex(column, center, center, 0.25rem, nowrap);
+      padding: u.rem(40);
+      border: solid 1px var(--color-border-blend);
+      border-radius: u.rem(4);
+
+      @include u.breakpoint-down(medium) {
+        padding: u.rem(20);
+      }
+    }
+  }
+</style>
+
+<script>
+  const copyButton = document.getElementById("sh-btn");
+  const copyPageURLToClipBoard = () => {
+    let url = window.location.href;
+    navigator.clipboard.writeText(url);
+  };
+
+  copyButton?.addEventListener("click", copyPageURLToClipBoard);
+</script>
