@@ -8,11 +8,15 @@
 }
 
 .wrapper {
-    width: min(50% - 40px, u.rem(1100));
+    width: min(50% - 40px, u.rem(1200));
     margin-inline: auto;
     min-height: 80vh;
     margin-block-start: u.rem(74);
+    position: relative;
 
+    @include u.breakpoint-down(large) {
+    width: min(80% - 40px, u.rem(1100));
+    }
     @include u.breakpoint-down(medium) {
     width: min(100% - 40px, u.rem(1100));
     }
