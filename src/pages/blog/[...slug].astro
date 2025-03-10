@@ -20,19 +20,26 @@ const { Content, remarkPluginFrontmatter } = await render(post);
 <Layout title={post.data.title}>
   <div class="wrapper has-padding">
     <div class="post__header">
-      <h1>{capitalize(post.data.title)}</h1>
-      <p>
-        {formatDate(post.data.pubDate)}
-        –
-        <span>{remarkPluginFrontmatter.minutesRead}</span>
-      </p>
-      <div class="controls">
-        <a class="ctrl" href="/blog"><i class="iconoir-dot-arrow-left"></i></a>
-        <!-- TODO: Add functionality for this -->
-        <!-- <button id="sh-btn" class="ctrl"
-          ><i class="iconoir-share-ios"></i></button
-        > -->
+      <div class="sep">
+        <div class="info">
+          <h1>{capitalize(post.data.title)}</h1>
+          <p>
+            {formatDate(post.data.pubDate)}
+            –
+            <span>{remarkPluginFrontmatter.minutesRead}</span>
+          </p>
+        </div>
+
+        <div class="controls">
+          <a class="ctrl" href="/blog"><i class="iconoir-dot-arrow-left"></i></a
+          >
+          <!-- TODO: Add functionality for this -->
+          <button id="sh-btn" class="ctrl"
+            ><i class="iconoir-share-ios"></i></button
+          >
+        </div>
       </div>
+
       <ImageLoader
         src={`/images/blog/${post.id}/cover.jpg`}
         alt={`cover image for ${post.data.title}`}
@@ -54,40 +61,77 @@ const { Content, remarkPluginFrontmatter } = await render(post);
       width: 100%;
       @include u.display-flex(column, flex-start, flex-start, 0.25em, nowrap);
 
-      h1 {
-        font-size: u.rem(16);
-        font-weight: 400;
-      }
+      .sep {
+        width: 100%;
+        @include u.display-flex(row, flex-end, space-between, 0.25em, wrap);
 
-      p {
-        font-size: u.rem(14);
-
-        span {
-          font-style: italic;
-        }
-      }
-
-      .controls {
-        @include u.display-flex(row, center, flex-start, 0.5em, nowrap);
-
-        .ctrl {
-          border: none;
-          height: 32px;
-          width: 32px;
-          border-radius: 50%;
-          background-color: var(--color-fore-bg);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: u.rem(8);
-          cursor: pointer;
-
-          &:hover {
-            background-color: var(--color-highlight-bg);
+        .info {
+          @include u.display-flex(
+            column,
+            flex-start,
+            flex-start,
+            0.25em,
+            nowrap
+          );
+          h1 {
+            font-size: u.rem(16);
+            font-weight: 400;
           }
 
-          i {
-            font-size: 18px;
+          p {
+            font-size: u.rem(14);
+
+            span {
+              font-style: italic;
+            }
+          }
+        }
+
+        .controls {
+          @include u.display-flex(row, center, flex-start, 0.5em, nowrap);
+
+          button {
+            &:hover {
+              &::before {
+                content: "Copy URL";
+                position: absolute;
+                right: 0;
+                top: u.rem(-30);
+                background-color: var(--color-fore-bg);
+                padding: u.rem(2);
+                border: solid 1px var(--color-border-blend);
+                width: max-content;
+                font-size: u.rem(12);
+                border-radius: u.rem(2);
+              }
+            }
+
+            &:active {
+              transform: scale(0.9);
+
+              &::before {
+                content: "Copied";
+              }
+            }
+          }
+
+          .ctrl {
+            border: none;
+            height: 32px;
+            border-radius: u.rem(4);
+            background-color: var(--color-fore-bg);
+            @include u.display-flex(row, center, flex-start, 0.5em, nowrap);
+            padding: u.rem(8);
+            cursor: pointer;
+            position: relative;
+
+            &:hover {
+              background-color: var(--color-highlight-bg);
+            }
+
+            i {
+              font-size: 18px;
+            }
           }
         }
       }
@@ -197,3 +241,13 @@ const { Content, remarkPluginFrontmatter } = await render(post);
     }
   }
 </style>
+
+<script>
+  const copyButton = document.getElementById("sh-btn");
+  const copyPageURLToClipBoard = () => {
+    let url = window.location.href;
+    navigator.clipboard.writeText(url);
+  };
+
+  copyButton?.addEventListener("click", copyPageURLToClipBoard);
+</script>

@@ -24,4 +24,8 @@
             padding-block: 60px;
         }
     }
+
+    &.is-full-width {
+    width: min(70% - 40px, u.rem(1400));
+    }
 }

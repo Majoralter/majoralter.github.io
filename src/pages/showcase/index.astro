@@ -3,19 +3,24 @@ import Layout from "../../layouts/Layout.astro";
 ---
 
 <Layout title="Showcase">
-  <div class="wrapper shc">
-    <p>Shipping soon...</p>
+  <div class="wrapper shc is-full-width has-padding">
+    <h1>Component Showcase</h1>
+    <a href="/showcase/slider">Go to slider</a>
   </div>
 </Layout>
 
 <style lang="scss">
   @use "../../styles/utils/" as u;
   .shc {
-    @include u.display-flex(column, center, center, 0, nowrap);
+    @include u.display-flex(column, flex-start, flex-start, 0, nowrap);
 
-    p {
-      font-size: 20px;
+    h1 {
+      font-size: u.rem(24);
       font-style: italic;
+    }
+
+    a {
+      color: white;
     }
   }
 </style>
