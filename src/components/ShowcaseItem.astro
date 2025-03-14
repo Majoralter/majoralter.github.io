@@ -34,6 +34,10 @@ interface Props {
     border-radius: u.rem(8);
     border: solid 1px var(--color-border-blend);
 
+    @include u.breakpoint-down(small) {
+      width: 100%;
+    }
+
     a {
       width: 100%;
       @include u.display-flex(column, flex-start, flex-start, 0.5em, nowrap);
