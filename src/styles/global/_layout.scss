@@ -30,15 +30,17 @@
   }
 
   &.is-full-width {
-    width: min(70% - 40px, u.rem(1400));
+    width: min(100% - 40px, u.rem(1400));
   }
 
   &.flex-start {
     @include u.display-flex(column, flex-start, flex-start, 1.5rem, nowrap);
   }
+
   &.flex-start-center {
     @include u.display-flex(column, center, flex-start, 1.5rem, nowrap);
   }
+
   &.flex-center {
     @include u.display-flex(column, center, center, 1.5rem, nowrap);
   }

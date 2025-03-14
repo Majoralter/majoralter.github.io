@@ -4,7 +4,9 @@ import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import ShowcaseItem from "../../components/ShowcaseItem.astro";
 
-const ShowcaseItems: CollectionEntry<"showcase">[] = (await getCollection("showcase"))
+const ShowcaseItems: CollectionEntry<"showcase">[] = (
+  await getCollection("showcase")
+)
   .sort(
     (a: CollectionEntry<"showcase">, b: CollectionEntry<"showcase">) =>
       b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -14,7 +16,6 @@ const ShowcaseItems: CollectionEntry<"showcase">[] = (await getCollection("showc
 
 <Layout title="Showcase">
   <div class="wrapper shc is-full-width has-padding">
-    <h1>Component Showcase</h1>
     {ShowcaseItems.map((item) => <ShowcaseItem {item} />)}
   </div>
 </Layout>

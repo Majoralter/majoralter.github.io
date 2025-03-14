@@ -1,5 +1,5 @@
 ---
-import { formatDate } from "../utils";
+import { formatDate, capitalize } from "../utils";
 import type { CollectionEntry } from "astro:content";
 
 const { item } = Astro.props;
@@ -10,9 +10,54 @@ interface Props {
 ---
 
 <div class="item">
-    <a href={`/showcase/${item.id}`}>
-        <h1>
-            {item.data.title}
-        </h1>
-    </a>
+  <a href={`/showcase/${item.id}`}>
+    <img
+      src={`/images/showcase/${item.id}/thumbnail.gif`}
+      alt={`Thumbnail of ${item.data.title} component`}
+    />
+
+    <div class="abt">
+      <h2>
+        {capitalize(item.data.title)}
+      </h2>
+      <p>{formatDate(item.data.pubDate)}</p>
+    </div>
+  </a>
 </div>
+
+<style lang="scss">
+  @use "../styles/utils/" as u;
+  .item {
+    width: 500px;
+    background-color: var(--color-fore-bg);
+    padding: u.rem(8);
+    border-radius: u.rem(8);
+    border: solid 1px var(--color-border-blend);
+
+    a {
+      width: 100%;
+      @include u.display-flex(column, flex-start, flex-start, 0.5em, nowrap);
+      text-decoration: none;
+
+      img {
+        border-radius: u.rem(4);
+        width: 100%;
+        height: auto;
+      }
+
+      .abt {
+        width: 100%;
+        @include u.display-flex(row, center, space-between, .5em, wrap);
+
+        h2 {
+          font-size: u.rem(16);
+          font-weight: 400;
+        }
+
+        p {
+          font-size: u.rem(13);
+        }
+      }
+    }
+  }
+</style>
