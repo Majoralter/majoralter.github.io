@@ -4,12 +4,11 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
   nitro: {
-    preset: "github-pages",
+    preset: "vercel",
   },
 
   app: {
     pageTransition: { name: "page", mode: "out-in" },
-    baseURL: "/majoralter.github.io/",
 
     head: {
       htmlAttrs: {
