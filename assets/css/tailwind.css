@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Instrument+Serif:ital@0;1&display=swap");
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@font-face {
+  font-family: Acumin;
+  src: url("/assets/fonts/Acumin-RPro.otf");
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body,
+  html {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    scroll-padding-top: 40px;
+  }
+
+  body {
+    background-color: #0f0f0f;
+  }
+}
+
+@theme {
+  --font-sans: "Acumin", sans-serif;
+  --font-serif: "Instrument Serif", serif;
+  --font-hand: "Caveat", cursive;
+}
