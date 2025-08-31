@@ -3,9 +3,13 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-05-15",
   devtools: { enabled: true },
   ssr: false,
+  nitro: {
+    preset: "github-pages",
+  },
 
   app: {
     pageTransition: { name: "page", mode: "out-in" },
+    baseURL: "/majoralter.github.io/",
 
     head: {
       htmlAttrs: {
@@ -23,7 +27,7 @@ export default defineNuxtConfig({
     "@nuxt/ui",
     "@nuxtjs/tailwindcss",
     "@vueuse/nuxt",
-    "nuxt-og-image"
+    "nuxt-og-image",
   ],
 
   image: {
