@@ -11,8 +11,8 @@ defineProps<{
   >
     <p class="text-base font-medium text-gray-200">Jenrola Jackson</p>
 
-    <div class="flex flex-col items-start gap-2">
-      <h1 class="text-lg text-white">
+    <div class="flex flex-col items-start gap-0.5">
+      <h1 class="text-3xl text-white">
         {{ title }}
       </h1>
       <p class="text-sm text-gray-300">{{ date }}</p>

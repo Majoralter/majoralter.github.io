@@ -34,7 +34,7 @@ useHead({
             >{{ m.type }}</span
           >
           <StarRating :value="m.rating" />  
-          <h2 class="capitalize text-lg leading-5">{{ m.title }}</h2>
+          <h2 class="capitalize text-lg leading-5 text-white">{{ m.title }}</h2>
           <p class="text-gray-400 text-base capitalize">{{ m.author }}</p>
         </div>
       </div>

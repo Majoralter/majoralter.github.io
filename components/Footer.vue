@@ -72,7 +72,7 @@ onMounted(() => {
 
 <template>
   <footer
-    class="fixed w-max bottom-6 left-1/2 -translate-x-1/2 mx-auto flex justify-center border border-[#202020] rounded-full origin-center bg-[#121212] cursor-pointer"
+    class="fixed w-max bottom-10 left-1/2 -translate-x-1/2 mx-auto flex justify-center border border-[#202020] rounded-full origin-center bg-[#121212] cursor-pointer"
     ref="dockContainer"
   >
     <div class="flex items-center justify-around px-1 py-2">
@@ -128,6 +128,7 @@ onMounted(() => {
   transform-origin: bottom;
   cursor: pointer;
   touch-action: none;
+  color: white;
 
   &::before {
     content: attr(data-tooltip);
@@ -146,6 +147,7 @@ onMounted(() => {
       transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
       opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     transform: translateY(100%);
+    color: white;
   }
 
   &:hover::before {

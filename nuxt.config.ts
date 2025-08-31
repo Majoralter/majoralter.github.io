@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: "2025-05-15",
   devtools: { enabled: true },
+  ssr: true,
 
   app: {
     pageTransition: { name: "page", mode: "out-in" },
@@ -12,6 +13,7 @@ export default defineNuxtConfig({
       },
       link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
     },
+    baseURL: "/majoralter.github.io/"
   },
 
   modules: [
