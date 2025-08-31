@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useTemplateRef, onMounted } from "vue";
+import { onMounted, ref } from "vue";
 
 const dockItems = [
   { name: "Home", icon: "home", to: "/" },
@@ -21,8 +21,8 @@ const socials = [
   },
 ];
 
-const dockContainer = useTemplateRef<HTMLDivElement>("dockContainer");
-const items = useTemplateRef<HTMLDivElement[]>("items");
+const dockContainer = ref<HTMLDivElement | null>(null);
+const items = ref<HTMLDivElement[]>([]);
 
 const defaultScale = 1;
 const hoverScale = 1.75;
@@ -36,7 +36,7 @@ const applyDockStyles = (hoveredIndex: number | null) => {
   if (animationFrame) cancelAnimationFrame(animationFrame);
 
   animationFrame = requestAnimationFrame(() => {
-    items.value?.forEach((el, index) => {
+    items.value.forEach((el, index) => {
       let scale = defaultScale;
       let margin = defaultMargin;
 
@@ -58,15 +58,19 @@ const applyDockStyles = (hoveredIndex: number | null) => {
 };
 
 onMounted(() => {
-  items.value?.forEach((el, index) => {
-    el.addEventListener("mousemove", () => {
-      applyDockStyles(index);
-    });
-  });
+  const isTouchDevice =
+    "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
-  dockContainer.value?.addEventListener("mouseleave", () => {
-    applyDockStyles(null);
-  });
+  if (!isTouchDevice) {
+    console.log(isTouchDevice)
+    items.value.forEach((el, index) => {
+      el.addEventListener("mousemove", () => applyDockStyles(index));
+    });
+
+    dockContainer.value?.addEventListener("mouseleave", () =>
+      applyDockStyles(null)
+    );
+  }
 });
 </script>
 
@@ -77,15 +81,16 @@ onMounted(() => {
   >
     <div class="flex items-center justify-around px-1 py-2">
       <div
-        v-for="item in dockItems"
+        v-for="(item, i) in dockItems"
         :key="item.name"
         :data-tooltip="item.name"
         ref="items"
-        class="dock-item active:scale-[0.75] transition active:duration-700 active:ease-out"
+        class="dock-item active:lg:scale-[0.75] transition active:duration-700 active:ease-out"
       >
         <NuxtLink
           :to="item.to"
           class="leading-0 w-full h-full flex items-center justify-center"
+          :aria-label="item.name"
         >
           <Icon :name="`ion:${item.icon}`" size="24" />
         </NuxtLink>
@@ -94,7 +99,7 @@ onMounted(() => {
       <hr class="h-6 w-0.5 bg-[#202020] shrink-0 border-0 vt-rule" />
 
       <div
-        v-for="item in socials"
+        v-for="(item, i) in socials"
         :key="item.name"
         :data-tooltip="item.name"
         ref="items"
@@ -103,7 +108,9 @@ onMounted(() => {
         <a
           :href="item.href"
           target="_blank"
+          rel="noopener"
           class="leading-0 w-full h-full flex items-center justify-center"
+          :aria-label="item.name"
         >
           <Icon :name="`ion:${item.icon}`" size="24" />
         </a>
@@ -129,30 +136,34 @@ onMounted(() => {
   cursor: pointer;
   touch-action: none;
   color: white;
+  position: relative;
 
-  &::before {
-    content: attr(data-tooltip);
-    position: absolute;
-    top: -28px;
-    z-index: -1;
-    padding: 5px 8px 1px;
-    white-space: nowrap;
-    font-size: 8px;
-    border-radius: 4px;
-    border: 1px solid rgba(255, 255, 255, 0.04);
-    background-color: #202020;
-    opacity: 0;
-    pointer-events: none;
-    transition:
-      transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-      opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    transform: translateY(100%);
-    color: white;
-  }
+  // only apply tooltip + hover effects if device supports hover
+  @media (hover: hover) and (pointer: fine) {
+    &::before {
+      content: attr(data-tooltip);
+      position: absolute;
+      top: -28px;
+      z-index: 10;
+      padding: 5px 8px 1px;
+      white-space: nowrap;
+      font-size: 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      background-color: #202020;
+      opacity: 0;
+      pointer-events: none;
+      transition:
+        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(100%);
+      color: white;
+    }
 
-  &:hover::before {
-    opacity: 1;
-    transform: translateY(0);
+    &:hover::before {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
 
