@@ -72,7 +72,7 @@ onMounted(() => {
 
 <template>
   <footer
-    class="fixed w-max bottom-10 left-1/2 -translate-x-1/2 mx-auto flex justify-center border border-[#202020] rounded-full origin-center bg-[#121212] cursor-pointer"
+    class="fixed w-max bottom-8 left-1/2 -translate-x-1/2 mx-auto flex justify-center border border-[#202020] rounded-full origin-center bg-[#121212] cursor-pointer"
     ref="dockContainer"
   >
     <div class="flex items-center justify-around px-1 py-2">
