@@ -6,8 +6,7 @@ export default defineNuxtConfig({
 
   app: {
     pageTransition: { name: "page", mode: "out-in" },
-    baseURL: "/majoralter.github.io/",
-    buildAssetsDir: "assets",
+    baseURL: "/",
 
     head: {
       htmlAttrs: {
