@@ -46,10 +46,10 @@ useHead({
   title,
 });
 
-defineOgImageComponent("OGImage", {
-  title: post.value?.title,
-  date: useDateFormat(post.value?.pubDate, "MMM DD, YYYY"),
-});
+// defineOgImageComponent("OGImage", {
+//   title: post.value?.title,
+//   date: useDateFormat(post.value?.pubDate, "MMM DD, YYYY"),
+// });
 </script>
 
 <template>
