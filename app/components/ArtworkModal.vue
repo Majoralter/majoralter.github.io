@@ -16,7 +16,6 @@ const emit = defineEmits<{
 const subIndex = ref(0);
 const imageRef = ref<HTMLElement | null>(null);
 
-// Sync subIndex when modal opens or initialSubIndex changes
 watch(
     () => props.initialSubIndex,
     (newVal) => {
@@ -44,7 +43,6 @@ const prev = () => {
         props.activeItem.images.length;
 };
 
-// GSAP transition between image slides
 watch(subIndex, () => {
     if (imageRef.value) {
         gsap.fromTo(
@@ -74,7 +72,6 @@ onUnmounted(() => window.removeEventListener("keydown", handleKeyDown));
                 class="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-xl p-4 sm:p-12"
                 @click.self="emit('close')"
             >
-                <!-- Top Modal Bar -->
                 <div
                     class="absolute top-6 left-6 right-6 flex justify-between items-center z-10 pointer-events-none"
                 >
@@ -92,7 +89,6 @@ onUnmounted(() => window.removeEventListener("keydown", handleKeyDown));
                     </button>
                 </div>
 
-                <!-- Image Display -->
                 <div
                     class="relative max-w-6xl w-full flex flex-col items-center pointer-events-none"
                 >
@@ -112,7 +108,6 @@ onUnmounted(() => window.removeEventListener("keydown", handleKeyDown));
                         />
                     </div>
 
-                    <!-- Metadata -->
                     <div class="mt-6 text-center pointer-events-auto">
                         <h2
                             class="text-xl font-bold tracking-tight text-white uppercase"
@@ -128,7 +123,6 @@ onUnmounted(() => window.removeEventListener("keydown", handleKeyDown));
                     </div>
                 </div>
 
-                <!-- Controls (Only if multiple images) -->
                 <template v-if="activeItem.images.length > 1">
                     <button
                         @click="prev"

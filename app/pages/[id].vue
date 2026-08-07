@@ -5,14 +5,12 @@ import { PROJECTS, type Artwork } from "~/data/projects";
 
 const route = useRoute();
 
-// Extract active category slug from current route parameter
 const selectedCategory = computed(() => route.params.id as string);
 
 const isModalOpen = ref<boolean>(false);
 const activeItem = ref<Artwork | null>(null);
 const activeSubIndex = ref<number>(0);
 
-// Filter projects directly based on the route category slug
 const filteredProjects = computed(() => {
     return PROJECTS.filter(
         (project) => project.category === selectedCategory.value,

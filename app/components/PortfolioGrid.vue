@@ -13,7 +13,6 @@ const emit = defineEmits<{
 
 const gridRef = ref<HTMLElement | null>(null);
 
-// Track active slide per project ID: { [projectId]: number }
 const activeSlideMap = ref<Record<string, number>>({});
 
 const getActiveSlide = (id: string) => activeSlideMap.value[id] || 0;
@@ -37,20 +36,18 @@ const prevSlide = (item: Artwork, event: Event) => {
     activeSlideMap.value[item.id] = prev;
 };
 
-// Map project aspectRatio setting directly to Tailwind utility classes
 const getAspectRatioClass = (ratio?: "square" | "video" | "portrait") => {
     switch (ratio) {
         case "video":
-            return "aspect-video"; // 16:9 for title cards & widescreen visuals
+            return "aspect-video";
         case "portrait":
-            return "aspect-[3/4]"; // 3:4 for posters
+            return "aspect-[3/4]";
         case "square":
         default:
-            return "aspect-square"; // 1:1 default for cover art
+            return "aspect-square";
     }
 };
 
-// Entrance Animation with GSAP
 const animateGrid = () => {
     if (!gridRef.value) return;
     const cards = gridRef.value.querySelectorAll(".grid-card");
@@ -96,7 +93,6 @@ watch(
                 class="w-full h-auto group-hover:scale-105 transition-all duration-500 ease-out"
             />
 
-            <!-- Carousel Badge (Shows if project has multiple slides) -->
             <div
                 v-if="item.images.length > 1"
                 class="absolute top-4 right-4 z-10 bg-black/80 backdrop-blur-md px-2 py-0.5 text-[10px] font-mono tracking-widest text-neutral-300 rounded uppercase"
@@ -104,7 +100,6 @@ watch(
                 {{ getActiveSlide(item.id) + 1 }} / {{ item.images.length }}
             </div>
 
-            <!-- In-Card Carousel Nav (Hover visible for multi-slide projects) -->
             <div
                 v-if="item.images.length > 1"
                 class="absolute inset-x-3 top-1/2 -translate-y-1/2 flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity z-20 pointer-events-none"
@@ -125,7 +120,6 @@ watch(
                 </button>
             </div>
 
-            <!-- Pagination Dots -->
             <div
                 v-if="item.images.length > 1"
                 class="absolute bottom-16 inset-x-0 flex justify-center items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity z-20"
@@ -143,7 +137,6 @@ watch(
                 />
             </div>
 
-            <!-- Overlay Metadata -->
             <div
                 class="absolute inset-0 bg-linear-to-t from-black/95 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 flex flex-col justify-end pointer-events-none"
             >

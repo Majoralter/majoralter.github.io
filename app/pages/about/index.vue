@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-// Copy Email Utility
 const copied = ref(false);
 const email = "jenrolajackson210@gmail.com";
 
@@ -26,7 +25,6 @@ const clients = [
     "Worldcharming",
 ];
 
-// Services / Capabilities
 const capabilities = [
     "COVER ARTWORK",
     "MUSIC VIDEO TITLE CARDS",
@@ -48,7 +46,6 @@ const capabilities = [
             ref="infoContainer"
             class="grow max-w-7xl mx-auto w-full px-6 py-12 md:py-20 space-y-24"
         >
-            <!-- 1. Studio Bio -->
             <section
                 class="gsap-fade grid grid-cols-1 md:grid-cols-12 gap-8 items-start"
             >
@@ -74,7 +71,6 @@ const capabilities = [
                 </div>
             </section>
 
-            <!-- 2. Services & Capabilities -->
             <section class="gsap-fade grid grid-cols-1 md:grid-cols-12 gap-8">
                 <div
                     class="md:col-span-4 text-xs font-mono tracking-widest text-neutral-500 uppercase"
@@ -97,7 +93,6 @@ const capabilities = [
                 </div>
             </section>
 
-            <!-- 3. Client Roster -->
             <section class="gsap-fade grid grid-cols-1 md:grid-cols-12 gap-8">
                 <div
                     class="md:col-span-4 text-xs font-mono tracking-widest text-neutral-500 uppercase"
@@ -119,7 +114,6 @@ const capabilities = [
                 </div>
             </section>
 
-            <!-- 4. Contact CTA -->
             <section
                 class="gsap-fade grid grid-cols-1 md:grid-cols-12 gap-8 pt-6"
             >
@@ -162,7 +156,6 @@ const capabilities = [
             </section>
         </main>
 
-        <!-- Footer -->
         <footer
             class="px-6 py-8 flex flex-col sm:flex-row justify-between items-center text-xs font-mono text-neutral-500 gap-4"
         >

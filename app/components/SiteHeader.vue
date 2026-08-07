@@ -15,7 +15,6 @@ withDefaults(
 const route = useRoute();
 const isMenuOpen = ref(false);
 
-// Filter out "all" if present in CATEGORIES
 const categories = computed(() =>
     CATEGORIES.filter((cat) => cat.value !== "all")
 );
@@ -28,7 +27,6 @@ const closeMenu = () => {
     isMenuOpen.value = false;
 };
 
-// Close menu on route change automatically
 watch(() => route.path, () => {
     isMenuOpen.value = false;
 });
@@ -38,7 +36,6 @@ watch(() => route.path, () => {
     <header
         class="sticky top-0 z-50 bg-background/90 backdrop-blur-md border-b border-surface px-6 py-4 flex items-center justify-between"
     >
-        <!-- Monogram Logo -->
         <NuxtLink
             to="/"
             @click="closeMenu"
@@ -47,7 +44,6 @@ watch(() => route.path, () => {
             MA.
         </NuxtLink>
 
-        <!-- Desktop Category Nav -->
         <div
             class="hidden md:flex items-center space-x-6 text-xs font-mono tracking-widest uppercase"
         >
@@ -67,7 +63,6 @@ watch(() => route.path, () => {
         </div>
 
         <div class="flex items-center gap-6">
-            <!-- Info Link (Desktop) -->
             <NuxtLink
                 to="/about"
                 class="hidden md:block text-xs font-mono tracking-widest uppercase text-neutral-400 hover:text-white transition-colors"
@@ -75,7 +70,6 @@ watch(() => route.path, () => {
                 INFO
             </NuxtLink>
 
-            <!-- Mobile Menu Toggle Button -->
             <button
                 @click="toggleMenu"
                 class="md:hidden text-xs font-mono uppercase text-neutral-300 hover:text-white transition-colors py-1 px-2 border border-neutral-800 rounded z-50"
@@ -86,7 +80,6 @@ watch(() => route.path, () => {
             </button>
         </div>
 
-        <!-- Mobile Full-Screen Menu Overlay -->
         <Transition
             enter-active-class="transition duration-300 ease-out"
             enter-from-class="opacity-0 -translate-y-4"

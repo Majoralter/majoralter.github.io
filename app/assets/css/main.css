@@ -1,21 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  /* Custom Colors */
   --color-background: #080808;
   --color-surface: #121212;
   --color-border-line: #222222;
 
-  /* Custom Fonts */
   --font-sans: "Inter", system-ui, sans-serif;
   --font-mono: "Space Mono", monospace;
 
-  /* Custom Letter Spacings */
   --tracking-widest: 0.25em;
   --tracking-ultra: 0.35em;
 }
 
-/* Base Styles & Dark Mode Enforcement */
 @layer base {
   html,
   body {
