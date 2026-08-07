@@ -1,12 +1,6 @@
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
-  nitro: {
-    preset: 'github-pages'
-  },
-  app: {
-    baseURL: 'https://Majoralter.github.io/site'
-  },
   routeRules: {
     "/about": { ssr: false },
   },
