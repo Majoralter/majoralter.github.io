@@ -223,4 +223,13 @@ export const PROJECTS: Artwork[] = [
     images: ["/images/titles/badaminton/title.png"],
     aspectRatio: "video",
   },
+  {
+    id: "22",
+    title: "Job's Not Done UK Tour",
+    artist: "Personal work",
+    category: "posters",
+    year: "2026",
+    images: ["/images/posters/kidwild-poster.png"],
+    aspectRatio: "portrait",
+  },
 ];
