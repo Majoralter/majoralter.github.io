@@ -13,8 +13,8 @@ export interface Artwork {
 export const CATEGORIES = [
   { label: "TITLE CARDS", value: "title-cards" },
   { label: "POSTERS", value: "posters" },
-  { label: "COVER ARTWORK", value: "cover-artwork" },
-  { label: "MUSIC PACKAGING", value: "music-packaging" },
+  // { label: "COVER ARTWORK", value: "cover-artwork" },
+  // { label: "MUSIC PACKAGING", value: "music-packaging" },
   { label: "ARCHIVE", value: "archive" },
 ] as const;
 
