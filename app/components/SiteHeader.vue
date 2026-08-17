@@ -90,7 +90,7 @@ watch(() => route.path, () => {
         >
             <div
                 v-if="isMenuOpen"
-                class="fixed inset-0 top-0 left-0 w-full h-screen bg-background/98 backdrop-blur-xl z-40 flex flex-col justify-between px-8 pt-28 pb-12 md:hidden"
+                class="fixed inset-0 top-0 left-0 w-full h-[80vh] bg-background/98 backdrop-blur-xl z-40 flex flex-col justify-between px-8 pt-28 pb-12 md:hidden"
             >
                 <nav class="flex flex-col space-y-6">
                     <p class="text-[10px] font-mono uppercase text-neutral-500 tracking-widest border-b border-neutral-800 pb-2">
