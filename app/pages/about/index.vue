@@ -34,6 +34,12 @@ const capabilities = [
     "PHYSICAL MUSIC PACKAGING (VINYL / CD / CASSETTE)",
     "ROLLOUT VISUAL ASSETS",
 ];
+
+const socials = [
+    { name: "INSTAGRAM", url: "https://www.instagram.com/mjrmadeit/" },
+    { name: "PINTEREST", url: "https://www.pinterest.com/mistbornson/" },
+    { name: "BEHANCE", url: "https://www.behance.net/jenrolajackson" },
+];
 </script>
 
 <template>
@@ -60,7 +66,7 @@ const capabilities = [
                     >
                         hello, i'm Jenrola Jackson a graphics designer and
                         visual artist. <br />
-                        formerly a software engineer, I recently made the switch
+                        I recently made the switch from software development
                         to design focused on the music & entertainment industry
                         — although i'm open to other opportunities. &nbsp;
                         <br />
@@ -151,6 +157,29 @@ const capabilities = [
                                     : "COPY EMAIL ADDRESS"
                             }}
                         </button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="gsap-fade grid grid-cols-1 md:grid-cols-12 gap-8">
+                <div
+                    class="md:col-span-4 text-xs font-mono tracking-widest text-neutral-500 uppercase"
+                >
+                    SOCIALS
+                </div>
+                <div class="md:col-span-8">
+                    <div class="flex flex-wrap gap-x-8 gap-y-4 text-xs font-mono tracking-widest uppercase">
+                        <a
+                            v-for="(social, idx) in socials"
+                            :key="idx"
+                            :href="social.url"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-neutral-400 hover:text-white transition-colors flex items-center gap-1"
+                        >
+                            <span>{{ social.name }}</span>
+                            <span class="text-neutral-600">↗</span>
+                        </a>
                     </div>
                 </div>
             </section>

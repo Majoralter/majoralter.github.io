@@ -16,6 +16,8 @@ const emit = defineEmits<{
 const subIndex = ref(0);
 const imageRef = ref<HTMLElement | null>(null);
 
+const imgDimensions = ref<{ width: number; height: number } | null>(null);
+
 watch(
     () => props.initialSubIndex,
     (newVal) => {
@@ -30,6 +32,31 @@ const currentImage = computed(() => {
         props.activeItem.images[subIndex.value] || props.activeItem.images[0]
     );
 });
+
+// 2. Preload function to fetch intrinsic size before NuxtImg renders/resizes
+const fetchImageDimensions = (url: string) => {
+    if (!url) {
+        imgDimensions.value = null;
+        return;
+    }
+    const img = new Image();
+    img.onload = () => {
+        imgDimensions.value = {
+            width: img.naturalWidth,
+            height: img.naturalHeight,
+        };
+    };
+    img.src = url;
+};
+
+// 3. Trigger preload whenever the active image changes or modal opens
+watch(
+    currentImage,
+    (newUrl) => {
+        if (newUrl) fetchImageDimensions(newUrl);
+    },
+    { immediate: true }
+);
 
 const next = () => {
     if (!props.activeItem) return;
@@ -96,9 +123,12 @@ onUnmounted(() => window.removeEventListener("keydown", handleKeyDown));
                         ref="imageRef"
                         class="relative max-h-[78vh] flex items-center justify-center"
                     >
+                        <!-- Bind width and height dynamically once fetched -->
                         <NuxtImg
                             :src="currentImage"
                             :alt="activeItem.title"
+                            :width="imgDimensions?.width"
+                            :height="imgDimensions?.height"
                             format="webp"
                             quality="80"
                             sizes="xs:100vw sm:90vw md:50vw lg:60vw"

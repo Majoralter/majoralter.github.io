@@ -90,6 +90,7 @@ watch(
                 quality="80"
                 sizes="xs:100vw sm:50vw md:33vw lg:25vw"
                 loading="lazy"
+                placeholder
                 class="w-full h-auto group-hover:scale-105 transition-all duration-500 ease-out"
             />
 
